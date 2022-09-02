@@ -1,0 +1,47 @@
+{
+    "meta": {
+        "apparatus": "TriStar II 3020 3.02",
+        "material": "Sample B",
+        "operator": null,
+        "date": "2017-06-13T07:56:30",
+        "adsorbate": "N2",
+        "date_finished": "6/13/2017 11:32:24 AM",
+        "temperature": 77.3,
+        "temperature_unit": "K",
+        "date_report": "6/13/2017 11:32:24 AM",
+        "material_mass": 0.288,
+        "material_mass_unit": "g",
+        "comment": "Sample that was stopped during collection.",
+        "pressure_mode": "absolute",
+        "pressure_unit": "torr",
+        "loading_basis": "molar",
+        "loading_unit": "cm3(STP)",
+        "material_basis": "mass",
+        "material_unit": "g",
+        "errors": [
+            "BET Calculation: At least 2 Points must be supplied for the BET Calculation's Least Squares Fit",
+            "1023-  Preparations failed in primary data.",
+            "BET Calculation: At least 2 Points must be supplied for the BET Calculation's Least Squares Fit",
+            "1023-  Preparations failed in primary data.",
+            "BET Calculation: At least 2 Points must be supplied for the BET Calculation's Least Squares Fit",
+            "1023-  Preparations failed in primary data."
+        ]
+    },
+    "data": {
+        "pressure_relative": [
+            0.00035662138740906555
+        ],
+        "pressure": [
+            0.26594552397727966
+        ],
+        "loading": [
+            28.33484691613959
+        ],
+        "time": [
+            99
+        ],
+        "pressure_saturation": [
+            745.736328125
+        ]
+    }
+}
