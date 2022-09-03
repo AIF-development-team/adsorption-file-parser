@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # pylint: disable=W0614,W0611,W0622
 # flake8: noqa
 # isort:skip_file
@@ -51,11 +52,11 @@ def read(path, manufacturer, fmt, **options):
 
     if manufacturer not in _SUPPORTED_FORMATS:
         raise ParsingError(
-            f"Currently available manufacturers are {list(_SUPPORTED_FORMATS.keys())})"
+            f'Currently available manufacturers are {list(_SUPPORTED_FORMATS.keys())})'
         )
 
     if fmt not in _SUPPORTED_FORMATS[manufacturer]:
-        raise ParsingError(f"Currently available formats are {_SUPPORTED_FORMATS[manufacturer]}")
+        raise ParsingError(f'Currently available formats are {_SUPPORTED_FORMATS[manufacturer]}')
 
     if manufacturer == 'smsdvs' and fmt == 'xlsx':
         from .smsdvs_excel import parse
@@ -73,6 +74,6 @@ def read(path, manufacturer, fmt, **options):
     elif manufacturer == 'qnt' and fmt == 'txt-raw':
         from .qnt_txt import parse
     else:
-        raise ParsingError("Something went wrong.")
+        raise ParsingError('Something went wrong.')
 
     return parse(path, **options)

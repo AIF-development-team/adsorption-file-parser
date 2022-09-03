@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """Parse SMS DVS (.xlsx) output files."""
 import dateutil.parser
 import openpyxl
@@ -9,97 +10,97 @@ _META_DICT = {
     'material': {
         'text': ('sample name:', ),
         'type': 'string',
-        "xl_ref": (0, 1)  # row, column
+        'xl_ref': (0, 1)  # row, column
     },
     'material_mass': {
         'text': ('ref. mass', ),
         'type': 'numeric',
-        "xl_ref": (0, 1)
+        'xl_ref': (0, 1)
     },
     'material_mass_initial': {
         'text': ('initial mass [mg]:', ),  # TODO not only mg?
         'type': 'numeric',
-        "xl_ref": (0, 1)
+        'xl_ref': (0, 1)
     },
     'adsorbate': {
         'text': ('vapour:', ),
         'type': 'string',
-        "xl_ref": (0, 1)
+        'xl_ref': (0, 1)
     },
     'adsorbate_saturation_pressure': {
         'text': ('vapour pressure [torr]:', ),
         'type': 'numeric',
-        "xl_ref": (0, 1)
+        'xl_ref': (0, 1)
     },
     'operator': {
         'text': ('user name:', ),
         'type': 'string',
-        "xl_ref": (0, 1)
+        'xl_ref': (0, 1)
     },
     'date': {
         'text': ('raw data file created:', ),
         'type': 'date',
-        "xl_ref": (0, 1)
+        'xl_ref': (0, 1)
     },
     'dvs_file_version': {
         'text': ('file version:', ),
         'type': 'string',
-        "xl_ref": (0, 1)
+        'xl_ref': (0, 1)
     },
     'dvs_sequence_name': {
         'text': ('sequence name:', ),
         'type': 'string',
-        "xl_ref": (0, 1)
+        'xl_ref': (0, 1)
     },
     'dvs_sequence_creation_date': {
         'text': ('sequence created:', ),
         'type': 'date',
-        "xl_ref": (0, 1)
+        'xl_ref': (0, 1)
     },
     'dvs_method_name': {
         'text': ('method name:', ),
         'type': 'string',
-        "xl_ref": (0, 1)
+        'xl_ref': (0, 1)
     },
     'dvs_method_creation_date': {
         'text': ('method created:', ),
         'type': 'date',
-        "xl_ref": (0, 1)
+        'xl_ref': (0, 1)
     },
     'dvs_method_modified': {
         'text': ('method modified:', ),
         'type': 'numeric',
-        "xl_ref": (0, 1)
+        'xl_ref': (0, 1)
     },
     'dvs_sample_number': {
         'text': ('sample number:', ),
         'type': 'numeric',
-        "xl_ref": (0, 1)
+        'xl_ref': (0, 1)
     },
     'dvs_sample_description': {
         'text': ('sample description:', ),
         'type': 'string',
-        "xl_ref": (0, 1)
+        'xl_ref': (0, 1)
     },
     'dvs_data_save_interval': {
         'text': ('data saving interval [seconds]:', ),
         'type': 'numeric',
-        "xl_ref": (0, 1)
+        'xl_ref': (0, 1)
     },
     'dvs_control_mode': {
         'text': ('control mode', ),
         'type': 'string',
-        "xl_ref": (0, 1)
+        'xl_ref': (0, 1)
     },
     'dvs_material_mass_determination': {
         'text': ('ref. mass option', ),
         'type': 'string',
-        "xl_ref": (0, 1)
+        'xl_ref': (0, 1)
     },
     'dvs_imported_by_dll': {
         'text': ('importbydllseries', ),
         'type': 'string',
-        "xl_ref": (0, 1)
+        'xl_ref': (0, 1)
     },
 }
 
@@ -142,7 +143,7 @@ def parse(path):
             continue
 
         # We do not take kinetics for the moment
-        if cell_value.value == "Time [minutes]":  # If "kinetic data" section
+        if cell_value.value == 'Time [minutes]':  # If "kinetic data" section
             break
 
         key = cell_value.value.lower()
@@ -168,12 +169,12 @@ def parse(path):
 
     # Then get data and some remaining metadata
     book = None
-    if "Iso Report" in workbook:
-        book = "Iso Report"
-    elif "Iso Report (Torr)" in workbook:
-        book = "Iso Report (Torr)"
+    if 'Iso Report' in workbook:
+        book = 'Iso Report'
+    elif 'Iso Report (Torr)' in workbook:
+        book = 'Iso Report (Torr)'
     else:
-        raise Exception("Could not find a processed isotherm in the file.")
+        raise Exception('Could not find a processed isotherm in the file.')
 
     iso_sheet = workbook[book]
 
@@ -184,13 +185,13 @@ def parse(path):
             if not cell.value:
                 continue
 
-            if cell.value == "Temp:":
+            if cell.value == 'Temp:':
                 temp = iso_sheet.cell(cell.row, cell.column + 1).value
                 comp = temp.split()
-                meta["temperature"] = float(comp[0])
-                meta["temperature_unit"] = parse_temperature_string(comp[1])
+                meta['temperature'] = float(comp[0])
+                meta['temperature_unit'] = parse_temperature_string(comp[1])
 
-            elif cell.value == "Cycle 1":
+            elif cell.value == 'Cycle 1':
                 head, unit = _parse_header(iso_sheet, cell.row - 2, cell.column + 1)
                 meta.update(unit)
                 data = _parse_data(iso_sheet, cell.row, head)
@@ -201,9 +202,9 @@ def parse(path):
                 break
 
     # Set extra metadata
-    meta["material_mass_unit"] = "mg"
-    meta["material_basis"] = "mass"
-    meta["material_unit"] = None
+    meta['material_mass_unit'] = 'mg'
+    meta['material_basis'] = 'mass'
+    meta['material_unit'] = None
 
     return meta, data
 
@@ -221,28 +222,28 @@ def _parse_header(sheet, row, col):
 
     # determine pressure mode
     pressure_mode = sheet.cell(row + 1, col).value
-    if pressure_mode == "% P/Po":
-        units["pressure_mode"] = "relative%"
-        units["pressure_unit"] = None
-    elif pressure_mode == "Pres.":
-        units["pressure_mode"] = "absolute"
-        units["pressure_unit"] = "torr"
-    headers["pressure_target"] = col
+    if pressure_mode == '% P/Po':
+        units['pressure_mode'] = 'relative%'
+        units['pressure_unit'] = None
+    elif pressure_mode == 'Pres.':
+        units['pressure_mode'] = 'absolute'
+        units['pressure_unit'] = 'torr'
+    headers['pressure_target'] = col
 
     # determine target/actual display
     pressure_output = sheet.cell(row, col + 1).value
-    if pressure_output == "Actual":
-        headers["pressure_actual_ads"] = col + 1
-        headers["loading_ads"] = col + 2
-        headers["pressure_actual_des"] = col + 3
-        headers["loading_des"] = col + 4
+    if pressure_output == 'Actual':
+        headers['pressure_actual_ads'] = col + 1
+        headers['loading_ads'] = col + 2
+        headers['pressure_actual_des'] = col + 3
+        headers['loading_des'] = col + 4
     else:
-        headers["loading_ads"] = col + 1
-        headers["loading_des"] = col + 2
+        headers['loading_ads'] = col + 1
+        headers['loading_des'] = col + 2
 
     # TODO does this change?
-    units["loading_basis"] = "percent"
-    units["loading_unit"] = None
+    units['loading_basis'] = 'percent'
+    units['loading_unit'] = None
 
     return headers, units
 
@@ -253,7 +254,7 @@ def _parse_data(sheet, row, head):
     data = {k: [] for k in head}
 
     # pressure_target column
-    col = head["pressure_target"]
+    col = head['pressure_target']
     while True:
         text = sheet.cell(row, col).value
         if text is None:
@@ -271,16 +272,16 @@ def _parse_data(sheet, row, head):
 def _sort_data(data, head):
 
     ds = {}
-    ds["branch"] = ([0] * len(data["pressure_target"]) + [1] * len(data["pressure_target"]))
-    ds["loading"] = (data["loading_ads"] + data["loading_des"][::-1])
+    ds['branch'] = ([0] * len(data['pressure_target']) + [1] * len(data['pressure_target']))
+    ds['loading'] = (data['loading_ads'] + data['loading_des'][::-1])
 
-    if "pressure_actual_ads" in head:
-        ds["pressure_target"] = (data["pressure_target"] + data["pressure_target"][::-1])
-        ds["pressure"] = (data["pressure_actual_ads"] + data["pressure_actual_des"][::-1])
-        indices = [i for i, v in enumerate(ds["pressure"]) if v is None]
+    if 'pressure_actual_ads' in head:
+        ds['pressure_target'] = (data['pressure_target'] + data['pressure_target'][::-1])
+        ds['pressure'] = (data['pressure_actual_ads'] + data['pressure_actual_des'][::-1])
+        indices = [i for i, v in enumerate(ds['pressure']) if v is None]
     else:
-        ds["pressure"] = (data["pressure_target"] + data["pressure_target"][::-1])
-        indices = [i for i, v in enumerate(ds["loading"]) if v is None]
+        ds['pressure'] = (data['pressure_target'] + data['pressure_target'][::-1])
+        indices = [i for i, v in enumerate(ds['loading']) if v is None]
 
     # remove empty data
     indices = indices[::-1]
@@ -292,6 +293,6 @@ def _sort_data(data, head):
 
 
 def _handle_dvs_date(text):
-    if text == "N/A":
+    if text == 'N/A':
         return None
-    return dateutil.parser.parse(text.replace(" UTC ", "")).isoformat()
+    return dateutil.parser.parse(text.replace(' UTC ', '')).isoformat()

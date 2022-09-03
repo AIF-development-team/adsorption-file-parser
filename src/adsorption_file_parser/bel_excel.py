@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """Parse BEL Excel(.xls) output files."""
 
 from itertools import product
@@ -44,7 +45,7 @@ def parse(path):
             continue
 
         # check if we are in the data section
-        if cell_value != "No":
+        if cell_value != 'No':
             cell_value = cell_value.strip().lower()
             try:
                 key = util.search_key_in_def_dict(cell_value, meta_dict)
@@ -83,7 +84,7 @@ def parse(path):
             meta.update(units)
 
             (ads_start, ads_end, des_start, des_end) = _parse_data(sheet, row, col)
-            data["branch"] = [0] * (ads_end - ads_start) + [1] * (des_end - des_start)
+            data['branch'] = [0] * (ads_end - ads_start) + [1] * (des_end - des_start)
             for i, item in enumerate(head[1:]):
                 ads_points = [sheet.cell(r, i).value for r in range(ads_start, ads_end)]
                 des_points = [sheet.cell(r, i).value for r in range(des_start, des_end)]
@@ -143,4 +144,4 @@ def _handle_bel_xl_timedelta(val):
     seconds = int(round(val * 86400.0))
     minutes, second = divmod(seconds, 60)
     hour, minute = divmod(minutes, 60)
-    return f"{hour}:{minute}:{second}"
+    return f'{hour}:{minute}:{second}'

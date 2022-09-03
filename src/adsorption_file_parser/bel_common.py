@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """Common BEL file utilities."""
 
 import adsorption_file_parser.utils.common_utils as util
@@ -6,110 +7,110 @@ from adsorption_file_parser.utils import unit_parsing
 
 _META_DICT = {
     'material': {
-        "text": ('comment1', 'コメント１'),
-        "type": 'string',
-        "xl_ref": (0, 2),
+        'text': ('comment1', 'コメント１'),
+        'type': 'string',
+        'xl_ref': (0, 2),
     },
     'adsorbate': {
-        "text": ('adsorptive', '吸着質名称'),
-        "type": 'string',
-        "xl_ref": (0, 2),
+        'text': ('adsorptive', '吸着質名称'),
+        'type': 'string',
+        'xl_ref': (0, 2),
     },
     'temperature': {
-        "text": (
+        'text': (
             'adsorption temperature',
             'adsorption temperature',
-            "meas. temp.",
+            'meas. temp.',
             '吸着温度',
         ),
-        "type": "numeric",
-        "unit": "temperature_unit",
-        "xl_ref": (0, 2),
+        'type': 'numeric',
+        'unit': 'temperature_unit',
+        'xl_ref': (0, 2),
     },
     'operator': {
-        "text": ('comment2', 'コメント２'),
-        "type": 'string',
-        "xl_ref": (0, 2),
+        'text': ('comment2', 'コメント２'),
+        'type': 'string',
+        'xl_ref': (0, 2),
     },
     'date': {
-        "text": ('date of measurement', '測定日'),
-        "type": 'datetime',
-        "xl_ref": (0, 2),
+        'text': ('date of measurement', '測定日'),
+        'type': 'datetime',
+        'xl_ref': (0, 2),
     },
     'material_mass': {
-        "text": ('sample weight', 'サンプル質量'),
-        "unit": "material_mass_unit",
-        "type": "numeric",
-        "xl_ref": (0, 2),
+        'text': ('sample weight', 'サンプル質量'),
+        'unit': 'material_mass_unit',
+        'type': 'numeric',
+        'xl_ref': (0, 2),
     },
     'measurement_duration': {
-        "text": ('time of measurement', '測定時間'),
-        "type": 'timedelta',
-        "xl_ref": (0, 2),
+        'text': ('time of measurement', '測定時間'),
+        'type': 'timedelta',
+        'xl_ref': (0, 2),
     },
     'serialnumber': {
-        "text": ('serial number', 's/n', "instrument", 'シリアルナンバー'),
-        "type": 'string',
-        "xl_ref": (0, 2),
+        'text': ('serial number', 's/n', 'instrument', 'シリアルナンバー'),
+        'type': 'string',
+        'xl_ref': (0, 2),
     },
     'errors': {
-        "text": ('primary data', ),
-        "type": 'error',
-        "xl_ref": (0, 2),
+        'text': ('primary data', ),
+        'type': 'error',
+        'xl_ref': (0, 2),
     },
     'comment3': {
-        "text": ('comment3', ),
-        "type": 'string',
-        "xl_ref": (0, 2),
+        'text': ('comment3', ),
+        'type': 'string',
+        'xl_ref': (0, 2),
     },
     'comment4': {
-        "text": ('comment4', ),
-        "type": 'string',
-        "xl_ref": (0, 2),
+        'text': ('comment4', ),
+        'type': 'string',
+        'xl_ref': (0, 2),
     },
     'cell_volume': {
         'text': ('vs/', 'standard volume'),
-        "type": "numeric",
-        "unit": "cell_volume_unit",
-        "xl_ref": (0, 2),
+        'type': 'numeric',
+        'unit': 'cell_volume_unit',
+        'xl_ref': (0, 2),
     },
     'dead_volume': {
         'text': ('dead volume', ),
-        "type": "numeric",
-        "xl_ref": (0, 2),
+        'type': 'numeric',
+        'xl_ref': (0, 2),
     },
     'equilibration_time': {
         'text': ('equilibrium time', ),
-        "type": "numeric",
-        "unit": "equilibration_time_unit",
-        "xl_ref": (0, 2),
+        'type': 'numeric',
+        'unit': 'equilibration_time_unit',
+        'xl_ref': (0, 2),
     },
 }
 
 _DATA_DICT = {
     'measurement': {
-        "text": ('no', ),
+        'text': ('no', ),
     },
     'pressure_internal': {
-        "text": ('pi/', ),
+        'text': ('pi/', ),
     },
     'pressure': {
-        "text": ('pe/', ),
+        'text': ('pe/', ),
     },
     'pressure2': {
-        "text": ('pe2/', ),
+        'text': ('pe2/', ),
     },
     'pressure_saturation': {
-        "text": ('p0/', ),
+        'text': ('p0/', ),
     },
     'pressure_relative': {
-        "text": ('p/p0', ),
+        'text': ('p/p0', ),
     },
     'dead_volume': {
-        "text": ('vd/', ),
+        'text': ('vd/', ),
     },
     'loading': {
-        "text": ('v/', 'va/', 'n/', 'na/'),
+        'text': ('v/', 'va/', 'n/', 'na/'),
     },
 }
 
@@ -121,7 +122,7 @@ def _parse_header(header_split):
 
     for h in header_split:
         try:
-            text = h.replace(" ", "").lower()
+            text = h.replace(' ', '').lower()
             header = util.search_key_starts_def_dict(text, _DATA_DICT)
         except StopIteration:
             header = h
@@ -150,6 +151,6 @@ def _check(meta, data, path):
     if 'loading' in data:
         empties = (k for k, v in data.items() if not v)
         for empty in empties:
-            logger.info(f"No data collected for {empty} in file {path}.")
+            logger.info(f'No data collected for {empty} in file {path}.')
     if 'errors' in meta:
         logger.warning('\n'.join(meta['errors']))

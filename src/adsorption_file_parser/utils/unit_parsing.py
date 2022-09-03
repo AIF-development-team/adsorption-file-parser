@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """Parses the most common unit types."""
 
 import re
@@ -12,38 +13,38 @@ from adsorption_file_parser.utils.units import _VOLUME_UNITS
 # [pattern, substitution value]
 pre_proc_sub = [
     # quotes, underscores, commas
-    [util.RE_PUNCTUATION, ""],
+    [util.RE_PUNCTUATION, ''],
     # single spaces/tabs
-    [util.RE_SPACES, " "],
+    [util.RE_SPACES, ' '],
     # unicode superscripts
-    [util.RE_SUPERSCRIPT2, "2"],
-    [util.RE_SUPERSCRIPT3, "3"],
+    [util.RE_SUPERSCRIPT2, '2'],
+    [util.RE_SUPERSCRIPT3, '3'],
     # remove all brackets
-    [util.RE_BRACKETS, ""],
+    [util.RE_BRACKETS, ''],
 ]
 
 # the string can be a single descriptor like "wt%" or "fraction volume"
 ALIAS_FRACTION = {
-    "percent": ("%", "percent"),
-    "fraction": ("fractional", "fraction", "frac"),
+    'percent': ('%', 'percent'),
+    'fraction': ('fractional', 'fraction', 'frac'),
 }
 ALIAS_BASIS = {
-    "mass": ("mass", "wt", "weight"),
-    "molar": ("molar", "mol"),
-    "volume": ("volume", "vol"),
+    'mass': ('mass', 'wt', 'weight'),
+    'molar': ('molar', 'mol'),
+    'volume': ('volume', 'vol'),
 }
 ALIAS_PRESSURE_UNIT = {
-    "torr": ('mmhg', 'torr', 'mm hg'),
-    "Pa": ('pa', 'pascal'),
-    "kPa": ('kpa', 'kilopascal'),
-    "MPa": ('mpa', 'megapascal'),
-    "bar": ('bar', ),
-    "mbar": ('mbar', 'millibar'),
-    "atm": ('atm', 'atmosphere'),
+    'torr': ('mmhg', 'torr', 'mm hg'),
+    'Pa': ('pa', 'pascal'),
+    'kPa': ('kpa', 'kilopascal'),
+    'MPa': ('mpa', 'megapascal'),
+    'bar': ('bar', ),
+    'mbar': ('mbar', 'millibar'),
+    'atm': ('atm', 'atmosphere'),
 }
 ALIAS_VOLUME_UNIT = {
-    "cm3": ('cm3', 'cc'),
-    "mL": ('ml', ),
+    'cm3': ('cm3', 'cc'),
+    'mL': ('ml', ),
     'dm3': ('dm3', ),
     'L': ('l', ),
     'm3': ('m3', ),
@@ -60,10 +61,10 @@ def parse_number_unit_string(string):
 def parse_temperature_unit(text: str) -> str:
     """Ensure celsius is correctly written."""
     lower_text = text.lower()
-    if "c" in lower_text:
-        return "°C"
-    if "k" in lower_text:
-        return "K"
+    if 'c' in lower_text:
+        return '°C'
+    if 'k' in lower_text:
+        return 'K'
     return text
 
 
@@ -82,8 +83,8 @@ def parse_pressure_string(pressure_string: str) -> str:
     """Correctly parse a pressure string."""
 
     final_units = {
-        "pressure_mode": None,
-        "pressure_unit": None,
+        'pressure_mode': None,
+        'pressure_unit': None,
     }
 
     # first clean the string
@@ -100,24 +101,24 @@ def parse_pressure_string(pressure_string: str) -> str:
                 final_units['pressure_unit'] = p_unit
 
         if not final_units['pressure_unit']:
-            raise ParsingError(f"Cannot understand pressure units in {pressure_string}")
+            raise ParsingError(f'Cannot understand pressure units in {pressure_string}')
 
     return final_units
 
 
 def upper_litre(text: str) -> str:
     """Have the litre capitalized."""
-    return text[:-1] + text[-1].upper() if text in ["ml", "l"] else text
+    return text[:-1] + text[-1].upper() if text in ['ml', 'l'] else text
 
 
-def clean_string(text: str, patterns: "list[str]") -> str:
+def clean_string(text: str, patterns: 'list[str]') -> str:
     """Apply a list of regex substitution patterns."""
     for pattern in patterns:
         text = re.sub(pattern[0], pattern[1], text)
     return text.lower().strip()
 
 
-def parse_loading_string(loading_string: str, missing_units: dict = None) -> "tuple[str, str]":
+def parse_loading_string(loading_string: str, missing_units: dict = None) -> 'tuple[str, str]':
     """
     Correctly parse an adsorption loading unit string.
 
@@ -129,14 +130,14 @@ def parse_loading_string(loading_string: str, missing_units: dict = None) -> "tu
     or in a fractional/percentage amount adsorbed.
     """
     final_units = {
-        "loading_basis": None,
-        "loading_unit": None,
-        "material_basis": None,
-        "material_unit": None,
+        'loading_basis': None,
+        'loading_unit': None,
+        'material_basis': None,
+        'material_unit': None,
     }
     if missing_units:
         final_units.update(missing_units)
-    error_text = "Isotherm cannot be parsed due to loading string format."
+    error_text = 'Isotherm cannot be parsed due to loading string format.'
 
     # first clean the string
     loading_string_clean = clean_string(loading_string, pre_proc_sub)
@@ -144,11 +145,11 @@ def parse_loading_string(loading_string: str, missing_units: dict = None) -> "tu
     # the string can be a single descriptor like "wt%" or "fractional volume"
     for lbasis, lbtext in ALIAS_FRACTION.items():
         if any(text in loading_string_clean for text in lbtext):
-            final_units["loading_basis"] = lbasis
+            final_units['loading_basis'] = lbasis
 
             for mbasis, mbtext in ALIAS_BASIS.items():
                 if any(text in loading_string_clean for text in mbtext):
-                    final_units["material_basis"] = mbasis
+                    final_units['material_basis'] = mbasis
 
                     return final_units
             raise ParsingError(error_text)
@@ -157,11 +158,11 @@ def parse_loading_string(loading_string: str, missing_units: dict = None) -> "tu
 
     # first check for "stp" moniker, removing it if true
     stp = False
-    if "stp" in loading_string_clean:
+    if 'stp' in loading_string_clean:
         stp = True
-        final_units["loading_basis"] = "molar"
-        loading_string_clean = re.sub(r"stp", "", loading_string_clean)
-        loading_string_clean = re.sub(r"\s+", " ", loading_string_clean).strip()
+        final_units['loading_basis'] = 'molar'
+        loading_string_clean = re.sub(r'stp', '', loading_string_clean)
+        loading_string_clean = re.sub(r'\s+', ' ', loading_string_clean).strip()
 
     # now, this string could be as "x/y" or "x y-1"
     unit_components = loading_string_clean.split('/')
@@ -178,7 +179,7 @@ def parse_loading_string(loading_string: str, missing_units: dict = None) -> "tu
 
     # We add the STP moniker in a standard way
     if stp:
-        loading_unit = loading_unit + "(STP)"
+        loading_unit = loading_unit + '(STP)'
 
     if loading_unit in _MOLAR_UNITS:
         final_units['loading_basis'] = 'molar'
@@ -188,20 +189,20 @@ def parse_loading_string(loading_string: str, missing_units: dict = None) -> "tu
         final_units['loading_basis'] = 'volume_gas'
         logger.warning(
             f"The loading unit '{loading_unit}' is ambiguous. "
-            "It can mean either gas at STP, gas at isotherm temperature "
-            "or liquid volume. Here we assumed it is gas at isotherm temperature. "
-            "DOUBLE CHECK if this is the case !!!"
+            'It can mean either gas at STP, gas at isotherm temperature '
+            'or liquid volume. Here we assumed it is gas at isotherm temperature. '
+            'DOUBLE CHECK if this is the case !!!'
         )
     else:
         raise ParsingError(f"Cannot understand loading units in '{loading_string_clean}'.")
     final_units['loading_unit'] = loading_unit
 
     if material_unit in _MASS_UNITS:
-        final_units['material_basis'] = "mass"
+        final_units['material_basis'] = 'mass'
     elif material_unit in _VOLUME_UNITS:
-        final_units['material_basis'] = "volume"
+        final_units['material_basis'] = 'volume'
     elif material_unit in _MOLAR_UNITS:
-        final_units['material_basis'] = "molar"
+        final_units['material_basis'] = 'molar'
     else:
         raise ParsingError(f"Cannot understand material units in '{loading_string_clean}'.")
     final_units['material_unit'] = material_unit
