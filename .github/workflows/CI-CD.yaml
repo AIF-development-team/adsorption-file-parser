@@ -88,6 +88,9 @@ jobs:
         with:
           user: __token__
           password: ${{ secrets.PYPI_API_TOKEN }}
+      - name: Test PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        run: pip install adsorption-file-parser
       - name: GH 🐱🐙 Release
         uses: softprops/action-gh-release@v1
         env:
