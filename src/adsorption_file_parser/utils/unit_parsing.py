@@ -118,6 +118,34 @@ def clean_string(text: str, patterns: 'list[str]') -> str:
     return text.lower().strip()
 
 
+def find_loading_basis(loading_unit):
+    """Find the loading basis from the unit"""
+    if loading_unit in _MOLAR_UNITS:
+        return 'molar'
+    if loading_unit in _MASS_UNITS:
+        return 'mass'
+    if loading_unit in _VOLUME_UNITS:
+        logger.warning(
+            f"The loading unit '{loading_unit}' is ambiguous. "
+            'It can mean either gas at STP, gas at isotherm temperature '
+            'or liquid volume. Here we assumed it is gas at isotherm temperature. '
+            'DOUBLE CHECK if this is the case !!!'
+        )
+        return 'volume_gas'
+    raise ParsingError(f"Cannot understand loading units in '{loading_unit}'.")
+
+
+def find_material_basis(material_unit):
+    """Find the material basis from the unit"""
+    if material_unit in _MASS_UNITS:
+        return 'mass'
+    if material_unit in _VOLUME_UNITS:
+        return 'volume'
+    if material_unit in _MOLAR_UNITS:
+        return 'molar'
+    raise ParsingError(f"Cannot understand material units in '{material_unit}'.")
+
+
 def parse_loading_string(loading_string: str, missing_units: dict = None) -> 'tuple[str, str]':
     """
     Correctly parse an adsorption loading unit string.
@@ -181,30 +209,10 @@ def parse_loading_string(loading_string: str, missing_units: dict = None) -> 'tu
     if stp:
         loading_unit = loading_unit + '(STP)'
 
-    if loading_unit in _MOLAR_UNITS:
-        final_units['loading_basis'] = 'molar'
-    elif loading_unit in _MASS_UNITS:
-        final_units['loading_basis'] = 'mass'
-    elif loading_unit in _VOLUME_UNITS:
-        final_units['loading_basis'] = 'volume_gas'
-        logger.warning(
-            f"The loading unit '{loading_unit}' is ambiguous. "
-            'It can mean either gas at STP, gas at isotherm temperature '
-            'or liquid volume. Here we assumed it is gas at isotherm temperature. '
-            'DOUBLE CHECK if this is the case !!!'
-        )
-    else:
-        raise ParsingError(f"Cannot understand loading units in '{loading_string_clean}'.")
+    final_units['loading_basis'] = find_loading_basis(loading_unit)
     final_units['loading_unit'] = loading_unit
 
-    if material_unit in _MASS_UNITS:
-        final_units['material_basis'] = 'mass'
-    elif material_unit in _VOLUME_UNITS:
-        final_units['material_basis'] = 'volume'
-    elif material_unit in _MOLAR_UNITS:
-        final_units['material_basis'] = 'molar'
-    else:
-        raise ParsingError(f"Cannot understand material units in '{loading_string_clean}'.")
+    final_units['material_basis'] = find_material_basis(material_unit)
     final_units['material_unit'] = material_unit
 
     return final_units
