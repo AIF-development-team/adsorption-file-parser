@@ -238,6 +238,7 @@ def _parse_header(header_split):
         if 'pressure_relative' in headers:
             headers[headers.index('pressure_relative')] = 'pressure'
             units['pressure_mode'] = 'relative'
+            units['pressure_unit'] = None
 
     return headers, units
 
