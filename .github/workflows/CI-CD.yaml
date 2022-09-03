@@ -50,7 +50,7 @@ jobs:
 
   build-publish:
       runs-on: ubuntu-latest
-      needs: [linting-checks, docs-build, unittests]
+      needs: [linting-checks, unittests]
       if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
 
       steps:
