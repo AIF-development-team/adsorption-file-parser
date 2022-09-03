@@ -63,6 +63,10 @@ jobs:
         run: |
           python -m pip install --upgrade setuptools wheel
           pip --version
+      - name: Install package
+        run: |
+          pip install .[dev]
+          python -c "from importlib.metadata import version; print(version('adsorption_file_parser'))"
       - name: Build wheels
         run: python setup.py sdist bdist_wheel
       - name: Publish 📦 to Test PyPI
