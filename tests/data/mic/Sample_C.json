@@ -14,7 +14,8 @@
         "loading_unit": "cm3(STP)",
         "material_basis": "mass",
         "material_unit": "g",
-        "pressure_mode": "relative"
+        "pressure_mode": "relative",
+        "pressure_unit": null
     },
     "data": {
         "pressure": [
