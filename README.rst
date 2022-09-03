@@ -4,13 +4,13 @@ Adsorption File Parser
 A pure python parser to sorption files from various instrumentation manufacturers.
 It comes with minimal dependencies and maximum flexibility.
 
-Currently supports:
+Currently supports files from:
 
-    - Micromeritics
-    - Surface Measurement Systems DVS
-    - 3P instruments
-    - Quantachrome
-    - MicrotracBEL
+- Micromeritics (.xls reports)
+- Surface Measurement Systems DVS (.xlsx reports)
+- 3P instruments (.xlsx reports)
+- Quantachrome (.txt raw isotherm data)
+- MicrotracBEL (.dat, .xls and .csv files)
 
 .. start-badges
 
@@ -24,7 +24,6 @@ Currently supports:
       - | |license|
     * - tests
       - | |GHA| |codecov|
-        | |requires|
     * - package
       - | |version| |wheel|
         | |supported-versions| |supported-implementations|
@@ -41,31 +40,27 @@ Currently supports:
     :target: https://opensource.org/licenses/MIT
     :alt: Project License
 
-.. |GHA| image:: https://github.com/AIF-development-team/adsorption-file-parser/workflows/CI/badge.svg
+.. |GHA| image:: https://github.com/AIF-development-team/adsorption-file-parser/actions/workflows/CI-CD.yaml/badge.svg
     :alt: GHA-CI Build Status
     :target: https://github.com/AIF-development-team/adsorption-file-parser/actions
-
-.. |requires| image:: https://requires.io/github/AIF-development-team/adsorption-file-parser/requirements.svg?branch=master
-    :alt: Requirements Status
-    :target: https://requires.io/github/AIF-development-team/adsorption-file-parser/requirements/?branch=master
 
 .. |codecov| image:: https://img.shields.io/codecov/c/github/AIF-development-team/adsorption-file-parser.svg
     :alt: Coverage Status
     :target: https://codecov.io/gh/AIF-development-team/adsorption-file-parser
 
-.. |version| image:: https://img.shields.io/pypi/v/adsorption-file-parser/.svg
+.. |version| image:: https://img.shields.io/pypi/v/adsorption-file-parser.svg
     :alt: PyPI Package latest release
     :target: https://pypi.org/project/adsorption-file-parser/
 
-.. |wheel| image:: https://img.shields.io/pypi/wheel/adsorption-file-parser/.svg
+.. |wheel| image:: https://img.shields.io/pypi/wheel/adsorption-file-parser.svg
     :alt: PyPI Wheel
     :target: https://pypi.org/project/adsorption-file-parser/
 
-.. |supported-versions| image:: https://img.shields.io/pypi/pyversions/adsorption-file-parser/.svg
+.. |supported-versions| image:: https://img.shields.io/pypi/pyversions/adsorption-file-parser.svg
     :alt: Supported versions
     :target: https://pypi.org/project/adsorption-file-parser/
 
-.. |supported-implementations| image:: https://img.shields.io/pypi/implementation/adsorption-file-parser/.svg
+.. |supported-implementations| image:: https://img.shields.io/pypi/implementation/adsorption-file-parser.svg
     :alt: Supported implementations
     :target: https://pypi.org/project/adsorption-file-parser/
 
@@ -84,6 +79,12 @@ Install using pip
 
 Documentation
 =============
+
+The main read function returns two dictionaries:
+a ``meta`` dictionary, which contains various metadata
+that is present in the report (date, user, units)
+and the ``data`` dictionary, containing lists
+of individual isotherm data.
 
 .. code:: bash
 
