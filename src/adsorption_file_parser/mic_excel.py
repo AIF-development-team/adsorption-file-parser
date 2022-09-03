@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """Parse Micromeritics Excel(.xls) report files."""
 
 from itertools import product
@@ -12,75 +13,75 @@ _META_DICT = {
     'material': {
         'text': ('sample:', 'echantillon:'),
         'type': 'string',
-        "xl_ref": (0, 1),
+        'xl_ref': (0, 1),
     },
     'adsorbate': {
         'text': ('analysis ads', ),
         'type': 'string',
-        "xl_ref": (0, 1),
+        'xl_ref': (0, 1),
     },
     'temperature': {
         'text': ('analysis bath', ),
         'type': 'numeric',
-        "xl_ref": (0, 1),
+        'xl_ref': (0, 1),
     },
     'operator': {
         'text': ('operator', 'analyste'),
         'type': 'string',
-        "xl_ref": (0, 1),
+        'xl_ref': (0, 1),
     },
     'date': {
         'text': ('started', ),
         'type': 'datetime',
-        "xl_ref": (0, 1),
+        'xl_ref': (0, 1),
     },
     'date_finished': {
         'text': ('completed', ),
         'type': 'datetime',
-        "xl_ref": (0, 1),
+        'xl_ref': (0, 1),
     },
     'date_report': {
         'text': ('report time', ),
         'type': 'datetime',
-        "xl_ref": (0, 1),
+        'xl_ref': (0, 1),
     },
     'material_mass': {
         'text': ('sample mass', ),
         'type': 'numeric',
-        "xl_ref": (0, 1),
+        'xl_ref': (0, 1),
     },
     'apparatus': {
         'text': ('micromeritics instrument', ),
         'type': 'string',
-        "xl_ref": (1, 0),
+        'xl_ref': (1, 0),
     },
     'comment': {
         'text': ('comments', ),
         'type': 'string',
-        "xl_ref": (0, 0),
+        'xl_ref': (0, 0),
     },
     'error': {
         'text': ('primary data', ),
         'type': 'error',
-        "xl_ref": (1, 0),
+        'xl_ref': (1, 0),
     },
 }
 
 _DATA_DICT = {
     'pressure': {
-        "text": ('absolute', ),
+        'text': ('absolute', ),
     },
     'pressure_saturation': {
-        "text": ('saturation', ),
+        'text': ('saturation', ),
     },
     'pressure_relative': {
-        "text": ('relative', ),
+        'text': ('relative', ),
     },
     'time_total': {
-        "text": ('elapsed time', ),
+        'text': ('elapsed time', ),
     },
     'loading': {
-        "text": ('quantity', ),
+        'text': ('quantity', ),
     },
 }
 
@@ -120,7 +121,7 @@ def parse(path):
             continue
 
         # check if we are in the data section
-        if cell_value not in ["Isotherm Tabular Report"]:
+        if cell_value not in ['Isotherm Tabular Report']:
             cell_value = cell_value.strip().lower()
             try:
                 key = util.search_key_starts_def_dict(cell_value, meta_dict)
@@ -137,7 +138,7 @@ def parse(path):
             elif tp == 'numeric':
                 nb, unit = unit_parsing.parse_number_unit_string(val)
                 meta[key] = nb
-                meta[f"{key}_unit"] = unit
+                meta[f'{key}_unit'] = unit
             elif tp == 'string':
                 meta[key] = util.handle_excel_string(val)
             elif tp == 'datetime':
@@ -164,7 +165,7 @@ def parse(path):
                     data[h] = list(map(util.handle_string_time_minutes, points[1:]))
                 elif h == 'pressure_saturation':
                     data[h] = [float(x) for x in points[1:]]
-                elif h.startswith("pressure") or h.startswith("loading"):
+                elif h.startswith('pressure') or h.startswith('loading'):
                     data[h] = [float(x) for x in points]
                 else:
                     data[h] = points
@@ -175,8 +176,8 @@ def parse(path):
     _check(meta, data, path)
 
     # Set extra metadata
-    if meta.get("comment"):
-        meta["comment"] = meta["comment"].replace('Comments: ', '')
+    if meta.get('comment'):
+        meta['comment'] = meta['comment'].replace('Comments: ', '')
 
     return meta, data
 
@@ -189,7 +190,7 @@ def _get_header(sheet, row, col):
     header = sheet.cell(row + header_row, final_column).value.lower()
     header_options = []
     for option in _DATA_DICT.values():
-        header_options.extend(option["text"])
+        header_options.extend(option['text'])
     while any(header.startswith(label) for label in header_options):
         final_column += 1
         header = sheet.cell(row + header_row, final_column).value.lower()
@@ -197,13 +198,13 @@ def _get_header(sheet, row, col):
     if col == final_column:
         # this means no header exists, can happen in some older files
         # the units might not be standard! TODO should check
-        logger.warning("Default data headers supplied for file.")
+        logger.warning('Default data headers supplied for file.')
         return [
-            "Relative Pressure (P/Po)",
-            "Absolute Pressure (kPa)",
-            "Quantity Adsorbed (cm³/g STP)",
-            "Elapsed Time (h:min)",
-            "Saturation Pressure (kPa)",
+            'Relative Pressure (P/Po)',
+            'Absolute Pressure (kPa)',
+            'Quantity Adsorbed (cm³/g STP)',
+            'Elapsed Time (h:min)',
+            'Saturation Pressure (kPa)',
         ]
 
     return [sheet.cell(row + header_row, i).value for i in range(col, final_column)]

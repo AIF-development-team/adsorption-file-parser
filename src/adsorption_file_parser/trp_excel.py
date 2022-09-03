@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """Parse 3P xlsx output files."""
 
 import openpyxl
@@ -27,22 +28,22 @@ _META_DICT = {
 
 _DATA_DICT = {
     'measurement': {
-        "text": ('id', ),
+        'text': ('id', ),
     },
     'pressure': {
-        "text": ('p (', ),
+        'text': ('p (', ),
     },
     'pressure_saturation': {
-        "text": ('p0 (', ),
+        'text': ('p0 (', ),
     },
     'pressure_relative': {
-        "text": ('p/p0', ),
+        'text': ('p/p0', ),
     },
     'time_point': {
-        "text": ('time', ),
+        'text': ('time', ),
     },
     'loading': {
-        "text": ('v (', ),
+        'text': ('v (', ),
     },
 }
 
@@ -87,7 +88,7 @@ def parse(path):
             key = util.search_key_in_def_dict(cell_value, meta_dict)
         except StopIteration:
             if val:
-                key = cell_value.replace(" ", "_")
+                key = cell_value.replace(' ', '_')
                 meta[key] = val
             continue
 
@@ -118,7 +119,7 @@ def parse(path):
     # Set extra metadata
     meta['apparatus'] = '3P'
     meta['temperature'] = 77.3  # TODO where is this stored?
-    meta['temperature_unit'] = "K"  # TODO where is this stored?
+    meta['temperature_unit'] = 'K'  # TODO where is this stored?
 
     return meta, data
 
@@ -155,7 +156,7 @@ def _parse_data(data_rows):
     branch = 0
     for row in list(data_rows):
         # If we reached the desorption branch we change
-        if row[0] == "---":
+        if row[0] == '---':
             branch = 1
             continue
         data.append([branch] + list(row))
@@ -171,6 +172,6 @@ def _check(meta, data, path):
     if 'loading' in data:
         empties = (k for k, v in data.items() if not v)
         for empty in empties:
-            logger.info(f"No data collected for {empty} in file {path}.")
+            logger.info(f'No data collected for {empty} in file {path}.')
     if 'errors' in meta:
         logger.warning('\n'.join(meta['errors']))

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """Parse BEL DAT files."""
 
 from adsorption_file_parser import ParsingError
@@ -42,7 +43,7 @@ def parse(path):
                 except StopIteration:  # Store unknown as is
                     key, unit = _handle_bel_dat_string_units(text)
                     if unit:
-                        val = val + " " + unit
+                        val = val + ' ' + unit
                     meta[key] = val
                     continue
 
@@ -56,7 +57,7 @@ def parse(path):
                     meta[key] = util.handle_string_numeric(val)
                 elif tp == 'string':
                     meta[key] = val
-                elif tp in ["date", 'datetime']:
+                elif tp in ['date', 'datetime']:
                     meta[key] = util.handle_string_date(val)
                 elif tp == 'time':
                     meta[key] = val
@@ -65,7 +66,7 @@ def parse(path):
 
                 if unit_key:
                     text, unit = _handle_bel_dat_string_units(text)
-                    if key == "temperature":
+                    if key == 'temperature':
                         meta[unit_key] = unit_parsing.parse_temperature_unit(unit)
                     else:
                         meta[unit_key] = unit
@@ -77,7 +78,7 @@ def parse(path):
                 if title.startswith('adsorption data'):
                     file.readline()  # ====== - discard
                     header_line = file.readline().rstrip()  # header
-                    header_list = header_line.replace('"', '').split("\t")
+                    header_list = header_line.replace('"', '').split('\t')
                     head, units = _parse_header(header_list)  # header
                     meta.update(units)
 
@@ -100,10 +101,10 @@ def parse(path):
                     continue
 
             else:
-                raise ParsingError(f"Unknown line format: {line}")
+                raise ParsingError(f'Unknown line format: {line}')
 
     # Format extra metadata
-    meta['apparatus'] = 'BEL ' + meta["serialnumber"]
+    meta['apparatus'] = 'BEL ' + meta['serialnumber']
 
     # Prepare data
     data = dict(zip(head, map(lambda *x: list(x), *data)))
@@ -112,8 +113,8 @@ def parse(path):
 
 
 def _handle_bel_dat_string_units(text):
-    key = text.replace(":", "").replace(" ", "_")
-    key_units = key.split("/")
+    key = text.replace(':', '').replace(' ', '_')
+    key_units = key.split('/')
     if len(key_units) == 2:
         return key_units[0], key_units[1]
     return key, None

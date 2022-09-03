@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import re
 
 import dateutil.parser
@@ -7,14 +8,14 @@ from adsorption_file_parser import logger
 # regexes
 
 RE_PUNCTUATION = re.compile(r"['\"_,\^]")  # quotes, underscores, commas, superscript
-RE_SPACES = re.compile(r"\s+")  # spaces/tabs
+RE_SPACES = re.compile(r'\s+')  # spaces/tabs
 # unicode superscripts
-RE_SUPERSCRIPT2 = re.compile("²")
-RE_SUPERSCRIPT3 = re.compile("³")
-RE_BRACKETS = re.compile(r"[\{\[\(\)\]\}]")  # all bracket type
+RE_SUPERSCRIPT2 = re.compile('²')
+RE_SUPERSCRIPT3 = re.compile('³')
+RE_BRACKETS = re.compile(r'[\{\[\(\)\]\}]')  # all bracket type
 
-RE_ONLY_NUMBERS = re.compile(r"^(-)?\d+(.|,)?\d+")
-RE_BETWEEN_BRACKETS = re.compile(r"(?<=\().+?(?=\))")
+RE_ONLY_NUMBERS = re.compile(r'^(-)?\d+(.|,)?\d+')
+RE_BETWEEN_BRACKETS = re.compile(r'(?<=\().+?(?=\))')
 
 
 def search_key_in_def_dict(key, def_dict):
@@ -42,9 +43,9 @@ def handle_string_date(text):
     try:
         return dateutil.parser.parse(text).isoformat()
     except dateutil.parser.ParserError:
-        if "午" in text:
-            text = text.replace("下午", "")
-            text = text.replace("上午", "")
+        if '午' in text:
+            text = text.replace('下午', '')
+            text = text.replace('上午', '')
             return handle_string_date(text)
         logger.warning(f"Could not parse date '{text}'")
         return text
@@ -59,20 +60,20 @@ def handle_xlrd_datetime(text, sheet):
 def handle_xlrd_date(text, sheet):
     """Convert date cell from xlrd to a simple format."""
     from xlrd.xldate import xldate_as_datetime
-    return xldate_as_datetime(text, sheet.book.datemode).strftime("%Y-%m-%d")
+    return xldate_as_datetime(text, sheet.book.datemode).strftime('%Y-%m-%d')
 
 
 def handle_xlrd_time(text, sheet):
     """Convert time cell from xlrd to a simple format."""
     from xlrd.xldate import xldate_as_datetime
-    return xldate_as_datetime(text, sheet.book.datemode).strftime("%H:%M:%S")
+    return xldate_as_datetime(text, sheet.book.datemode).strftime('%H:%M:%S')
 
 
 def handle_xlrd_timedelta(text, sheet):
     """Convert timedelta cell from xlrd (in h) to a string."""
     from xlrd.xldate import xldate_as_tuple
     dt = xldate_as_tuple(text, sheet.book.datemode)
-    return f"{dt[3]}:{dt[4]}:{dt[5]}"
+    return f'{dt[3]}:{dt[4]}:{dt[5]}'
 
 
 def handle_excel_string(text):
