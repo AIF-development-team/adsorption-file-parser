@@ -22,10 +22,12 @@
         "apparatus": "Nova Station C",
         "cell_id": "0",
         "material_unit": "g",
+        "material_basis": "mass",
         "temperature_unit": "K",
         "pressure_unit": null,
         "pressure_saturation_unit": "Torr",
-        "loading_unit": "cc(STP)"
+        "loading_unit": "cc(STP)",
+        "loading_basis": "molar"
     },
     "data": {
         "pressure_relative": [

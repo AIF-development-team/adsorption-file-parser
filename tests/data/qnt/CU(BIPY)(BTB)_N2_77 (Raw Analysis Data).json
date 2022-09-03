@@ -18,13 +18,15 @@
         "apparatus": "Autosorb Station 1",
         "temperature": 77.35,
         "material_unit": "g",
+        "material_basis": "mass",
         "temperature_unit": "K",
         "pressure_unit": "Torr",
         "pressure_saturation_unit": "Torr",
         "loading_unit": "cc(STP)",
         "measurement_time_unit": "min",
         "pressure_tolerance_unit": null,
-        "equilibration_time_unit": null
+        "equilibration_time_unit": null,
+        "loading_basis": "molar"
     },
     "data": {
         "pressure": [

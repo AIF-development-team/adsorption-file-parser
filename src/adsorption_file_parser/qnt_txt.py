@@ -3,7 +3,7 @@
 import re
 
 import adsorption_file_parser.utils.common_utils as util
-from adsorption_file_parser.utils.unit_parsing import parse_temperature_unit
+from adsorption_file_parser.utils import unit_parsing
 
 _META_DICT = {
     'adsorbate': {
@@ -226,25 +226,25 @@ def parse(path):
     temp, temp_unit = meta['temperature'].split()
     mass, temp = map(float, (mass, temp))
 
+    # takes care of pressure, loading and other units
     meta['material_mass'] = mass
     meta['material_unit'] = mass_unit
+    meta['material_basis'] = unit_parsing.find_loading_basis(mass_unit)
     meta['temperature'] = temp
-    meta['temperature_unit'] = parse_temperature_unit(temp_unit)
-
-    # takes care of pressure, loading and other units
+    meta['temperature_unit'] = unit_parsing.parse_temperature_unit(temp_unit)
     for i, h in enumerate(head):
         if h == 'pressure_relative':
             meta['pressure_unit'] = None
         else:
             meta[h + '_unit'] = all_units[i]
-
     if meta['loading_unit'] in ['cc']:
         meta['loading_unit'] += '(STP)'
+    meta['loading_basis'] = unit_parsing.find_loading_basis(meta['loading_unit'])
 
     if meta.get('date'):
         meta['date'] = util.handle_string_date(meta['date'])
 
-    # amount adsorbed from cc to cc/g
+    # amount adsorbed from cc to cc/material_unit
     data = dict(zip(head, map(lambda *x: list(x), *data)))
     data['loading'] = [ld / mass for ld in data['loading']]
 
