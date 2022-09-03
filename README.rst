@@ -4,13 +4,13 @@ Adsorption File Parser
 A pure python parser to sorption files from various instrumentation manufacturers.
 It comes with minimal dependencies and maximum flexibility.
 
-Currently supports:
+Currently supports files from:
 
-    - Micromeritics
-    - Surface Measurement Systems DVS
-    - 3P instruments
-    - Quantachrome
-    - MicrotracBEL
+- Micromeritics (.xls reports)
+- Surface Measurement Systems DVS (.xlsx reports)
+- 3P instruments (.xlsx reports)
+- Quantachrome (.txt raw isotherm data)
+- MicrotracBEL (.dat, .xls and .csv files)
 
 .. start-badges
 
