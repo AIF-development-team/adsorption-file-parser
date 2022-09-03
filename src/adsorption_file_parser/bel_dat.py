@@ -1,10 +1,8 @@
-"""Interface with BEL-generated DAT files."""
+"""Parse BEL DAT files."""
 
-import dateutil.parser
-from adsorption_file_parser.utils.bel_common import _META_DICT
-from adsorption_file_parser.utils.bel_common import _parse_header
 from adsorption_file_parser import ParsingError
-
+from adsorption_file_parser.bel_common import _META_DICT
+from adsorption_file_parser.bel_common import _parse_header
 from adsorption_file_parser.utils import common_utils as util
 from adsorption_file_parser.utils import unit_parsing
 
@@ -31,7 +29,7 @@ def parse(path):
     # local for efficiency
     meta_dict = _META_DICT.copy()
 
-    with open(path, 'r', encoding='utf-8') as file:
+    with open(path, 'r', encoding='cp1252') as file:
         for line in file:
             values = line.strip().split(sep='\t')
             nvalues = len(values)
@@ -42,20 +40,35 @@ def parse(path):
                 try:  # find the standard name in the metadata dictionary
                     key = util.search_key_starts_def_dict(text, meta_dict)
                 except StopIteration:  # Store unknown as is
-                    key = text.replace(" ", "_")
-                    key_units = key.split("/")
-                    if key_units == 2:
-                        key = key_units[0]
-                        val = val + " " + key_units[1]
+                    key, unit = _handle_bel_dat_string_units(text)
+                    if unit:
+                        val = val + " " + unit
                     meta[key] = val
                     continue
 
-                meta[key] = val
+                tp = meta_dict[key]['type']
+                unit_key = meta_dict[key].get('unit')
                 del meta_dict[key]  # delete for efficiency
 
-                if text == "temperature":
-                    text, unit = key.split("/")
-                    meta['temperature_unit'] = unit_parsing.parse_temperature_unit(unit)
+                if val == '':
+                    meta[key] = None
+                elif tp == 'numeric':
+                    meta[key] = util.handle_string_numeric(val)
+                elif tp == 'string':
+                    meta[key] = val
+                elif tp in ["date", 'datetime']:
+                    meta[key] = util.handle_string_date(val)
+                elif tp == 'time':
+                    meta[key] = val
+                elif tp == 'timedelta':
+                    meta[key] = val
+
+                if unit_key:
+                    text, unit = _handle_bel_dat_string_units(text)
+                    if key == "temperature":
+                        meta[unit_key] = unit_parsing.parse_temperature_unit(unit)
+                    else:
+                        meta[unit_key] = unit
 
             elif nvalues < 2:  # If "section title"
                 title = values[0].strip().lower()
@@ -90,10 +103,17 @@ def parse(path):
                 raise ParsingError(f"Unknown line format: {line}")
 
     # Format extra metadata
-    meta['date'] = dateutil.parser.parse(meta['date']).isoformat()
     meta['apparatus'] = 'BEL ' + meta["serialnumber"]
 
     # Prepare data
     data = dict(zip(head, map(lambda *x: list(x), *data)))
 
     return meta, data
+
+
+def _handle_bel_dat_string_units(text):
+    key = text.replace(":", "").replace(" ", "_")
+    key_units = key.split("/")
+    if len(key_units) == 2:
+        return key_units[0], key_units[1]
+    return key, None

@@ -1,3 +1,5 @@
+"""Units and interconversion."""
+
 _MOLAR_UNITS = {
     "mmol": 0.001,
     "mol": 1,

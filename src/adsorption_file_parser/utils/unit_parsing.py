@@ -1,24 +1,25 @@
+"""Parses the most common unit types."""
+
 import re
 
+from adsorption_file_parser import ParsingError
+from adsorption_file_parser import logger
+from adsorption_file_parser.utils import common_utils as util
 from adsorption_file_parser.utils.units import _MASS_UNITS
 from adsorption_file_parser.utils.units import _MOLAR_UNITS
 from adsorption_file_parser.utils.units import _VOLUME_UNITS
 
-from adsorption_file_parser import ParsingError
-from adsorption_file_parser import logger
-from adsorption_file_parser.utils import common_utils as u
-
 # [pattern, substitution value]
 pre_proc_sub = [
     # quotes, underscores, commas
-    [u.RE_PUNCTUATION, ""],
+    [util.RE_PUNCTUATION, ""],
     # single spaces/tabs
-    [u.RE_SPACES, " "],
+    [util.RE_SPACES, " "],
     # unicode superscripts
-    [u.RE_SUPERSCRIPT2, "2"],
-    [u.RE_SUPERSCRIPT3, "3"],
+    [util.RE_SUPERSCRIPT2, "2"],
+    [util.RE_SUPERSCRIPT3, "3"],
     # remove all brackets
-    [u.RE_BRACKETS, ""],
+    [util.RE_BRACKETS, ""],
 ]
 
 # the string can be a single descriptor like "wt%" or "fraction volume"
@@ -52,7 +53,7 @@ ALIAS_VOLUME_UNIT = {
 def parse_number_unit_string(string):
     """Split a string """
     number, unit = string.strip().split()
-    number = float(u.RE_ONLY_NUMBERS.search(string.replace(',', '')).group())
+    number = float(util.RE_ONLY_NUMBERS.search(string.replace(',', '')).group())
     return number, unit
 
 

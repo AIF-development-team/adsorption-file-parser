@@ -1,13 +1,12 @@
-"""Parse bel xls output files."""
+"""Parse BEL Excel(.xls) output files."""
 
 from itertools import product
 
-import dateutil.parser
 import xlrd
 
-from adsorption_file_parser.utils.bel_common import _META_DICT
-from adsorption_file_parser.utils.bel_common import _check
-from adsorption_file_parser.utils.bel_common import _parse_header
+from adsorption_file_parser.bel_common import _META_DICT
+from adsorption_file_parser.bel_common import _check
+from adsorption_file_parser.bel_common import _parse_header
 
 from .utils import common_utils as util
 
@@ -54,23 +53,28 @@ def parse(path):
 
             ref = meta_dict[key]['xl_ref']
             tp = meta_dict[key]['type']
+            unit_key = meta_dict[key].get('unit')
             del meta_dict[key]  # delete for efficiency
 
             val = sheet.cell(row + ref[0], col + ref[1]).value
             if val == '':
                 meta[key] = None
             elif tp == 'numeric':
-                meta[key] = val
+                meta[key] = util.handle_string_numeric(val)
             elif tp == 'string':
                 meta[key] = util.handle_excel_string(val)
             elif tp == 'datetime':
-                meta[key] = util.handle_xlrd_datetime(sheet, val)
+                meta[key] = util.handle_xlrd_datetime(val, sheet)
             elif tp == 'date':
-                meta[key] = util.handle_xlrd_date(sheet, val)
+                meta[key] = util.handle_xlrd_date(val, sheet)
             elif tp == 'time':
-                meta[key] = util.handle_xlrd_time(sheet, val)
+                meta[key] = util.handle_xlrd_time(val, sheet)
             elif tp == 'timedelta':
-                meta[key] = val
+                meta[key] = _handle_bel_xl_timedelta(val)
+
+            if unit_key:
+                unit = sheet.cell(row + ref[0], col + ref[1] + 1).value.strip('[]')
+                meta[unit_key] = unit
 
         else:  # If "data" section
 
@@ -89,7 +93,6 @@ def parse(path):
 
     # Set extra metadata
     meta['apparatus'] = f'BEL {meta["serialnumber"]}'
-    meta['date'] = dateutil.parser.parse(meta['date']).isoformat()
 
     return meta, data
 
@@ -134,3 +137,10 @@ def _parse_data(sheet, row, col):
                 point = None
 
     return (ads_start_row, ads_final_row, des_start_row, des_final_row)
+
+
+def _handle_bel_xl_timedelta(val):
+    seconds = int(round(val * 86400.0))
+    minutes, second = divmod(seconds, 60)
+    hour, minute = divmod(minutes, 60)
+    return f"{hour}:{minute}:{second}"

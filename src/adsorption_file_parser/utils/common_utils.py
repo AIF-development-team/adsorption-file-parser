@@ -1,5 +1,9 @@
 import re
 
+import dateutil.parser
+
+from adsorption_file_parser import logger
+
 # regexes
 
 RE_PUNCTUATION = re.compile(r"['\"_,\^]")  # quotes, underscores, commas, superscript
@@ -23,47 +27,62 @@ def search_key_starts_def_dict(key, def_dict):
     return next(k for k, v in def_dict.items() if any(key.startswith(n) for n in v.get('text', [])))
 
 
-def handle_xlrd_datetime(sheet, val):
-    """
-    Convert date to string.
-
-    Input is a cell of type 'datetime'.
-    """
-    if val:
-        from xlrd.xldate import xldate_as_datetime
-        return xldate_as_datetime(val, sheet.book.datemode).isoformat()
-
-
-def handle_xlrd_date(sheet, val):
-    """
-    Convert date to string.
-
-    Input is a cell of type 'date'.
-    """
-    if val:
-        from xlrd.xldate import xldate_as_datetime
-        return xldate_as_datetime(val, sheet.book.datemode).strftime("%Y-%m-%d")
+def handle_string_numeric(text):
+    """Convert to a int/float."""
+    if isinstance(text, str):
+        try:
+            return int(text)
+        except ValueError:
+            return float(text)
+    return text
 
 
-def handle_xlrd_time(sheet, val):
-    """
-    Convert date to string.
+def handle_string_date(text):
+    """Convert general date string to ISO format."""
+    try:
+        return dateutil.parser.parse(text).isoformat()
+    except dateutil.parser.ParserError:
+        if "午" in text:
+            text = text.replace("下午", "")
+            text = text.replace("上午", "")
+            return handle_string_date(text)
+        logger.warning(f"Could not parse date '{text}'")
+        return text
 
-    Input is a cell of type 'time'.
-    """
-    if val:
-        from xlrd.xldate import xldate_as_datetime
-        return xldate_as_datetime(val, sheet.book.datemode).strftime("%H:%M:%S")
+
+def handle_xlrd_datetime(text, sheet):
+    """Convert datetime cell from xlrd to ISO format."""
+    from xlrd.xldate import xldate_as_datetime
+    return xldate_as_datetime(text, sheet.book.datemode).isoformat()
 
 
-def handle_excel_string(val):
+def handle_xlrd_date(text, sheet):
+    """Convert date cell from xlrd to a simple format."""
+    from xlrd.xldate import xldate_as_datetime
+    return xldate_as_datetime(text, sheet.book.datemode).strftime("%Y-%m-%d")
+
+
+def handle_xlrd_time(text, sheet):
+    """Convert time cell from xlrd to a simple format."""
+    from xlrd.xldate import xldate_as_datetime
+    return xldate_as_datetime(text, sheet.book.datemode).strftime("%H:%M:%S")
+
+
+def handle_xlrd_timedelta(text, sheet):
+    """Convert timedelta cell from xlrd (in h) to a string."""
+    from xlrd.xldate import xldate_as_tuple
+    dt = xldate_as_tuple(text, sheet.book.datemode)
+    return f"{dt[3]}:{dt[4]}:{dt[5]}"
+
+
+def handle_excel_string(text):
     """
     Replace any newline found.
 
     Input is a cell of type 'string'.
     """
-    if val:
-        return str(val).replace('\r\n', ' ')
+    if text:
+        return str(text).replace('\r\n', ' ')
     return None
 
 

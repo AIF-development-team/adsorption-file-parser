@@ -6,8 +6,8 @@ import pytest
 
 import adsorption_file_parser as afp
 
-from .conftest import RECREATE
 from .conftest import DATA_QNT
+from .conftest import RECREATE
 
 
 class TestQuantachrome():

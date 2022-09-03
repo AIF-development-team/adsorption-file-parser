@@ -1,3 +1,6 @@
+"""Common BEL file utilities."""
+
+import adsorption_file_parser.utils.common_utils as util
 from adsorption_file_parser import logger
 from adsorption_file_parser.utils import unit_parsing
 
@@ -16,7 +19,7 @@ _META_DICT = {
         "text": (
             'adsorption temperature',
             'adsorption temperature',
-            "meas. temp",
+            "meas. temp.",
             '吸着温度',
         ),
         "type": "numeric",
@@ -30,12 +33,12 @@ _META_DICT = {
     },
     'date': {
         "text": ('date of measurement', '測定日'),
-        "type": 'date',
+        "type": 'datetime',
         "xl_ref": (0, 2),
     },
     'material_mass': {
         "text": ('sample weight', 'サンプル質量'),
-        "unit": "material_unit",
+        "unit": "material_mass_unit",
         "type": "numeric",
         "xl_ref": (0, 2),
     },
@@ -64,20 +67,50 @@ _META_DICT = {
         "type": 'string',
         "xl_ref": (0, 2),
     },
+    'cell_volume': {
+        'text': ('vs/', 'standard volume'),
+        "type": "numeric",
+        "unit": "cell_volume_unit",
+        "xl_ref": (0, 2),
+    },
+    'dead_volume': {
+        'text': ('dead volume', ),
+        "type": "numeric",
+        "xl_ref": (0, 2),
+    },
+    'equilibration_time': {
+        'text': ('equilibrium time', ),
+        "type": "numeric",
+        "unit": "equilibration_time_unit",
+        "xl_ref": (0, 2),
+    },
 }
 
 _DATA_DICT = {
-    'no': 'measurement',
-    'pi/': 'pressure_internal',
-    'pe/': 'pressure',
-    'pe2/': 'pressure2',
-    'p0/': 'pressure_saturation',
-    'p/p0': 'pressure_relative',
-    'vd/': 'deadvolume',
-    'v/': 'loading',
-    'va/': 'loading',
-    'n/': 'loading',
-    'na/': 'loading',
+    'measurement': {
+        "text": ('no', ),
+    },
+    'pressure_internal': {
+        "text": ('pi/', ),
+    },
+    'pressure': {
+        "text": ('pe/', ),
+    },
+    'pressure2': {
+        "text": ('pe2/', ),
+    },
+    'pressure_saturation': {
+        "text": ('p0/', ),
+    },
+    'pressure_relative': {
+        "text": ('p/p0', ),
+    },
+    'dead_volume': {
+        "text": ('vd/', ),
+    },
+    'loading': {
+        "text": ('v/', 'va/', 'n/', 'na/'),
+    },
 }
 
 
@@ -87,10 +120,15 @@ def _parse_header(header_split):
     units = {}
 
     for h in header_split:
-        header = next((_DATA_DICT[a] for a in _DATA_DICT if h.lower().startswith(a)), h)
+        try:
+            text = h.replace(" ", "").lower()
+            header = util.search_key_starts_def_dict(text, _DATA_DICT)
+        except StopIteration:
+            header = h
+
         headers.append(header)
 
-        if header in 'loading':
+        if header == 'loading':
             unit_string = h.split('/')[1].strip()
             unit_dict = unit_parsing.parse_loading_string(unit_string)
             units.update(unit_dict)

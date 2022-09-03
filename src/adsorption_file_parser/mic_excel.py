@@ -1,12 +1,7 @@
-"""Parse micromeritics xls output files.
-
-@author Chris Murdock
-@modified Paul Iacomi
-"""
+"""Parse Micromeritics Excel(.xls) report files."""
 
 from itertools import product
 
-import dateutil.parser
 import xlrd
 
 from adsorption_file_parser import logger
@@ -36,17 +31,17 @@ _META_DICT = {
     },
     'date': {
         'text': ('started', ),
-        'type': 'string',
+        'type': 'datetime',
         "xl_ref": (0, 1),
     },
     'date_finished': {
         'text': ('completed', ),
-        'type': 'string',
+        'type': 'datetime',
         "xl_ref": (0, 1),
     },
     'date_report': {
         'text': ('report time', ),
-        'type': 'string',
+        'type': 'datetime',
         "xl_ref": (0, 1),
     },
     'material_mass': {
@@ -72,11 +67,21 @@ _META_DICT = {
 }
 
 _DATA_DICT = {
-    'absolute': 'pressure',
-    'relative': 'pressure_relative',
-    'saturation': 'pressure_saturation',
-    'quantity': 'loading',
-    'elapsed': 'time',
+    'pressure': {
+        "text": ('absolute', ),
+    },
+    'pressure_saturation': {
+        "text": ('saturation', ),
+    },
+    'pressure_relative': {
+        "text": ('relative', ),
+    },
+    'time_total': {
+        "text": ('elapsed time', ),
+    },
+    'loading': {
+        "text": ('quantity', ),
+    },
 }
 
 
@@ -136,11 +141,11 @@ def parse(path):
             elif tp == 'string':
                 meta[key] = util.handle_excel_string(val)
             elif tp == 'datetime':
-                meta[key] = util.handle_xlrd_datetime(sheet, val)
+                meta[key] = util.handle_string_date(val)
             elif tp == 'date':
-                meta[key] = util.handle_xlrd_date(sheet, val)
+                meta[key] = util.handle_xlrd_date(val, sheet)
             elif tp == 'time':
-                meta[key] = util.handle_xlrd_time(sheet, val)
+                meta[key] = util.handle_xlrd_time(val, sheet)
             elif tp == 'timedelta':
                 meta[key] = val
             elif tp == 'error':
@@ -155,7 +160,7 @@ def parse(path):
             for i, h in enumerate(head[1:]):
                 points = _parse_data(sheet, row, col + i)
 
-                if h == 'time':
+                if h == 'time_total':
                     data[h] = list(map(util.handle_string_time_minutes, points[1:]))
                 elif h == 'pressure_saturation':
                     data[h] = [float(x) for x in points[1:]]
@@ -170,15 +175,8 @@ def parse(path):
     _check(meta, data, path)
 
     # Set extra metadata
-    try:
-        meta['date'] = dateutil.parser.parse(meta['date']).isoformat()
-    except BaseException:
-        logger.warning("Could not convert date.")
     if meta.get("comment"):
         meta["comment"] = meta["comment"].replace('Comments: ', '')
-    meta['pressure_mode'] = 'absolute'
-    meta['loading_basis'] = 'molar'
-    meta['material_basis'] = 'mass'
 
     return meta, data
 
@@ -189,7 +187,10 @@ def _get_header(sheet, row, col):
     header_row = 2
     # Abstract this sort of thing
     header = sheet.cell(row + header_row, final_column).value.lower()
-    while any(header.startswith(label) for label in _DATA_DICT.keys()):
+    header_options = []
+    for option in _DATA_DICT.values():
+        header_options.extend(option["text"])
+    while any(header.startswith(label) for label in header_options):
         final_column += 1
         header = sheet.cell(row + header_row, final_column).value.lower()
 
@@ -214,7 +215,12 @@ def _parse_header(header_split):
     units = {}
 
     for h in header_split:
-        header = next((_DATA_DICT[a] for a in _DATA_DICT if h.lower().startswith(a)), h)
+        try:
+            text = h.lower()
+            header = util.search_key_starts_def_dict(text, _DATA_DICT)
+        except StopIteration:
+            header = h
+
         headers.append(header)
 
         if header in 'loading':

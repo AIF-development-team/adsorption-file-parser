@@ -1,15 +1,24 @@
 {
     "meta": {
         "date": "2018-06-11T00:00:00",
-        "measurement_duration": 0.8211458333333334,
+        "measurement_duration": "19:42:27",
         "material": "Sample_C",
         "operator": "User",
         "comment3": "Comment number 1",
         "comment4": "Leak amount 1.177Pa/min",
         "serialnumber": "1.0",
         "material_mass": 0.074,
+        "material_mass_unit": "g",
+        "cell_volume": 9.057,
+        "cell_volume_unit": "cm3",
+        "dead_volume": 11.242,
+        "equilibration_time": 0.0,
+        "equilibration_time_unit": "sec",
         "adsorbate": "C3H8",
         "temperature": 303.0,
+        "temperature_unit": "K",
+        "pressure_mode": "absolute",
+        "pressure_unit": "kPa",
         "loading_basis": "molar",
         "loading_unit": "cm3(STP)",
         "material_basis": "mass",
@@ -63,7 +72,7 @@
             20.0,
             21.0
         ],
-        "pi /kPa": [
+        "pressure_internal": [
             0.0,
             0.0,
             0.0,
@@ -86,7 +95,7 @@
             0.0,
             0.0
         ],
-        "pe /kPa": [
+        "pressure": [
             0.2197,
             1.1963,
             2.2014,
@@ -109,7 +118,7 @@
             91.016,
             100.97
         ],
-        "pe2 /kPa": [
+        "pressure2": [
             0.0,
             0.0,
             0.0,
@@ -132,7 +141,7 @@
             0.0,
             0.0
         ],
-        "p0 /kPa": [
+        "pressure_saturation": [
             1079.0,
             1079.0,
             1079.0,

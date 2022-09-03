@@ -2,12 +2,12 @@
     "meta": {
         "material": "XXXXinXXXX",
         "operator": null,
-        "date": "2021/12/16 \u4e0b\u5348 06:50:16",
+        "date": "2021-12-16T06:50:16",
         "adsorbate": "N2",
-        "date_finished": "2021/12/17 \u4e0b\u5348 08:54:19",
+        "date_finished": "2021-12-17T08:54:19",
         "temperature": -195.85,
         "temperature_unit": "\u00b0C",
-        "date_report": "2021/12/21 \u4e0b\u5348 02:31:47",
+        "date_report": "2021-12-21T02:31:47",
         "material_mass": 0.0832,
         "material_mass_unit": "g",
         "pressure_mode": "absolute",
@@ -430,7 +430,7 @@
             366.73480447560274,
             366.8051158680364
         ],
-        "time": [
+        "time_total": [
             318,
             333,
             347,

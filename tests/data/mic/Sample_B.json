@@ -5,10 +5,10 @@
         "operator": null,
         "date": "2017-06-13T07:56:30",
         "adsorbate": "N2",
-        "date_finished": "6/13/2017 11:32:24 AM",
+        "date_finished": "2017-06-13T11:32:24",
         "temperature": 77.3,
         "temperature_unit": "K",
-        "date_report": "6/13/2017 11:32:24 AM",
+        "date_report": "2017-06-13T11:32:24",
         "material_mass": 0.288,
         "material_mass_unit": "g",
         "comment": "Sample that was stopped during collection.",
@@ -37,7 +37,7 @@
         "loading": [
             28.33484691613959
         ],
-        "time": [
+        "time_total": [
             99
         ],
         "pressure_saturation": [

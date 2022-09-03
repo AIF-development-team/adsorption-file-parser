@@ -6,10 +6,10 @@ import pytest
 
 import adsorption_file_parser as afp
 
-from .conftest import RECREATE
 from .conftest import DATA_BEL
 from .conftest import DATA_BEL_CSV
 from .conftest import DATA_BEL_XL
+from .conftest import RECREATE
 
 
 class TestBEL():

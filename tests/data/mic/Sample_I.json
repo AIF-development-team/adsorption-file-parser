@@ -4,10 +4,10 @@
         "operator": "XXXX",
         "date": "2019-12-14T12:00:05",
         "adsorbate": "N2",
-        "date_finished": "12/15/2019 8:36:55 AM",
+        "date_finished": "2019-12-15T08:36:55",
         "temperature": 77.3,
         "temperature_unit": "K",
-        "date_report": "7/15/2021 2:58:59 PM",
+        "date_report": "2021-07-15T14:58:59",
         "material_mass": 0.1226,
         "material_mass_unit": "g",
         "pressure_mode": "absolute",
@@ -321,7 +321,7 @@
             484.27808884540417,
             473.8606728051787
         ],
-        "time": [
+        "time_total": [
             43,
             46,
             48,

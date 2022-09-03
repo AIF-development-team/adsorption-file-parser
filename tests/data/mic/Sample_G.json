@@ -4,10 +4,10 @@
         "operator": "Scott",
         "date": "2020-08-20T15:25:51",
         "adsorbate": "N2",
-        "date_finished": "23/08/2020 08:11:14",
+        "date_finished": "2020-08-23T08:11:14",
         "temperature": 77.307,
         "temperature_unit": "K",
-        "date_report": "01/09/2020 13:47:56",
+        "date_report": "2020-01-09T13:47:56",
         "material_mass": 0.0455,
         "material_mass_unit": "g",
         "pressure_mode": "absolute",
@@ -348,7 +348,7 @@
             2.350117539370838,
             1.9316502042299966
         ],
-        "time": [
+        "time_total": [
             113,
             121,
             128,

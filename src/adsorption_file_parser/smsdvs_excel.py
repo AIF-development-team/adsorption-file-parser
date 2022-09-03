@@ -1,4 +1,4 @@
-"""Parse SMS DVS xlsx output files."""
+"""Parse SMS DVS (.xlsx) output files."""
 import dateutil.parser
 import openpyxl
 

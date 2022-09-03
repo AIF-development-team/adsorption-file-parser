@@ -1,7 +1,7 @@
 """Parse Quantachrome txt output files."""
 import re
 
-import dateutil.parser
+import adsorption_file_parser.utils.common_utils as util
 from adsorption_file_parser.utils.unit_parsing import parse_temperature_unit
 
 _META_DICT = {
@@ -241,7 +241,7 @@ def parse(path):
         meta["loading_unit"] += "(STP)"
 
     if meta.get("date"):
-        meta['date'] = dateutil.parser.parse(meta['date']).isoformat()
+        meta['date'] = util.handle_string_date(meta['date'])
 
     # amount adsorbed from cc to cc/g
     data = dict(zip(head, map(lambda *x: list(x), *data)))

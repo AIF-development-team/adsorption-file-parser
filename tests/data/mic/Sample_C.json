@@ -7,14 +7,14 @@
         "date_finished": null,
         "temperature": 77.3,
         "temperature_unit": "K",
-        "date_report": "15/04/2021 15:06:14",
+        "date_report": "2021-04-15T15:06:14",
         "material_mass": 1.0,
         "material_mass_unit": "g",
         "loading_basis": "molar",
         "loading_unit": "cm3(STP)",
         "material_basis": "mass",
         "material_unit": "g",
-        "pressure_mode": "absolute"
+        "pressure_mode": "relative"
     },
     "data": {
         "pressure": [

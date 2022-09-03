@@ -1,15 +1,9 @@
 # -*- coding: utf-8 -*-
-"""
-Parse BEL CSV to AIF
-Handles both western and JIS encoded text
-Modified from https://github.com/AIF-development-team/adsorptioninformationformat
-"""
+"""Parse BEL CSV files."""
 
-import dateutil.parser
-
+from adsorption_file_parser.bel_common import _META_DICT
+from adsorption_file_parser.bel_common import _parse_header
 from adsorption_file_parser.utils import common_utils as util
-from adsorption_file_parser.utils.bel_common import _META_DICT
-from adsorption_file_parser.utils.bel_common import _parse_header
 
 
 def parse(path, separator=",", lang="ENG"):
@@ -54,10 +48,23 @@ def parse(path, separator=",", lang="ENG"):
                     meta[key] = val
                     continue
 
-                meta[key] = val
                 if nvalues > 2 and meta_dict[key].get("unit"):
                     meta[meta_dict[key]['unit']] = values[2].strip('[]')
+                tp = meta_dict[key]['type']
                 del meta_dict[key]  # delete for efficiency
+
+                if val == '':
+                    meta[key] = None
+                elif tp == 'numeric':
+                    meta[key] = util.handle_string_numeric(val)
+                elif tp == 'string':
+                    meta[key] = val
+                elif tp in ["date", 'datetime']:
+                    meta[key] = util.handle_string_date(val)
+                elif tp == 'time':
+                    meta[key] = val
+                elif tp == 'timedelta':
+                    meta[key] = val
 
             elif line.startswith('No,'):  # If "data" section
 
@@ -78,7 +85,7 @@ def parse(path, separator=",", lang="ENG"):
                     line = file.readline()
 
     # Format extra metadata
-    meta['date'] = dateutil.parser.parse(meta['date']).isoformat()
+    meta['date'] = util.handle_string_date(meta['date'])
     meta['apparatus'] = 'BEL ' + meta["serialnumber"]
     if not meta['material']:
         meta['material'] = meta['file_name']

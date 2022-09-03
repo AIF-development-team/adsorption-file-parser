@@ -4,10 +4,10 @@
         "operator": "Troy",
         "date": "2019-06-17T15:59:45",
         "adsorbate": "N2",
-        "date_finished": "18/06/2019 16:36:00",
+        "date_finished": "2019-06-18T16:36:00",
         "temperature": 77.5,
         "temperature_unit": "K",
-        "date_report": "06/09/2019 10:57:41",
+        "date_report": "2019-06-09T10:57:41",
         "material_mass": 0.9813,
         "material_mass_unit": "g",
         "pressure_mode": "absolute",
@@ -172,7 +172,7 @@
             0.032487990854020155,
             0.023437838705852712
         ],
-        "time": [
+        "time_total": [
             126,
             129,
             132,

@@ -1,6 +1,5 @@
-"""Parse 3P xls output files."""
+"""Parse 3P xlsx output files."""
 
-import dateutil.parser
 import openpyxl
 
 from adsorption_file_parser import logger
@@ -27,12 +26,24 @@ _META_DICT = {
 }
 
 _DATA_DICT = {
-    'id': 'measurement',
-    'p (': 'pressure',
-    'p0 (': 'pressure_saturation',
-    'p/p0': 'pressure_relative',
-    'v (': 'loading',
-    'time': 'point_time',
+    'measurement': {
+        "text": ('id', ),
+    },
+    'pressure': {
+        "text": ('p (', ),
+    },
+    'pressure_saturation': {
+        "text": ('p0 (', ),
+    },
+    'pressure_relative': {
+        "text": ('p/p0', ),
+    },
+    'time_point': {
+        "text": ('time', ),
+    },
+    'loading': {
+        "text": ('v (', ),
+    },
 }
 
 
@@ -88,7 +99,7 @@ def parse(path):
         elif tp == 'numeric':
             meta[key] = val
         elif tp == 'date':
-            meta[key] = _handle_3p_date(val)
+            meta[key] = util.handle_string_date(val)
         elif tp == 'string':
             meta[key] = util.handle_excel_string(val)
 
@@ -118,15 +129,20 @@ def _parse_header(header_list):
     units = {}
 
     for h in header_list:
-        txt = next((_DATA_DICT[a] for a in _DATA_DICT if h.lower().startswith(a)), h)
-        headers.append(txt)
+        try:
+            text = h.lower()
+            header = util.search_key_starts_def_dict(text, _DATA_DICT)
+        except StopIteration:
+            header = h
 
-        if txt == 'loading':
+        headers.append(header)
+
+        if header == 'loading':
             unit_string = util.RE_BETWEEN_BRACKETS.search(h).group().strip()
             unit_dict = unit_parsing.parse_loading_string(unit_string)
             units.update(unit_dict)
 
-        if txt == 'pressure':
+        if header == 'pressure':
             unit_string = util.RE_BETWEEN_BRACKETS.search(h).group().strip()
             unit_dict = unit_parsing.parse_pressure_string(unit_string)
             units.update(unit_dict)
@@ -158,13 +174,3 @@ def _check(meta, data, path):
             logger.info(f"No data collected for {empty} in file {path}.")
     if 'errors' in meta:
         logger.warning('\n'.join(meta['errors']))
-
-
-def _handle_3p_date(text):
-    """
-    Convert date to string.
-
-    Input is a cell of type 'date'.
-    """
-    return dateutil.parser.parse(text).isoformat()
-    # return datetime.strptime(val, r'%Y-%m-%d %H:%M:%S').isoformat()
