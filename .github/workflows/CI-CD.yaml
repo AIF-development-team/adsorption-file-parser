@@ -26,7 +26,7 @@ jobs:
         isort --verbose --check-only --diff src tests
         flake8 src tests
 
-  unittests:
+  unit-tests:
     runs-on: ubuntu-latest
     defaults:
       run:
