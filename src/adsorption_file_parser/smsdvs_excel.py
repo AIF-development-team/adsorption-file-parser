@@ -154,7 +154,6 @@ def parse(path):
 
         ref = meta_dict[key]['xl_ref']
         tp = meta_dict[key]['type']
-        del meta_dict[key]  # delete for efficiency
 
         # handle different data types
         val = rawdata_sheet.cell(cell_value.row + ref[0], cell_value.column + ref[1]).value
@@ -166,6 +165,8 @@ def parse(path):
             meta[key] = util.handle_excel_string(val)
         elif tp == 'date':
             meta[key] = _handle_dvs_date(val)
+
+        del meta_dict[key]  # delete for efficiency
 
     # Then get data and some remaining metadata
     book = None

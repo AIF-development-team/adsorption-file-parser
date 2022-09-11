@@ -125,7 +125,6 @@ def parse(path):
 
             ref = meta_dict[key]['xl_ref']
             tp = meta_dict[key]['type']
-            del meta_dict[key]  # delete for efficiency
 
             val = sheet.cell(row + ref[0], col + ref[1]).value
             if val == '':
@@ -136,6 +135,8 @@ def parse(path):
                 meta[key] = nb
                 meta[f'{key}_unit'] = unit
             elif tp == 'string':
+                if key == 'operator' and val == 'XXXX':
+                    continue
                 meta[key] = util.handle_excel_string(val)
             elif tp == 'datetime':
                 meta[key] = util.handle_string_date(val)
@@ -147,6 +148,8 @@ def parse(path):
                 meta[key] = val
             elif tp == 'error':
                 errors += _parse_errors(sheet, row, col)
+
+            del meta_dict[key]  # delete for efficiency
 
         else:  # If "data" section
 
@@ -174,6 +177,8 @@ def parse(path):
     # Set extra metadata
     if meta.get('comment'):
         meta['comment'] = meta['comment'].replace('Comments: ', '')
+    if not meta.get('operator'):
+        meta['operator'] = None
 
     # Get instrument from absolute position
     meta['apparatus'] = str(sheet.cell(1, 0).value)

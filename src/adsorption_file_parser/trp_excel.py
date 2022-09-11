@@ -93,7 +93,6 @@ def parse(path):
             continue
 
         tp = meta_dict[key]['type']
-        del meta_dict[key]  # delete for efficiency
 
         if val is None:
             meta[key] = None
@@ -103,6 +102,8 @@ def parse(path):
             meta[key] = util.handle_string_date(val)
         elif tp == 'string':
             meta[key] = util.handle_excel_string(val)
+
+        del meta_dict[key]  # delete for efficiency
 
     # Data
     data_sheet = workbook['Isotherm']

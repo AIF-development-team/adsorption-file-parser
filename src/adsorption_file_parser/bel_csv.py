@@ -52,7 +52,6 @@ def parse(path, separator=',', lang='ENG'):
                 if nvalues > 2 and meta_dict[key].get('unit'):
                     meta[meta_dict[key]['unit']] = values[2].strip('[]')
                 tp = meta_dict[key]['type']
-                del meta_dict[key]  # delete for efficiency
 
                 if val == '':
                     meta[key] = None
@@ -66,6 +65,8 @@ def parse(path, separator=',', lang='ENG'):
                     meta[key] = val
                 elif tp == 'timedelta':
                     meta[key] = val
+
+                del meta_dict[key]  # delete for efficiency
 
             elif line.startswith('No,'):  # If "data" section
 
