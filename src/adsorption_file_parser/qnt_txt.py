@@ -237,6 +237,10 @@ def parse(path):
             meta['pressure_unit'] = None
         else:
             meta[h + '_unit'] = all_units[i]
+    if meta['pressure_unit'] is None:
+        meta['pressure_mode'] = "relative"
+    else:
+        meta['pressure_mode'] = "absolute"
     if meta['loading_unit'] in ['cc']:
         meta['loading_unit'] += '(STP)'
     meta['loading_basis'] = unit_parsing.find_loading_basis(meta['loading_unit'])

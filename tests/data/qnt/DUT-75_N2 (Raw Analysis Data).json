@@ -26,6 +26,7 @@
         "measurement_time_unit": "min",
         "pressure_tolerance_unit": null,
         "equilibration_time_unit": null,
+        "pressure_mode": "absolute",
         "loading_basis": "molar"
     },
     "data": {
