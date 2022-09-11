@@ -2,8 +2,8 @@
 """Parse BEL CSV files."""
 
 from adsorption_file_parser.bel_common import _META_DICT
-from adsorption_file_parser.bel_common import _parse_header
 from adsorption_file_parser.bel_common import _handle_bel_date
+from adsorption_file_parser.bel_common import _parse_header
 from adsorption_file_parser.utils import common_utils as util
 
 
