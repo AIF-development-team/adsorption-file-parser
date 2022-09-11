@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 """Common BEL file utilities."""
 
+import dateutil.parser
+
 import adsorption_file_parser.utils.common_utils as util
 from adsorption_file_parser import logger
 from adsorption_file_parser.utils import unit_parsing
@@ -140,6 +142,10 @@ def _parse_header(header_split):
             units.update(unit_dict)
 
     return headers, units
+
+
+def _handle_bel_date(text):
+    return dateutil.parser.parse(text, yearfirst=True).isoformat()
 
 
 def _check(meta, data, path):

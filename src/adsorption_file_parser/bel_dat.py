@@ -2,7 +2,7 @@
 """Parse BEL DAT files."""
 
 from adsorption_file_parser import ParsingError
-from adsorption_file_parser.bel_common import _META_DICT
+from adsorption_file_parser.bel_common import _META_DICT, _handle_bel_date
 from adsorption_file_parser.bel_common import _parse_header
 from adsorption_file_parser.utils import common_utils as util
 from adsorption_file_parser.utils import unit_parsing
@@ -58,7 +58,7 @@ def parse(path):
                 elif tp == 'string':
                     meta[key] = val
                 elif tp in ['date', 'datetime']:
-                    meta[key] = util.handle_string_date(val)
+                    meta[key] = _handle_bel_date(val)
                 elif tp == 'time':
                     meta[key] = val
                 elif tp == 'timedelta':
