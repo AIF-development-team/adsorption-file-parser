@@ -1,6 +1,5 @@
 {
     "meta": {
-        "apparatus": "TriStar II 3020 3.02",
         "material": "Sample A",
         "operator": null,
         "date": "2017-06-17T12:27:21",
@@ -451,6 +450,8 @@
             733.89111328125,
             733.9122924804688,
             734.024658203125
-        ]
+        ],
+        "apparatus": "TriStar II 3020 3.02",
+        "apparatus_details": "Serial # 1105  Unit 1  Port 1"
     }
 }

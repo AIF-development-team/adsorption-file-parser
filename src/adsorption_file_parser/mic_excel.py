@@ -50,11 +50,6 @@ _META_DICT = {
         'type': 'numeric',
         'xl_ref': (0, 1),
     },
-    'apparatus': {
-        'text': ('micromeritics instrument', ),
-        'type': 'string',
-        'xl_ref': (1, 0),
-    },
     'comment': {
         'text': ('comments', ),
         'type': 'string',
@@ -179,6 +174,10 @@ def parse(path):
     # Set extra metadata
     if meta.get('comment'):
         meta['comment'] = meta['comment'].replace('Comments: ', '')
+
+    # Get instrument from absolute position
+    data['apparatus'] = str(sheet.cell(1, 0).value)
+    data['apparatus_details'] = str(sheet.cell(2, 1).value)
 
     return meta, data
 
