@@ -31,6 +31,9 @@
         "pressure_tolerance_unit": null,
         "equilibration_timeout_unit": "sec",
         "equilibration_time_unit": null,
+        "pressure_mode": "absolute",
+        "original_pressure_string": "mmHg",
+        "original_loading_string": "cc",
         "loading_basis": "molar"
     },
     "data": {

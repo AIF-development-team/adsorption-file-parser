@@ -1,6 +1,5 @@
 {
     "meta": {
-        "apparatus": "TriStar II 3020 3.02",
         "material": "Sample A",
         "operator": null,
         "date": "2017-06-17T12:27:21",
@@ -14,10 +13,14 @@
         "comment": "A completed sample",
         "pressure_mode": "absolute",
         "pressure_unit": "torr",
+        "original_pressure_string": "mmHg",
         "loading_basis": "molar",
         "loading_unit": "cm3(STP)",
         "material_basis": "mass",
-        "material_unit": "g"
+        "material_unit": "g",
+        "original_loading_string": "cm\u00b3/g STP",
+        "apparatus": "TriStar II 3020 3.02",
+        "apparatus_details": "Serial # 1105  Unit 1  Port 1"
     },
     "data": {
         "pressure_relative": [

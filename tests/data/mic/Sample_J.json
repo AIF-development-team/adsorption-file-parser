@@ -1,21 +1,25 @@
 {
     "meta": {
         "material": "XXXX",
-        "operator": "XXXX",
         "date": "2021-04-14T09:20:40",
         "adsorbate": "C2H2",
         "date_finished": "2021-04-15T02:22:59",
-        "temperature": 298000.0,
+        "temperature": 298.0,
         "temperature_unit": "K",
         "date_report": "2021-08-30T13:22:35",
-        "material_mass": 1025.0,
+        "material_mass": 0.1025,
         "material_mass_unit": "g",
         "pressure_mode": "absolute",
         "pressure_unit": "mbar",
+        "original_pressure_string": "mbar",
         "loading_basis": "molar",
         "loading_unit": "cm3(STP)",
         "material_basis": "mass",
-        "material_unit": "g"
+        "material_unit": "g",
+        "original_loading_string": "cm\u00b3/g STP",
+        "operator": null,
+        "apparatus": "3Flex 5.01",
+        "apparatus_details": "Serial # 387  Unit 1  Port 2"
     },
     "data": {
         "pressure_relative": [

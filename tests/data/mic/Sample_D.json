@@ -12,15 +12,19 @@
         "material_mass_unit": "g",
         "pressure_mode": "absolute",
         "pressure_unit": "kPa",
+        "original_pressure_string": "kPa",
         "loading_basis": "molar",
         "loading_unit": "mmol",
         "material_basis": "mass",
         "material_unit": "g",
+        "original_loading_string": "mmol/g",
         "errors": [
             "4052-  Fewer than two points are selected for this report.",
             "Primary Data",
             "4052-  Fewer than two points are selected for this report."
-        ]
+        ],
+        "apparatus": "ASAP 2020 V3.01 H",
+        "apparatus_details": ""
     },
     "data": {
         "pressure_relative": [

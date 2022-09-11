@@ -12,10 +12,12 @@
         "average_pore_diameter_(4v/a)": 2.121,
         "pressure_mode": "absolute",
         "pressure_unit": "kPa",
+        "original_pressure_string": "kPa",
         "loading_basis": "molar",
         "loading_unit": "cm3(STP)",
         "material_basis": "mass",
         "material_unit": "g",
+        "original_loading_string": "cm\u00b3/g STP",
         "apparatus": "3P",
         "temperature": 77.3,
         "temperature_unit": "K"

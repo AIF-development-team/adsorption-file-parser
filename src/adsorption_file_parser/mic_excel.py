@@ -50,11 +50,6 @@ _META_DICT = {
         'type': 'numeric',
         'xl_ref': (0, 1),
     },
-    'apparatus': {
-        'text': ('micromeritics instrument', ),
-        'type': 'string',
-        'xl_ref': (1, 0),
-    },
     'comment': {
         'text': ('comments', ),
         'type': 'string',
@@ -130,16 +125,18 @@ def parse(path):
 
             ref = meta_dict[key]['xl_ref']
             tp = meta_dict[key]['type']
-            del meta_dict[key]  # delete for efficiency
 
             val = sheet.cell(row + ref[0], col + ref[1]).value
             if val == '':
                 meta[key] = None
             elif tp == 'numeric':
+                val = val.replace(',', '.')  # bad way of dealing with french locale
                 nb, unit = unit_parsing.parse_number_unit_string(val)
                 meta[key] = nb
                 meta[f'{key}_unit'] = unit
             elif tp == 'string':
+                if key == 'operator' and val == 'XXXX':
+                    continue
                 meta[key] = util.handle_excel_string(val)
             elif tp == 'datetime':
                 meta[key] = util.handle_string_date(val)
@@ -151,6 +148,8 @@ def parse(path):
                 meta[key] = val
             elif tp == 'error':
                 errors += _parse_errors(sheet, row, col)
+
+            del meta_dict[key]  # delete for efficiency
 
         else:  # If "data" section
 
@@ -178,6 +177,12 @@ def parse(path):
     # Set extra metadata
     if meta.get('comment'):
         meta['comment'] = meta['comment'].replace('Comments: ', '')
+    if not meta.get('operator'):
+        meta['operator'] = None
+
+    # Get instrument from absolute position
+    meta['apparatus'] = str(sheet.cell(1, 0).value)
+    meta['apparatus_details'] = str(sheet.cell(2, 1).value)
 
     return meta, data
 
@@ -224,15 +229,19 @@ def _parse_header(header_split):
 
         headers.append(header)
 
-        if header in 'loading':
+        if header == 'loading':
             unit_string = util.RE_BETWEEN_BRACKETS.search(h).group().strip()
             unit_dict = unit_parsing.parse_loading_string(unit_string)
             units.update(unit_dict)
+            units["original_loading_string"
+                  ] = unit_string  # TODO discuss unit parsing within AIF group
 
         elif header == 'pressure':
             unit_string = util.RE_BETWEEN_BRACKETS.search(h).group().strip()
             unit_dict = unit_parsing.parse_pressure_string(unit_string)
             units.update(unit_dict)
+            units["original_pressure_string"
+                  ] = unit_string  # TODO discuss unit parsing within AIF group
 
     if 'pressure' not in headers:
         if 'pressure_relative' in headers:

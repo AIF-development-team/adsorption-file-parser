@@ -12,14 +12,18 @@
         "material_mass_unit": "g",
         "pressure_mode": "absolute",
         "pressure_unit": "torr",
+        "original_pressure_string": "mmHg",
         "loading_basis": "molar",
         "loading_unit": "cm3(STP)",
         "material_basis": "mass",
         "material_unit": "g",
+        "original_loading_string": "cm\u00b3/g STP",
         "comment": "Comments:",
         "errors": [
             "At least two points must be selected for this calculation."
-        ]
+        ],
+        "apparatus": "3Flex 5.00",
+        "apparatus_details": "Serial # 394  Unit 2  Port 3"
     },
     "data": {
         "pressure_relative": [

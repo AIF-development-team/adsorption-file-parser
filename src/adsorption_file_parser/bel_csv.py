@@ -2,6 +2,7 @@
 """Parse BEL CSV files."""
 
 from adsorption_file_parser.bel_common import _META_DICT
+from adsorption_file_parser.bel_common import _handle_bel_date
 from adsorption_file_parser.bel_common import _parse_header
 from adsorption_file_parser.utils import common_utils as util
 
@@ -51,7 +52,6 @@ def parse(path, separator=',', lang='ENG'):
                 if nvalues > 2 and meta_dict[key].get('unit'):
                     meta[meta_dict[key]['unit']] = values[2].strip('[]')
                 tp = meta_dict[key]['type']
-                del meta_dict[key]  # delete for efficiency
 
                 if val == '':
                     meta[key] = None
@@ -60,11 +60,13 @@ def parse(path, separator=',', lang='ENG'):
                 elif tp == 'string':
                     meta[key] = val
                 elif tp in ['date', 'datetime']:
-                    meta[key] = util.handle_string_date(val)
+                    meta[key] = _handle_bel_date(val)
                 elif tp == 'time':
                     meta[key] = val
                 elif tp == 'timedelta':
                     meta[key] = val
+
+                del meta_dict[key]  # delete for efficiency
 
             elif line.startswith('No,'):  # If "data" section
 
@@ -85,7 +87,6 @@ def parse(path, separator=',', lang='ENG'):
                     line = file.readline()
 
     # Format extra metadata
-    meta['date'] = util.handle_string_date(meta['date'])
     meta['apparatus'] = 'BEL ' + meta['serialnumber']
     if not meta['material']:
         meta['material'] = meta['file_name']

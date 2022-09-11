@@ -14,8 +14,11 @@
         "loading_unit": "cm3(STP)",
         "material_basis": "mass",
         "material_unit": "g",
+        "original_loading_string": "cm\u00b3/g STP",
         "pressure_mode": "relative",
-        "pressure_unit": null
+        "pressure_unit": null,
+        "apparatus": "3Flex 5.02",
+        "apparatus_details": "Port 1"
     },
     "data": {
         "pressure": [

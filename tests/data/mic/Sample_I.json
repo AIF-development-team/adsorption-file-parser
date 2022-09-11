@@ -1,7 +1,7 @@
 {
     "meta": {
         "material": "SD 687-scale up",
-        "operator": "XXXX",
+        "operator": "shan",
         "date": "2019-12-14T12:00:05",
         "adsorbate": "N2",
         "date_finished": "2019-12-15T08:36:55",
@@ -12,10 +12,14 @@
         "material_mass_unit": "g",
         "pressure_mode": "absolute",
         "pressure_unit": "mbar",
+        "original_pressure_string": "mbar",
         "loading_basis": "molar",
         "loading_unit": "cm3(STP)",
         "material_basis": "mass",
-        "material_unit": "g"
+        "material_unit": "g",
+        "original_loading_string": "cm\u00b3/g STP",
+        "apparatus": "MicroActive 4.03",
+        "apparatus_details": "Serial # 298  Unit 1  Port 3"
     },
     "data": {
         "pressure_relative": [

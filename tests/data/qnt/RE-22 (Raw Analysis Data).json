@@ -27,6 +27,9 @@
         "pressure_unit": null,
         "pressure_saturation_unit": "Torr",
         "loading_unit": "cc(STP)",
+        "pressure_mode": "relative",
+        "original_pressure_string": null,
+        "original_loading_string": "cc",
         "loading_basis": "molar"
     },
     "data": {

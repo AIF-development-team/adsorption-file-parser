@@ -55,7 +55,6 @@ def parse(path):
             ref = meta_dict[key]['xl_ref']
             tp = meta_dict[key]['type']
             unit_key = meta_dict[key].get('unit')
-            del meta_dict[key]  # delete for efficiency
 
             val = sheet.cell(row + ref[0], col + ref[1]).value
             if val == '':
@@ -76,6 +75,8 @@ def parse(path):
             if unit_key:
                 unit = sheet.cell(row + ref[0], col + ref[1] + 1).value.strip('[]')
                 meta[unit_key] = unit
+
+            del meta_dict[key]  # delete for efficiency
 
         else:  # If "data" section
 

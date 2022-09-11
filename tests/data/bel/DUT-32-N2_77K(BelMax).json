@@ -1,7 +1,7 @@
 {
     "meta": {
         "file_name": "RGE-343-DUT32-7dCO2_Nitrogen.DAT",
-        "date": "2030-01-13T00:00:00",
+        "date": "2013-01-30T00:00:00",
         "measurement_duration": "39:37:15",
         "material": "RGE-343_DUT-32-7d",
         "operator": "irena",
@@ -29,10 +29,12 @@
         "number_of_desorption_data_point_:": "4",
         "pressure_mode": "absolute",
         "pressure_unit": "kPa",
+        "original_pressure_string": "kPa",
         "loading_basis": "molar",
         "loading_unit": "cm3(STP)",
         "material_basis": "mass",
         "material_unit": "g",
+        "original_loading_string": "cm^3(STP) g^-1",
         "apparatus": "BEL 00218"
     },
     "data": {

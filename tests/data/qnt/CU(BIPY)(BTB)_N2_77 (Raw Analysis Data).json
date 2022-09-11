@@ -26,6 +26,9 @@
         "measurement_time_unit": "min",
         "pressure_tolerance_unit": null,
         "equilibration_time_unit": null,
+        "pressure_mode": "absolute",
+        "original_pressure_string": "Torr",
+        "original_loading_string": "cc",
         "loading_basis": "molar"
     },
     "data": {

@@ -93,7 +93,6 @@ def parse(path):
             continue
 
         tp = meta_dict[key]['type']
-        del meta_dict[key]  # delete for efficiency
 
         if val is None:
             meta[key] = None
@@ -103,6 +102,8 @@ def parse(path):
             meta[key] = util.handle_string_date(val)
         elif tp == 'string':
             meta[key] = util.handle_excel_string(val)
+
+        del meta_dict[key]  # delete for efficiency
 
     # Data
     data_sheet = workbook['Isotherm']
@@ -142,11 +143,15 @@ def _parse_header(header_list):
             unit_string = util.RE_BETWEEN_BRACKETS.search(h).group().strip()
             unit_dict = unit_parsing.parse_loading_string(unit_string)
             units.update(unit_dict)
+            units["original_loading_string"
+                  ] = unit_string  # TODO discuss unit parsing within AIF group
 
         if header == 'pressure':
             unit_string = util.RE_BETWEEN_BRACKETS.search(h).group().strip()
             unit_dict = unit_parsing.parse_pressure_string(unit_string)
             units.update(unit_dict)
+            units["original_pressure_string"
+                  ] = unit_string  # TODO discuss unit parsing within AIF group
 
     return headers, units
 

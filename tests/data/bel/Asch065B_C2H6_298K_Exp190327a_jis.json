@@ -1,7 +1,7 @@
 {
     "meta": {
         "\u30d5\u30a1\u30a4\u30eb\u540d": "Asch065B_C2H6_298K_Exp190327.DAT",
-        "date": "2027-03-19T00:00:00",
+        "date": "2019-03-27T00:00:00",
         "measurement_duration": "32:21:22",
         "material": "Asch065B",
         "operator": "noro",
@@ -27,10 +27,12 @@
         "\u8131\u7740\u30c7\u30fc\u30bf\u6570": "73",
         "pressure_mode": "absolute",
         "pressure_unit": "kPa",
+        "original_pressure_string": "kPa",
         "loading_basis": "molar",
         "loading_unit": "cm3(STP)",
         "material_basis": "mass",
         "material_unit": "g",
+        "original_loading_string": "cm^3(STP) g^-1",
         "apparatus": "BEL 00508"
     },
     "data": {
