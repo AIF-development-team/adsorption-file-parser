@@ -26,10 +26,12 @@
         "initial_dead_volume": "25.627 ml",
         "pressure_mode": "absolute",
         "pressure_unit": "kPa",
+        "original_pressure_string": "kPa",
         "loading_basis": "molar",
         "loading_unit": "mL(STP)",
         "material_basis": "mass",
         "material_unit": "g",
+        "original_loading_string": "ml(STP) g-1",
         "apparatus": "BEL 00218"
     },
     "data": {

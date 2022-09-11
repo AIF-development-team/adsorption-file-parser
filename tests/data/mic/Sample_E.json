@@ -12,10 +12,12 @@
         "material_mass_unit": "g",
         "pressure_mode": "absolute",
         "pressure_unit": "kPa",
+        "original_pressure_string": "kPa",
         "loading_basis": "molar",
         "loading_unit": "mmol",
         "material_basis": "mass",
         "material_unit": "g",
+        "original_loading_string": "mmol/g",
         "errors": [
             "1089- Fewer than 2 points available for BET calculations.",
             "1023- Preparations failed in primary data.",

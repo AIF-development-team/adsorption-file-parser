@@ -29,10 +29,12 @@
         "number_of_desorption_data_point_:": "4",
         "pressure_mode": "absolute",
         "pressure_unit": "kPa",
+        "original_pressure_string": "kPa",
         "loading_basis": "molar",
         "loading_unit": "cm3(STP)",
         "material_basis": "mass",
         "material_unit": "g",
+        "original_loading_string": "cm^3(STP) g^-1",
         "apparatus": "BEL 00218"
     },
     "data": {

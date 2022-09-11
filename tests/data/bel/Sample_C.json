@@ -19,10 +19,12 @@
         "temperature_unit": "K",
         "pressure_mode": "absolute",
         "pressure_unit": "kPa",
+        "original_pressure_string": "kPa",
         "loading_basis": "molar",
         "loading_unit": "cm3(STP)",
         "material_basis": "mass",
         "material_unit": "g",
+        "original_loading_string": "cm3(STP) g-1",
         "apparatus": "BEL 1.0"
     },
     "data": {

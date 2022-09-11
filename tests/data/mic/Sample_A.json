@@ -14,10 +14,12 @@
         "comment": "A completed sample",
         "pressure_mode": "absolute",
         "pressure_unit": "torr",
+        "original_pressure_string": "mmHg",
         "loading_basis": "molar",
         "loading_unit": "cm3(STP)",
         "material_basis": "mass",
-        "material_unit": "g"
+        "material_unit": "g",
+        "original_loading_string": "cm\u00b3/g STP"
     },
     "data": {
         "pressure_relative": [

@@ -27,10 +27,12 @@
         "\u8131\u7740\u30c7\u30fc\u30bf\u6570": "73",
         "pressure_mode": "absolute",
         "pressure_unit": "kPa",
+        "original_pressure_string": "kPa",
         "loading_basis": "molar",
         "loading_unit": "cm3(STP)",
         "material_basis": "mass",
         "material_unit": "g",
+        "original_loading_string": "cm^3(STP) g^-1",
         "apparatus": "BEL 00508"
     },
     "data": {

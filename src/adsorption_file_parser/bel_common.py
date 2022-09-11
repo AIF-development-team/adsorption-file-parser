@@ -135,11 +135,15 @@ def _parse_header(header_split):
             unit_string = h.split('/')[1].strip()
             unit_dict = unit_parsing.parse_loading_string(unit_string)
             units.update(unit_dict)
+            units["original_loading_string"
+                  ] = unit_string  # TODO discuss unit parsing within AIF group
 
         elif header == 'pressure':
             unit_string = h.split('/')[1].strip()
             unit_dict = unit_parsing.parse_pressure_string(unit_string)
             units.update(unit_dict)
+            units["original_pressure_string"
+                  ] = unit_string  # TODO discuss unit parsing within AIF group
 
     return headers, units
 

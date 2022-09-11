@@ -224,15 +224,19 @@ def _parse_header(header_split):
 
         headers.append(header)
 
-        if header in 'loading':
+        if header == 'loading':
             unit_string = util.RE_BETWEEN_BRACKETS.search(h).group().strip()
             unit_dict = unit_parsing.parse_loading_string(unit_string)
             units.update(unit_dict)
+            units["original_loading_string"
+                  ] = unit_string  # TODO discuss unit parsing within AIF group
 
         elif header == 'pressure':
             unit_string = util.RE_BETWEEN_BRACKETS.search(h).group().strip()
             unit_dict = unit_parsing.parse_pressure_string(unit_string)
             units.update(unit_dict)
+            units["original_pressure_string"
+                  ] = unit_string  # TODO discuss unit parsing within AIF group
 
     if 'pressure' not in headers:
         if 'pressure_relative' in headers:
