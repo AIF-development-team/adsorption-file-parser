@@ -136,6 +136,7 @@ def parse(path):
             if val == '':
                 meta[key] = None
             elif tp == 'numeric':
+                val = val.replace(',', '.')  # bad way of dealing with french locale
                 nb, unit = unit_parsing.parse_number_unit_string(val)
                 meta[key] = nb
                 meta[f'{key}_unit'] = unit
