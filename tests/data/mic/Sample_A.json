@@ -18,7 +18,9 @@
         "loading_unit": "cm3(STP)",
         "material_basis": "mass",
         "material_unit": "g",
-        "original_loading_string": "cm\u00b3/g STP"
+        "original_loading_string": "cm\u00b3/g STP",
+        "apparatus": "TriStar II 3020 3.02",
+        "apparatus_details": "Serial # 1105  Unit 1  Port 1"
     },
     "data": {
         "pressure_relative": [
@@ -450,8 +452,6 @@
             733.89111328125,
             733.9122924804688,
             734.024658203125
-        ],
-        "apparatus": "TriStar II 3020 3.02",
-        "apparatus_details": "Serial # 1105  Unit 1  Port 1"
+        ]
     }
 }

@@ -26,7 +26,9 @@
             "1023-  Preparations failed in primary data.",
             "BET Calculation: At least 2 Points must be supplied for the BET Calculation's Least Squares Fit",
             "1023-  Preparations failed in primary data."
-        ]
+        ],
+        "apparatus": "TriStar II 3020 3.02",
+        "apparatus_details": "Serial # 1306  Unit 2  Port 2"
     },
     "data": {
         "pressure_relative": [
@@ -43,8 +45,6 @@
         ],
         "pressure_saturation": [
             745.736328125
-        ],
-        "apparatus": "TriStar II 3020 3.02",
-        "apparatus_details": "Serial # 1306  Unit 2  Port 2"
+        ]
     }
 }

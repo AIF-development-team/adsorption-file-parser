@@ -2,7 +2,7 @@
 from pathlib import Path
 
 # set to true to remake all jsons
-RECREATE = True
+RECREATE = False
 
 SMSDVS_PATH = Path('./tests/data/smsdvs')
 BEL_PATH = Path('./tests/data/bel')

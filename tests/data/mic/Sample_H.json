@@ -21,7 +21,9 @@
         "comment": "Comments:",
         "errors": [
             "At least two points must be selected for this calculation."
-        ]
+        ],
+        "apparatus": "3Flex 5.00",
+        "apparatus_details": "Serial # 394  Unit 2  Port 3"
     },
     "data": {
         "pressure_relative": [
@@ -273,8 +275,6 @@
             772.9948120117188,
             773.0050659179688,
             773.0082397460938
-        ],
-        "apparatus": "3Flex 5.00",
-        "apparatus_details": "Serial # 394  Unit 2  Port 3"
+        ]
     }
 }

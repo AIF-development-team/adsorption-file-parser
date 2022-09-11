@@ -21,7 +21,9 @@
         "comment": "Comments:",
         "errors": [
             "Analysis temperature was adjusted by as much as -272.943 \u00b0C to find usable compressibility factors.\n"
-        ]
+        ],
+        "apparatus": "3Flex 5.02",
+        "apparatus_details": "Serial # 1212  Unit 1  Port 1"
     },
     "data": {
         "pressure_relative": [
@@ -703,8 +705,6 @@
             778.4327392578125,
             778.4677734375,
             778.4954223632812
-        ],
-        "apparatus": "3Flex 5.02",
-        "apparatus_details": "Serial # 1212  Unit 1  Port 1"
+        ]
     }
 }

@@ -22,7 +22,9 @@
             "4052-  Fewer than two points are selected for this report.",
             "Primary Data",
             "4052-  Fewer than two points are selected for this report."
-        ]
+        ],
+        "apparatus": "ASAP 2020 V3.01 H",
+        "apparatus_details": ""
     },
     "data": {
         "pressure_relative": [
@@ -228,8 +230,6 @@
             7.464188096098782,
             6.132534581248026,
             4.889738980024986
-        ],
-        "apparatus": "ASAP 2020 V3.01 H",
-        "apparatus_details": ""
+        ]
     }
 }

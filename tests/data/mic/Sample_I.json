@@ -17,7 +17,9 @@
         "loading_unit": "cm3(STP)",
         "material_basis": "mass",
         "material_unit": "g",
-        "original_loading_string": "cm\u00b3/g STP"
+        "original_loading_string": "cm\u00b3/g STP",
+        "apparatus": "MicroActive 4.03",
+        "apparatus_details": "Serial # 298  Unit 1  Port 3"
     },
     "data": {
         "pressure_relative": [
@@ -524,8 +526,6 @@
             990.6883695219726,
             990.9289910654296,
             990.7920394057617
-        ],
-        "apparatus": "MicroActive 4.03",
-        "apparatus_details": "Serial # 298  Unit 1  Port 3"
+        ]
     }
 }

@@ -16,7 +16,9 @@
         "material_unit": "g",
         "original_loading_string": "cm\u00b3/g STP",
         "pressure_mode": "relative",
-        "pressure_unit": null
+        "pressure_unit": null,
+        "apparatus": "3Flex 5.02",
+        "apparatus_details": "Port 1"
     },
     "data": {
         "pressure": [
@@ -154,8 +156,6 @@
             150.55394452969307,
             149.60709743811861,
             148.067727826255
-        ],
-        "apparatus": "3Flex 5.02",
-        "apparatus_details": "Port 1"
+        ]
     }
 }

@@ -176,8 +176,8 @@ def parse(path):
         meta['comment'] = meta['comment'].replace('Comments: ', '')
 
     # Get instrument from absolute position
-    data['apparatus'] = str(sheet.cell(1, 0).value)
-    data['apparatus_details'] = str(sheet.cell(2, 1).value)
+    meta['apparatus'] = str(sheet.cell(1, 0).value)
+    meta['apparatus_details'] = str(sheet.cell(2, 1).value)
 
     return meta, data
 
