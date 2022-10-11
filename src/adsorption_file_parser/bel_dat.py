@@ -126,8 +126,11 @@ def parse(path, lang='ENG') -> "tuple[dict, dict]":
 
 
 def _handle_bel_dat_string_units(text):
+    # TODO find a more elegant way of replacing JIS characters
     text = text.replace("／", "/")
     text = text.replace("：", ":")
+    text = text.replace("ｋ", "k")
+    #
     key = text.replace(':', '').replace(' ', '_')
     key_units = key.split('/')
     if len(key_units) == 2:
