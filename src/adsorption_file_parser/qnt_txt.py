@@ -119,10 +119,12 @@ _DATA_DICT = {
 def parse(path):
     """
     Get the isotherm and sample data from a Quantachrome .txt file.
+
     Parameters
     ----------
     path : str
         Path to the file to be read.
+
     Returns
     -------
     meta : dict
