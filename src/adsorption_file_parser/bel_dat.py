@@ -9,13 +9,17 @@ from adsorption_file_parser.utils import common_utils as util
 from adsorption_file_parser.utils import unit_parsing
 
 
-def parse(path):
+def parse(path, lang='ENG') -> "tuple[dict, dict]":
     """
     Get the isotherm and sample data from a BEL Japan .dat file.
+
     Parameters
     ----------
     path : str
         Path to the file to be read.
+    lang : str
+        Language encoding of the file, either 'ENG' or 'JPN'.
+
     Returns
     -------
     meta : dict
@@ -24,6 +28,14 @@ def parse(path):
         Isotherm data.
     """
 
+    # set encoding
+    if lang == 'ENG':
+        encoding = 'cp1252'
+    elif lang == 'JPN':
+        encoding = 'shift_jis'
+    else:
+        raise ParsingError("Unknown language/encoding option.")
+
     meta = {}
     head = []
     data = []
@@ -31,7 +43,7 @@ def parse(path):
     # local for efficiency
     meta_dict = _META_DICT.copy()
 
-    with open(path, 'r', encoding='cp1252') as file:
+    with open(path, 'r', encoding=encoding) as file:
         for line in file:
             values = line.strip().split(sep='\t')
             nvalues = len(values)
@@ -76,7 +88,7 @@ def parse(path):
                 title = values[0].strip().lower()
 
                 # read "adsorption" section
-                if title.startswith('adsorption data'):
+                if title in ['adsorption data', '吸着データ']:
                     file.readline()  # ====== - discard
                     header_line = file.readline().rstrip()  # header
                     header_list = header_line.replace('"', '').split('\t')
@@ -89,7 +101,7 @@ def parse(path):
                         line = file.readline()
 
                 # read "desorption" section
-                elif title.startswith('desorption data'):
+                elif title in ['desorption data', '脱着データ']:
                     file.readline()  # ====== - discard
                     file.readline()  # header - discard
 
@@ -114,6 +126,8 @@ def parse(path):
 
 
 def _handle_bel_dat_string_units(text):
+    text = text.replace("／", "/")
+    text = text.replace("：", ":")
     key = text.replace(':', '').replace(' ', '_')
     key_units = key.split('/')
     if len(key_units) == 2:
