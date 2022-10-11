@@ -51,7 +51,7 @@ _META_DICT = {
         'xl_ref': (0, 2),
     },
     'serialnumber': {
-        'text': ('serial number', 's/n', 'instrument', 'シリアルナンバー'),
+        'text': ('serial number', 's/n', 'instrument', 'シリアルナンバー', '装置ｓ／ｎ'),
         'type': 'string',
         'xl_ref': (0, 2),
     },
@@ -61,12 +61,12 @@ _META_DICT = {
         'xl_ref': (0, 2),
     },
     'comment3': {
-        'text': ('comment3', ),
+        'text': ('comment3', 'コメント３'),
         'type': 'string',
         'xl_ref': (0, 2),
     },
     'comment4': {
-        'text': ('comment4', ),
+        'text': ('comment4', 'コメント４'),
         'type': 'string',
         'xl_ref': (0, 2),
     },
@@ -82,7 +82,7 @@ _META_DICT = {
         'xl_ref': (0, 2),
     },
     'equilibration_time': {
-        'text': ('equilibrium time', ),
+        'text': ('equilibrium time', '平衡時間'),
         'type': 'numeric',
         'unit': 'equilibration_time_unit',
         'xl_ref': (0, 2),

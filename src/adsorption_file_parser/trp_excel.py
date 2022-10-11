@@ -59,8 +59,10 @@ def parse(path):
 
     Returns
     -------
-    dict
-        A dictionary containing report information.
+    meta : dict
+        Isotherm metadata.
+    data : dict
+        Isotherm data.
     """
     meta = {}
     data = {}

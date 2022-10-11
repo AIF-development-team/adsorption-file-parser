@@ -18,7 +18,10 @@ class TestBEL():
     @pytest.mark.parametrize('path', DATA_BEL)
     def test_read_bel_dat(self, path):
         """Test reading of a BEL data file."""
-        meta, data = afp.read(path=path, manufacturer='bel', fmt='dat')
+        lang = 'ENG'
+        if path.stem.endswith('_jis'):
+            lang = 'JPN'
+        meta, data = afp.read(path=path, manufacturer='bel', fmt='dat', lang=lang)
         result_dict = {'meta': meta, 'data': data}
         json_path = path.with_suffix('.json')
 

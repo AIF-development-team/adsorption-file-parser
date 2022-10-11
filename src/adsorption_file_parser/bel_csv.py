@@ -1,29 +1,41 @@
 # -*- coding: utf-8 -*-
 """Parse BEL CSV files."""
 
+from adsorption_file_parser import ParsingError
 from adsorption_file_parser.bel_common import _META_DICT
 from adsorption_file_parser.bel_common import _handle_bel_date
 from adsorption_file_parser.bel_common import _parse_header
 from adsorption_file_parser.utils import common_utils as util
 
 
-def parse(path, separator=',', lang='ENG'):
+def parse(path, separator=',', lang='ENG') -> "tuple[dict, dict]":
     """
     Get the isotherm and sample data from a BEL Japan .csv file.
+
     Parameters
     ----------
     path : str
         Path to the file to be read.
+    separator : str
+        CSV separator
+    lang : str
+        Language encoding of the file, either 'ENG' or 'JPN'.
+
     Returns
     -------
-    dataDF
+    meta : dict
+        Isotherm metadata.
+    data : dict
+        Isotherm data.
     """
 
     # set encoding
     if lang == 'ENG':
         encoding = 'ISO-8859-1'
-    else:
+    elif lang == 'JPN':
         encoding = 'shift_jis'
+    else:
+        raise ParsingError("Unknown language/encoding option.")
 
     meta = {}
     head = []
