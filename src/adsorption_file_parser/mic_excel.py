@@ -199,6 +199,8 @@ def _get_header(sheet, row, col):
         header_options.extend(option['text'])
     while any(header.startswith(label) for label in header_options):
         final_column += 1
+        if final_column > sheet.ncols - 1:
+            break
         header = sheet.cell(row + header_row, final_column).value.lower()
 
     if col == final_column:
@@ -266,10 +268,14 @@ def _parse_data(sheet, row, col):
     point = sheet.cell(final_row, col).value
     while point:
         final_row += 1
+        if final_row > sheet.nrows - 1:
+            break
         point = sheet.cell(final_row, col).value
         # sometimes 1-row gaps are left for P0 measurement
         if not point:
             final_row += 1
+            if final_row > sheet.nrows - 1:
+                break
             point = sheet.cell(final_row, col).value
     return [
         sheet.cell(i, col).value for i in range(start_row, final_row) if sheet.cell(i, col).value
