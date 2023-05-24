@@ -12,7 +12,7 @@ from .conftest import RECREATE
 
 
 class TestMicromeritics():
-    """Test parsing of Micromeritics files"""
+    """Test parsing of Micromeritics files."""
     @pytest.mark.parametrize('path', DATA_MIC_XL)
     def test_read_excel_mic(self, path):
         """Test reading of micromeritics report files."""
