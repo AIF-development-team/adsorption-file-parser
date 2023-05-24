@@ -103,7 +103,10 @@ def parse(path):
 
     # open the workbook
     workbook = xlrd.open_workbook(path, encoding_override='latin-1')
-    sheet = workbook.sheet_by_index(0)
+    try:
+        sheet = workbook.sheet_by_name("Isotherm Tabular Report")
+    except Exception:
+        sheet = workbook.sheet_by_index(0)
 
     # local for efficiency
     meta_dict = _META_DICT.copy()
