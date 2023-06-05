@@ -254,7 +254,7 @@ def parse(path):
     if meta.get('date'):
         meta['date'] = util.handle_string_date(meta['date'])
 
-    # amount adsorbed from cc to cc/material_unit
+    # pack data
     data = dict(zip(head, map(lambda *x: list(x), *data)))
 
     return meta, data
