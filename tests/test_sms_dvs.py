@@ -7,13 +7,13 @@ import pytest
 
 import adsorption_file_parser as afp
 
-from .conftest import DATA_SMSDVS_XL
+from .conftest import DATA_SMS_DVS_XL
 from .conftest import RECREATE
 
 
 class TestSMS_DVS():
     """Test parsing of SMS DVS files"""
-    @pytest.mark.parametrize('path', DATA_SMSDVS_XL)
+    @pytest.mark.parametrize('path', DATA_SMS_DVS_XL)
     def test_read_excel_smsdvs(self, path):
         """Test reading of SMS DVS excel processed files."""
         meta, data = afp.read(path=path, manufacturer='smsdvs', fmt='xlsx')

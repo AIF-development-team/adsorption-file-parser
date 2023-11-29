@@ -71,7 +71,7 @@ def read(path, manufacturer, fmt, **options):
         raise ParsingError(f'Currently available formats are {_SUPPORTED_FORMATS[manufacturer]}')
 
     if manufacturer == 'smsdvs' and fmt == 'xlsx':
-        from .smsdvs_excel import parse
+        from .sms_dvs_excel import parse
     elif manufacturer == 'mic' and fmt == 'xl':
         from .mic_excel import parse
     elif manufacturer == 'bel':
