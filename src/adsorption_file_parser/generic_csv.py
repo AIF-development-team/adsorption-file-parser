@@ -8,9 +8,9 @@ and is used to check for any deprecations.
 
 from io import StringIO
 
-from adsorption_file_parser import logger
-from adsorption_file_parser import ParsingError
 import adsorption_file_parser.utils.common_utils as util
+from adsorption_file_parser import ParsingError
+from adsorption_file_parser import logger
 
 _parser_version = "1.0"
 

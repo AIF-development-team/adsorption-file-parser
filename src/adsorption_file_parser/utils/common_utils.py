@@ -4,8 +4,8 @@ import re
 
 import dateutil.parser
 
-from adsorption_file_parser import logger
 from adsorption_file_parser import ParsingError
+from adsorption_file_parser import logger
 
 # regexes
 
