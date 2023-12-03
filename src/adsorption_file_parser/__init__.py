@@ -36,7 +36,7 @@ _SUPPORTED_FORMATS = {
     'smsdvs': ('xlsx', ),
     'bel': ('csv', 'xl', 'dat'),
     'mic': ('xl', ),
-    '3p': ('xl', ),
+    '3p': ('xl'),  # 'jwgbt'),
     'qnt': ('txt-raw', ),
 }
 
@@ -81,8 +81,11 @@ def read(path, manufacturer, fmt, **options):
             from .bel_csv import parse
         elif fmt == 'dat':
             from .bel_dat import parse
-    elif manufacturer == '3p' and fmt == 'xl':
-        from .trp_excel import parse
+    elif manufacturer == '3p':
+        if fmt == 'xl':
+            from .trp_excel import parse
+        elif fmt == 'jwgbt':
+            from .trp_xml import parse
     elif manufacturer == 'qnt' and fmt == 'txt-raw':
         from .qnt_txt import parse
     else:
