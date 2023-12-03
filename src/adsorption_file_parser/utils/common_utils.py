@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
+import ast
 import re
 
 import dateutil.parser
 
 from adsorption_file_parser import logger
+from adsorption_file_parser import ParsingError
 
 # regexes
 
@@ -28,12 +30,87 @@ def search_key_starts_def_dict(key, def_dict):
     return next(k for k, v in def_dict.items() if any(key.startswith(n) for n in v.get('text', [])))
 
 
+def _is_none(s: str) -> bool:
+    """Check if a value is a text None."""
+    if not s:
+        return True
+    if s.lower() == 'none':
+        return True
+    return False
+
+
+def _is_bool(s: str) -> bool:
+    """Check a value is a text bool."""
+    if s.lower() in ['true', 'false']:
+        return True
+    return False
+
+
+def _from_bool(s: str) -> bool:
+    """Convert a string into a boolean."""
+    if s.lower() == 'true':
+        return True
+    if s.lower() == 'false':
+        return False
+    raise ValueError('String cannot be converted to bool')
+
+
+def _is_int(s: str) -> bool:
+    """Check if a value is a int."""
+    try:
+        int(s)
+        return True
+    except ValueError:
+        return False
+
+
+def _is_float(s: str) -> bool:
+    """Check if a value is a float."""
+    try:
+        float(s)
+        return True
+    except ValueError:
+        return False
+
+
+def _is_list(s: str) -> bool:
+    """Check a value is a simple list."""
+    if s.startswith('[') and s.endswith(']'):
+        return True
+    return False
+
+
+def _from_list(s: str):
+    """Convert a value into a list/tuple/dict."""
+    # note that the function will fail if the list has other spaces
+    return ast.literal_eval(s.replace(' ', ","))
+
+
+def cast_string(s):
+    """Check and cast strings of various data types."""
+    if _is_none(s):
+        return None
+    if _is_bool(s):
+        return _from_bool(s)
+    if s.isnumeric():
+        return int(s)
+    if _is_int(s):
+        return int(s)
+    if _is_float(s):
+        return float(s)
+    if _is_list(s):
+        return _from_list(s)
+    if isinstance(s, str):
+        return s
+    raise ParsingError(f"Could not parse value '{s}'")
+
+
 def handle_string_numeric(text):
-    """Convert to a int/float."""
+    """Convert string to an int or a float."""
     if isinstance(text, str):
-        try:
+        if _is_int(text):
             return int(text)
-        except ValueError:
+        else:
             return float(text)
     return text
 

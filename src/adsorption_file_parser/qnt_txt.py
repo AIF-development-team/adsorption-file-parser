@@ -137,6 +137,9 @@ def parse(path):
     head = []
     data = []
 
+    # local for efficiency
+    meta_dict = _META_DICT.copy()
+
     with open(path, 'r', encoding='cp1252') as file:
 
         # We skip the header
@@ -164,7 +167,6 @@ def parse(path):
         meta['comment'] = vals[1]
 
         # next lines are variable
-        local_meta_dict = _META_DICT.copy()
         for line in file:
             # break if we reach the end of the metadata
             if line == '\n':
@@ -172,7 +174,7 @@ def parse(path):
 
             components = []
             line_lower = line.lower()
-            for key, names in local_meta_dict.items():
+            for key, names in meta_dict.items():
                 # pos = line_lower.find(names["text"])
                 for text in names['text']:
                     pos = line_lower.find(text)
@@ -188,7 +190,7 @@ def parse(path):
                 )
                 for x, y in zip(components, vals):
                     meta[x[1]] = y
-                    del local_meta_dict[x[1]]
+                    del meta_dict[x[1]]
 
         # data section
         #

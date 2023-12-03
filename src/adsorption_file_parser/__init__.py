@@ -38,6 +38,7 @@ _SUPPORTED_FORMATS = {
     'mic': ('xl', ),
     '3p': ('xl'),  # 'jwgbt'),
     'qnt': ('txt-raw', ),
+    'generic': ('csv'),
 }
 
 
@@ -88,6 +89,9 @@ def read(path, manufacturer, fmt, **options):
             from .trp_xml import parse
     elif manufacturer == 'qnt' and fmt == 'txt-raw':
         from .qnt_txt import parse
+    elif manufacturer == 'generic':
+        if fmt == 'csv':
+            from .generic_csv import parse
     else:
         raise ParsingError('Something went wrong.')
 
