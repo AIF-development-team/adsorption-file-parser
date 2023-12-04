@@ -6,11 +6,13 @@ While theoretically, the amount adsorbed could be calculated from this data, it
 is outside the scope of a pure parser implementation. See below available data.
 
 <Adsorb>
-    <Item ID="0" Pd="-0.0000100000000000" Pcd="0.0663320194291271" PdT="0.0000000000000000" PcdT="26.1712062256809332" Day="2022-07-06" Time="11:32:03" P0="102.7410188143739873" Balance="1" SubIndex="0"/>
-    <Item ID="1_1" Pd="2.2583126573586632" Pcd="0.0909305451248286" PdT="26.1886015106431671" PcdT="26.1886015106431671" Day="2022-07-06" Time="11:33:50" P0="102.7308462348363349" Balance="0" SubIndex="1"/>
-    <Item ID="1_2" Pd="2.2827268482490268" Pcd="0.0991129356334646" PdT="26.2197299153124277" PcdT="26.2197299153124277" Day="2022-07-06" Time="11:35:55" P0="102.7267772030212853" Balance="0" SubIndex="2"/>
-    <Item ID="1_3" Pd="0.1424161135271229" Pcd="0.0806922161436194" PdT="26.2197299153124277" PcdT="26.2188143739986259" Day="2022-07-06" Time="11:36:46" P0="102.7267772030212853" Balance="0" SubIndex="3"/>
-    <Item ID="1_4" Pd="6.1422035248340574" Pcd="0.0991129356334646" PdT="26.2197299153124277" PcdT="26.2371252002746616" Day="2022-07-06" Time="11:38:36" P0="102.7308462348363349" Balance="0" SubIndex="4"/>
+    <Item ID="0" Pd="-0.0000100000000000" Pcd="0.0663320194291271"
+    PdT="0.0000000000000000" PcdT="26.1712062256809332" Day="2022-07-06"
+    Time="11:32:03" P0="102.7410188143739873" Balance="1" SubIndex="0"/>
+    <Item ID="1_1" Pd="2.2583126573586632" Pcd="0.0909305451248286"
+    PdT="26.1886015106431671" PcdT="26.1886015106431671" Day="2022-07-06"
+    Time="11:33:50" P0="102.7308462348363349" Balance="0" SubIndex="1"/>
+    ...
 </Adsorb>
 
 The current parser version will be left here for the time being, in case the
