@@ -19,8 +19,6 @@ uptake is added in a latter manufacturer format change.
 
 import xml.etree.ElementTree as ET
 
-from adsorption_file_parser import logger
-
 _DATA_DICT = {
     'measurement': {
         'text': ('ID', ),
