@@ -44,7 +44,7 @@ split_before_dot = true
 force_single_line = true
 line_length = 120
 default_section = "THIRDPARTY"
-skip = [".tox", ".eggs", "ci/templates", "build", "dist"]
+skip = [".tox", ".eggs", "ci/templates", "build", "dist", "src/adsorption_file_parser/_version.py"]
 
 # testing: pytest.py
 [tool.pytest.ini_options]

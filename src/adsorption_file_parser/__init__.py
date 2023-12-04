@@ -36,8 +36,9 @@ _SUPPORTED_FORMATS = {
     'smsdvs': ('xlsx', ),
     'bel': ('csv', 'xl', 'dat'),
     'mic': ('xl', ),
-    '3p': ('xl', ),
+    '3p': ('xl'),  # 'jwgbt'),
     'qnt': ('txt-raw', ),
+    'generic': ('csv'),
 }
 
 
@@ -71,7 +72,7 @@ def read(path, manufacturer, fmt, **options):
         raise ParsingError(f'Currently available formats are {_SUPPORTED_FORMATS[manufacturer]}')
 
     if manufacturer == 'smsdvs' and fmt == 'xlsx':
-        from .smsdvs_excel import parse
+        from .sms_dvs_excel import parse
     elif manufacturer == 'mic' and fmt == 'xl':
         from .mic_excel import parse
     elif manufacturer == 'bel':
@@ -81,10 +82,16 @@ def read(path, manufacturer, fmt, **options):
             from .bel_csv import parse
         elif fmt == 'dat':
             from .bel_dat import parse
-    elif manufacturer == '3p' and fmt == 'xl':
-        from .trp_excel import parse
+    elif manufacturer == '3p':
+        if fmt == 'xl':
+            from .trp_excel import parse
+        elif fmt == 'jwgbt':
+            from .trp_xml import parse
     elif manufacturer == 'qnt' and fmt == 'txt-raw':
         from .qnt_txt import parse
+    elif manufacturer == 'generic':
+        if fmt == 'csv':
+            from .generic_csv import parse
     else:
         raise ParsingError('Something went wrong.')
 

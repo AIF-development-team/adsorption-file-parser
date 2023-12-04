@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Tests SMS DVS excel file parsing."""
+"""Tests generic CSV excel parsing."""
 
 import json
 
@@ -7,16 +7,16 @@ import pytest
 
 import adsorption_file_parser as afp
 
-from .conftest import DATA_SMSDVS_XL
+from .conftest import DATA_GENERIC_CSV
 from .conftest import RECREATE
 
 
-class TestSMS_DVS():
-    """Test parsing of SMS DVS files"""
-    @pytest.mark.parametrize('path', DATA_SMSDVS_XL)
-    def test_read_excel_smsdvs(self, path):
-        """Test reading of SMS DVS excel processed files."""
-        meta, data = afp.read(path=path, manufacturer='smsdvs', fmt='xlsx')
+class TestGeneric():
+    """Test parsing of generic files."""
+    @pytest.mark.parametrize('path', DATA_GENERIC_CSV)
+    def test_read_generic_csv(self, path):
+        """Test reading of generic CSV files."""
+        meta, data = afp.read(path=path, manufacturer='generic', fmt='csv')
         result_dict = {'meta': meta, 'data': data}
         json_path = path.with_suffix('.json')
 

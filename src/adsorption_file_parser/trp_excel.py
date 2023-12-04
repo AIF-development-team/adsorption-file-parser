@@ -74,7 +74,11 @@ def parse(path):
     meta_dict = _META_DICT.copy()
 
     # Metadata
-    info_sheet = workbook['Info']
+    # Sheet may be named 'Info' or 'Summary'
+    try:
+        info_sheet = workbook['Info']
+    except KeyError:
+        info_sheet = workbook['Summary']
     # we know data is left-aligned
     # so we only iterate rows
     for row in info_sheet.rows:
@@ -111,12 +115,15 @@ def parse(path):
     data_sheet = workbook['Isotherm']
     # Data headers
     data_val = data_sheet.values
-    head, units = _parse_header(list(next(data_val)))
+    row = next(data_val)
+    while row[0] != 'ID':
+        row = next(data_val)
+    head, units = _parse_header(list(row))
     meta.update(units)
     # Parse and pack data
     data = _parse_data(data_val)
     data = dict(zip(head, map(lambda *x: list(x), *data)))
-
+    # Check data integrity (parser-specific)
     _check(meta, data, path)
 
     # Set extra metadata

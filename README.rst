@@ -6,11 +6,11 @@ It comes with minimal dependencies and maximum flexibility.
 
 Currently supports files from:
 
-- Micromeritics (.xls reports)
-- Surface Measurement Systems DVS (.xlsx reports)
-- 3P instruments (.xlsx reports)
-- Quantachrome (.txt raw isotherm data)
-- MicrotracBEL (.dat, .xls and .csv files)
+- Micromeritics ('.xls' reports)
+- Surface Measurement Systems DVS ('.xlsx' reports)
+- 3P instruments ('.xlsx' reports)
+- Quantachrome ('.txt' raw isotherm data)
+- MicrotracBEL ('.dat', '.xls' and '.csv' files)
 
 .. start-badges
 
