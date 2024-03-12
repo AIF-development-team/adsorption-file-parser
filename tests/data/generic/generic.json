@@ -1,8 +1,8 @@
 {
     "meta": {
         "_exptl_operator": "JDE",
-        "_exptl_instrument": "Test instrument",
-        "_exptl_date": 44997.0,
+        "_exptl_instrument": "Test-instrument",
+        "_exptl_date": "2023-03-12T00:00:00",
         "_exptl_adsorptive": "carbon dioxide",
         "_exptl_temperature": 303.0,
         "_exptl_method": "volumetric",
@@ -11,7 +11,7 @@
         "_units_loading": "mmol/g",
         "_units_mass": "g",
         "_units_temperature": "K",
-        "_adsnt_sample_id": "Test adsorption 10",
+        "_adsnt_sample_id": "Test-adsorption-10",
         "_adsnt_material_id": "MOF-1",
         "_adsnt_sample_mass": 0.1,
         "_adsnt_degas_temperature": 450.0

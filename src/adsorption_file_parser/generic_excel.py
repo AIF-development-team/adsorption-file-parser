@@ -13,6 +13,7 @@ import pandas
 import xlrd
 from adsorption_file_parser import logger
 from xlrd.xldate import xldate_as_datetime
+from adsorption_file_parser.utils import common_utils as util
 
 
 _parser_version = "1.0"
@@ -119,16 +120,17 @@ def parse(path):
         while row_index < sht.nrows:
             namec = sht.cell(row_index, 0)
             valc = sht.cell(row_index, 1)
-            if namec.ctype == xlrd.XL_CELL_EMPTY:
-                break
-            if valc.ctype == xlrd.XL_CELL_BOOLEAN:
-                val = bool(valc.value)
-            elif valc.ctype == xlrd.XL_CELL_EMPTY:
+            if valc.value is None:
                 val = None
-            else:
+            elif valc.ctype is xlrd.XL_CELL_EMPTY:
+                val = None
+            elif valc.ctype is xlrd.XL_CELL_NUMBER:
                 val = valc.value
-            if namec.value == '_exptl_date':
-                val = xldate_as_datetime(valc.value, sht.book.datemode).isoformat()
+            elif valc.ctype is xlrd.XL_CELL_TEXT:
+                val = util.handle_excel_string(valc.value)
+            elif valc.ctype is xlrd.XL_CELL_DATE:
+                val = util.handle_xlrd_datetime(valc.value, sht)
+
             meta[namec.value] = val
             row_index += 1
 
@@ -141,3 +143,7 @@ def parse(path):
 
     data_dict = {'pressure' : data['pressure'].to_list(), 'loading' : data['loading'].to_list(), 'branch' : data['branch'].to_list()}
     return meta, data_dict
+
+
+# meta, data = parse('tests/data/generic/generic.xls')
+# print(meta)
