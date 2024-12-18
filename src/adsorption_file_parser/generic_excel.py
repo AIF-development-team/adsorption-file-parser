@@ -141,9 +141,5 @@ def parse(path):
             "Strange things might happen, so double check your data."
         )
 
-    data_dict = {'pressure' : data['pressure'].to_list(), 'loading' : data['loading'].to_list(), 'branch' : data['branch'].to_list()}
+    data_dict = {'pressure' : data['pressure'].to_list(), 'loading' : data['loading'].to_list(), 'pressure_saturation' : data['pressure_saturation'].to_list(), 'branch' : data['branch'].to_list()}
     return meta, data_dict
-
-
-# meta, data = parse('tests/data/generic/generic.xls')
-# print(meta)
