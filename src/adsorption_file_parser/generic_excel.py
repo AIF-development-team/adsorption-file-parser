@@ -1,8 +1,6 @@
 """
 Parse to and from a Excel format for isotherms.
 
-The _parser_version variable documents any changes to the format,
-and is used to check for any deprecations.
 
 This is based on work by Paul Iacomi (https://raw.githubusercontent.com/pauliacomi/pyGAPS/master/src/pygaps/parsing/excel.py)
 
@@ -11,12 +9,9 @@ This is based on work by Paul Iacomi (https://raw.githubusercontent.com/pauliaco
 
 import pandas
 import xlrd
-from adsorption_file_parser import logger
-from xlrd.xldate import xldate_as_datetime
 from adsorption_file_parser.utils import common_utils as util
 
 
-_parser_version = "1.0"
 
 _META_DICT = {
     'isotherm_data': {
@@ -134,12 +129,6 @@ def parse(path):
             meta[namec.value] = val
             row_index += 1
 
-    version = meta.pop("_parser_version", None)
-    if not version or float(version) < float(_parser_version):
-        logger.warning(
-            f"The file version is {version} while the parser uses version {_parser_version}. "
-            "Strange things might happen, so double check your data."
-        )
 
     data_dict = {'pressure' : data['pressure'].to_list(), 'loading' : data['loading'].to_list(), 'pressure_saturation' : data['pressure_saturation'].to_list(), 'branch' : data['branch'].to_list()}
     return meta, data_dict
