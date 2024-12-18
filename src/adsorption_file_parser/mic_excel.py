@@ -120,7 +120,7 @@ def parse(path):
             continue
 
         # check if we are in the data section
-        if cell_value not in ['Isotherm Tabular Report', 'Isotherm Linear Absolute Plot']:
+        if cell_value not in ['Isotherm Tabular Report']:
             cell_value = cell_value.strip().lower()
             try:
                 key = util.search_key_starts_def_dict(cell_value, meta_dict)
@@ -169,7 +169,6 @@ def parse(path):
                 elif h == 'pressure_saturation':
                     data[h] = [float(x) for x in points[1:]]
                 elif h.startswith('pressure') or h.startswith('loading'):
-                    print(h)
                     data[h] = [float(x) for x in points]
                 else:
                     data[h] = points
@@ -208,7 +207,6 @@ def _get_header(sheet, row, col):
         header = sheet.cell(row + header_row, final_column).value.lower()
 
     if col == final_column:
-        print('yes')
         # this means no header exists, can happen in some older files
         # the units might not be standard! TODO should check
         logger.warning('Default data headers supplied for file.')
@@ -328,6 +326,3 @@ def _check(meta, data, path):
         logger.warning('Report file contains warnings:')
         logger.warning('\n'.join(meta['errors']))
 
-
-meta, data = parse('tests/data/problems/ASAP-001-314-report.XLS')
-print(data)
