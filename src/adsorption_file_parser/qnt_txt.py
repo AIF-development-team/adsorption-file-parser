@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """Parse Quantachrome txt output files."""
 import re
+from io import StringIO
 
 import adsorption_file_parser.utils.common_utils as util
 from adsorption_file_parser.utils import unit_parsing
@@ -116,7 +117,14 @@ _DATA_DICT = {
 }
 
 
-def parse(path):
+def parse_file(path):
+    with open(path, 'r', encoding='cp1252') as file:
+        content = file.read()
+        # parse content
+        result = parse(content)
+    return result
+
+def parse(content):
     """
     Get the isotherm and sample data from a Quantachrome .txt file.
 
@@ -137,93 +145,94 @@ def parse(path):
     head = []
     data = []
 
+    # to use preread content
+    file = StringIO(content)
+
     # local for efficiency
     meta_dict = _META_DICT.copy()
 
-    with open(path, 'r', encoding='cp1252') as file:
-
-        # We skip the header
-        for _ in range(6):
-            file.readline()
-
-        # metadata section
-        #
-        # first four lines are always the same
-        line7 = file.readline()
-        vals = find_key_vals_from_keys(line7, ['Operator:', 'Date:', 'Operator:', 'Date:'])
-        meta['operator'] = vals[0]
-        meta['date'] = vals[1]
-        meta['report_operator'] = vals[2]
-        meta['report_date'] = vals[3]
-
-        line8 = file.readline()
-        vals = find_key_vals_from_keys(line8, ['Sample ID:', 'Filename:'])
-        meta['material'] = vals[0]
-        meta['filename'] = vals[1]
-
-        line9 = file.readline()
-        vals = find_key_vals_from_keys(line9, ['Sample Desc:', 'Comment:'])
-        meta['material_description'] = vals[0]
-        meta['comment'] = vals[1]
-
-        # next lines are variable
-        for line in file:
-            # break if we reach the end of the metadata
-            if line == '\n':
-                break
-
-            components = []
-            line_lower = line.lower()
-            for key, names in meta_dict.items():
-                # pos = line_lower.find(names["text"])
-                for text in names['text']:
-                    pos = line_lower.find(text)
-                    if pos != -1:
-                        components.append((pos, key, text))
-                        break
-            if components:
-                components.sort(key=lambda x: x[0])
-                vals = find_key_vals_from_position(
-                    line,
-                    [x[2] for x in components],
-                    [x[0] for x in components],
-                )
-                for x, y in zip(components, vals):
-                    meta[x[1]] = y
-                    del meta_dict[x[1]]
-
-        # data section
-        #
-        # data headers
-        line = file.readline()
-        file_headers = re.split(r'\s{2,}', line.strip())
-        file_header_locations = [line.find(' ' + header) + 1 for header in file_headers]
-        for h in file_headers:
-            txt = next((k for k, v in _DATA_DICT.items() if h.lower() in v['text']), h)
-            head.append(txt)
-
-        # skip line
+    # We skip the header
+    for _ in range(6):
         file.readline()
 
-        # data header units
-        line = file.readline()
-        all_units = []
-        stated_units = re.split(r'\s{2,}', line.strip())
-        for loc in file_header_locations:
-            unit = None
-            if loc < len(line):
-                if not line[loc:loc + 8].isspace():
-                    unit = stated_units.pop(0)
-            all_units.append(unit)
+    # metadata section
+    #
+    # first four lines are always the same
+    line7 = file.readline()
+    vals = find_key_vals_from_keys(line7, ['Operator:', 'Date:', 'Operator:', 'Date:'])
+    meta['operator'] = vals[0]
+    meta['date'] = vals[1]
+    meta['report_operator'] = vals[2]
+    meta['report_date'] = vals[3]
 
-        # skip line
-        file.readline()
+    line8 = file.readline()
+    vals = find_key_vals_from_keys(line8, ['Sample ID:', 'Filename:'])
+    meta['material'] = vals[0]
+    meta['filename'] = vals[1]
 
-        # data
+    line9 = file.readline()
+    vals = find_key_vals_from_keys(line9, ['Sample Desc:', 'Comment:'])
+    meta['material_description'] = vals[0]
+    meta['comment'] = vals[1]
+
+    # next lines are variable
+    for line in file:
+        # break if we reach the end of the metadata
+        if line == '\n':
+            break
+
+        components = []
+        line_lower = line.lower()
+        for key, names in meta_dict.items():
+            # pos = line_lower.find(names["text"])
+            for text in names['text']:
+                pos = line_lower.find(text)
+                if pos != -1:
+                    components.append((pos, key, text))
+                    break
+        if components:
+            components.sort(key=lambda x: x[0])
+            vals = find_key_vals_from_position(
+                line,
+                [x[2] for x in components],
+                [x[0] for x in components],
+            )
+            for x, y in zip(components, vals):
+                meta[x[1]] = y
+                del meta_dict[x[1]]
+
+    # data section
+    #
+    # data headers
+    line = file.readline()
+    file_headers = re.split(r'\s{2,}', line.strip())
+    file_header_locations = [line.find(' ' + header) + 1 for header in file_headers]
+    for h in file_headers:
+        txt = next((k for k, v in _DATA_DICT.items() if h.lower() in v['text']), h)
+        head.append(txt)
+
+    # skip line
+    file.readline()
+
+    # data header units
+    line = file.readline()
+    all_units = []
+    stated_units = re.split(r'\s{2,}', line.strip())
+    for loc in file_header_locations:
+        unit = None
+        if loc < len(line):
+            if not line[loc:loc + 8].isspace():
+                unit = stated_units.pop(0)
+        all_units.append(unit)
+
+    # skip line
+    file.readline()
+
+    # data
+    line = file.readline()
+    while line:
+        data.append(list(map(float, line.split())))
         line = file.readline()
-        while line:
-            data.append(list(map(float, line.split())))
-            line = file.readline()
 
     # Elaborate and clarify some metadata
     mass, mass_unit = meta['material_mass'].split()

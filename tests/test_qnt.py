@@ -16,7 +16,7 @@ class TestQuantachrome():
     @pytest.mark.parametrize('path', DATA_QNT)
     def test_read_qnt_txt(self, path):
         """Test reading of Quantachrome txt files."""
-        meta, data = afp.read(path=path, manufacturer='qnt', fmt='txt-raw')
+        meta, data = afp.read_file(path=path, manufacturer='qnt', fmt='txt-raw')
         result_dict = {'meta': meta, 'data': data}
         json_path = path.with_suffix('.json')
 

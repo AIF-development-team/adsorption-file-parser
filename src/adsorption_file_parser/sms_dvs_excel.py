@@ -2,6 +2,7 @@
 """Parse SMS DVS (.xlsx) output files."""
 import dateutil.parser
 import openpyxl
+from io import BytesIO
 
 from adsorption_file_parser.utils import common_utils as util
 from adsorption_file_parser.utils.unit_parsing import parse_temperature_string
@@ -106,8 +107,14 @@ _META_DICT = {
 
 _DATA_DICT = {}
 
+def parse_file(path):
+    with open(path, 'rb') as file:
+        content = file.read()
+        # parse content
+        result = parse(content)
+    return result
 
-def parse(path):
+def parse(content):
     """
     Parse an xlsx file analysed through SMS DVS software
     to obtain the isotherm.
@@ -124,11 +131,13 @@ def parse(path):
     data : dict
         Isotherm data.
     """
+    file = BytesIO(content)
+
     meta = {}
     data = {}
 
     # open the workbook
-    workbook = openpyxl.load_workbook(path, read_only=True, data_only=True)
+    workbook = openpyxl.load_workbook(file, read_only=True, data_only=True)
 
     # local for efficiency
     meta_dict = _META_DICT.copy()

@@ -16,7 +16,7 @@ class TestGeneric():
     @pytest.mark.parametrize('path', DATA_GENERIC_EXCEL)
     def test_read_generic_excel(self, path):
         """Test reading of generic excel files."""
-        meta, data = afp.read(path=path, manufacturer='generic', fmt='xls')
+        meta, data = afp.read_file(path=path, manufacturer='generic', fmt='xls')
         result_dict = {'meta': meta, 'data': data}
         json_path = path.with_suffix('.json')
 

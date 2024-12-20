@@ -22,16 +22,21 @@ _META_DICT = {
     },
 }
 
-def parse(path):
+def parse_file(path):
+    with open(path, 'rb') as file:
+        content = file.read()
+        # parse content
+        result = parse(content)
+    return result
+
+def parse(content):
     """
     Load an isotherm from a pyGAPS Excel file.
 
     Parameters
     ----------
-    path : str
-        Path to the file to be read.
-    isotherm_parameters :
-        Any other options to be overridden in the isotherm creation.
+    content : str
+        content of file to be read.
 
     Returns
     -------
@@ -45,7 +50,7 @@ def parse(path):
     raw_dict = {}
 
     # Get excel workbook and sheet
-    wb = xlrd.open_workbook(path)
+    wb = xlrd.open_workbook(file_contents=content)
     if 'data' in wb.sheet_names():
         sht = wb.sheet_by_name('data')
     else:

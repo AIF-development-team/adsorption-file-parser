@@ -16,7 +16,7 @@ class TestGeneric():
     @pytest.mark.parametrize('path', DATA_GENERIC_CSV)
     def test_read_generic_csv(self, path):
         """Test reading of generic CSV files."""
-        meta, data = afp.read(path=path, manufacturer='generic', fmt='csv')
+        meta, data = afp.read(path, manufacturer='generic', fmt='csv')
         result_dict = {'meta': meta, 'data': data}
         json_path = path.with_suffix('.json')
 

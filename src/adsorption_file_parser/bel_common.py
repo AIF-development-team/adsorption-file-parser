@@ -152,7 +152,7 @@ def _handle_bel_date(text):
     return dateutil.parser.parse(text, yearfirst=True).isoformat()
 
 
-def _check(meta, data, path):
+def _check(meta, data):
     """
     Check keys in data and logs a warning if a key is empty.
 
@@ -161,6 +161,6 @@ def _check(meta, data, path):
     if 'loading' in data:
         empties = (k for k, v in data.items() if not v)
         for empty in empties:
-            logger.info(f'No data collected for {empty} in file {path}.')
+            logger.info(f'No data collected for {empty} in file.')
     if 'errors' in meta:
         logger.warning('\n'.join(meta['errors']))

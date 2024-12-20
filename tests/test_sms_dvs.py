@@ -16,7 +16,7 @@ class TestSMS_DVS():
     @pytest.mark.parametrize('path', DATA_SMS_DVS_XL)
     def test_read_excel_smsdvs(self, path):
         """Test reading of SMS DVS excel processed files."""
-        meta, data = afp.read(path=path, manufacturer='smsdvs', fmt='xlsx')
+        meta, data = afp.read_file(path=path, manufacturer='smsdvs', fmt='xlsx')
         result_dict = {'meta': meta, 'data': data}
         json_path = path.with_suffix('.json')
 

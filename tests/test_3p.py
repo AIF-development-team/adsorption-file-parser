@@ -17,7 +17,7 @@ class Test3P():
     @pytest.mark.parametrize('path', DATA_3P_XL)
     def test_read_excel_3p(self, path):
         """Test reading of 3P report files."""
-        meta, data = afp.read(path=path, manufacturer='3p', fmt='xl')
+        meta, data = afp.read_file(path=path, manufacturer='3p', fmt='xl')
         result_dict = {'meta': meta, 'data': data}
         json_path = path.with_suffix('.json')
 

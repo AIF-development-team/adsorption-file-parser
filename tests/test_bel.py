@@ -21,7 +21,7 @@ class TestBEL():
         lang = 'ENG'
         if path.stem.endswith('_jis'):
             lang = 'JPN'
-        meta, data = afp.read(path=path, manufacturer='bel', fmt='dat', lang=lang)
+        meta, data = afp.read_file(path=path, manufacturer='bel', fmt='dat', lang=lang)
         result_dict = {'meta': meta, 'data': data}
         json_path = path.with_suffix('.json')
 
@@ -40,7 +40,7 @@ class TestBEL():
         lang = 'ENG'
         if path.stem.endswith('_jis'):
             lang = 'JPN'
-        meta, data = afp.read(path=path, manufacturer='bel', fmt='csv', lang=lang)
+        meta, data = afp.read_file(path=path, manufacturer='bel', fmt='csv', lang=lang)
         result_dict = {'meta': meta, 'data': data}
         json_path = path.with_suffix('.json')
 
@@ -56,7 +56,7 @@ class TestBEL():
     @pytest.mark.parametrize('path', DATA_BEL_XL)
     def test_read_bel_excel(self, path):
         """Test reading of BEL report files."""
-        meta, data = afp.read(path=path, manufacturer='bel', fmt='xl')
+        meta, data = afp.read_file(path=path, manufacturer='bel', fmt='xl')
         result_dict = {'meta': meta, 'data': data}
         json_path = path.with_suffix('.json')
 

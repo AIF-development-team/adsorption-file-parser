@@ -16,7 +16,7 @@ class TestMicromeritics():
     @pytest.mark.parametrize('path', DATA_MIC_XL)
     def test_read_excel_mic(self, path):
         """Test reading of micromeritics report files."""
-        meta, data = afp.read(path=path, manufacturer='mic', fmt='xl')
+        meta, data = afp.read_file(path=path, manufacturer='mic', fmt='xl')
         result_dict = {'meta': meta, 'data': data}
         json_path = path.with_suffix('.json')
 
