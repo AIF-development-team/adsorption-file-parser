@@ -22,7 +22,7 @@ def parse_file(path, separator=',', lang='ENG') -> "tuple[dict, dict]":
         result = parse(content, separator)
     return result
 
-def parse(content, separator) -> "tuple[dict, dict]":
+def parse(content, separator=',') -> "tuple[dict, dict]":
     """
     Get the isotherm and sample data from a BEL Japan .csv file.
 
