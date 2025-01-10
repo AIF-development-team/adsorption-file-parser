@@ -325,4 +325,3 @@ def _check(meta, data, path):
     if 'errors' in meta:
         logger.warning('Report file contains warnings:')
         logger.warning('\n'.join(meta['errors']))
-
