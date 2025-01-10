@@ -2,7 +2,7 @@
 from pathlib import Path
 
 # set to true to remake all jsons
-RECREATE = True
+RECREATE = False
 
 BEL_PATH = Path('./tests/data/bel')
 MIC_PATH = Path('./tests/data/mic')
