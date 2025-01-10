@@ -138,7 +138,8 @@ as follows:
 
 - Create a new feature branch: `git flow feature start new-feature`
 - Write the feature then finalize the feature branch: `git flow feature finish new-feature`
-- Create a new release branch: `git flow release start 1.1.0`
+- Create a new release branch: `git flow release start 1.1.0`. The current
+  package version can be checked by using `pip show adsorption_file_parser`.
 - Finalize any last modifications and solve any CI issues. There is no need to
   manually update the version number - it will be determined from the tag name.
   WARNING: release will fail if all CI tests do not pass.
