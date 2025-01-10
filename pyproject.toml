@@ -10,6 +10,12 @@ license = {file = "LICENSE"}
 authors = [
     {name = "AIF Development Team", email = "mail@pauliacomi.com"}
 ]
+dependencies = [
+    "python-dateutil",
+    "xlrd>=1.1",
+    "xlwt>=1.3",
+    "openpyxl",
+]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "License :: OSI Approved :: MIT License",
@@ -20,12 +26,6 @@ classifiers = [
     "Topic :: Scientific/Engineering :: Physics",
     "Topic :: Scientific/Engineering :: Chemistry"
 ]
-dependencies = [
-    "python-dateutil",
-    "xlrd>=1.1",
-    "xlwt>=1.3",
-    "openpyxl",
-]
 
 [project.optional-dependencies]
 dev = [
@@ -35,6 +35,7 @@ dev = [
     "isort",
     "pylint",
     "flake8",
+    "flake8-pyproject",
     "autopep8",
     "pydocstyle",
     "pre-commit",
