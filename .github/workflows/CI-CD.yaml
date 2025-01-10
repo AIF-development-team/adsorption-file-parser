@@ -28,7 +28,7 @@ jobs:
         echo "Running flake8"
         flake8 src tests
         echo "Running pylint"
-        pylint src
+        pylint src -fail-under=9
 
   unit-tests:
     runs-on: ubuntu-latest

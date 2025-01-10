@@ -76,13 +76,15 @@ fallback_version = '0.0.1'
 
 # linting: flake8
 [tool.flake8]
-ignore = ["E402", "W503", "W504", "E126", "E731", "E501"]
 max-line-length = 140
+ignore = ["E402", "W503", "W504", "E126", "E731"]
 exclude = [".tox", ".eggs", "ci/templates", "build", "dist"]
 docstring_style = "numpy"
 
 # linting: pylint
 [tool.pylint.messages_control]
+max-line-length = 140
+jobs = 0
 disable = [
     "logging-fstring-interpolation", # fstrings are fast
     "import-outside-toplevel", # required for optimisations
@@ -94,7 +96,8 @@ disable = [
     "too-many-statements", # we don't need these
     "invalid-name", # we don't need these
     "duplicate-code", # sometimes it just has to happen
-    "unused-argument", # sometimes it just has to happen
+    # "unused-argument", # sometimes it just has to happen
+    # "fixme", # these are not errors...
 ]
 
 # linting: darglint

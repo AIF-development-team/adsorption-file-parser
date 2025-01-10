@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+"""Common test fixtures."""
 from pathlib import Path
 
 # set to true to remake all jsons
