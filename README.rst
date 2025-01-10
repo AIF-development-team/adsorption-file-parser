@@ -80,11 +80,9 @@ Install using pip
 Documentation
 =============
 
-The main read function returns two dictionaries:
-a ``meta`` dictionary, which contains various metadata
-that is present in the report (date, user, units)
-and the ``data`` dictionary, containing lists
-of individual isotherm data.
+The main read function returns two dictionaries: a ``meta`` dictionary, which
+contains various metadata that is present in the report (date, user, units) and
+the ``data`` dictionary, containing lists of individual isotherm data.
 
 .. code:: bash
 
