@@ -1,17 +1,12 @@
 """
 Parse to and from a Excel format for isotherms.
 
-
 This is based on work by Paul Iacomi (https://raw.githubusercontent.com/pauliacomi/pyGAPS/master/src/pygaps/parsing/excel.py)
-
 """
 
-
-import pandas
 import xlrd
+
 from adsorption_file_parser.utils import common_utils as util
-
-
 
 _META_DICT = {
     'isotherm_data': {
@@ -21,6 +16,7 @@ _META_DICT = {
         'column': 0,
     },
 }
+
 
 def parse(path):
     """
@@ -80,35 +76,33 @@ def parse(path):
 
         # read the data in
         header_col = 0
-        headers = []
-        dtypes = {}
-        experiment_data = {}
+        head = []
+        data = {}
+
         while header_col < sht.ncols:
             header = sht.cell(header_row, header_col).value
             if header == '':
                 break
             # read header, data, and dtype
-            headers.append(header)
-            experiment_data[header] = [
-                sht.cell(i, header_col).value for i in range(start_row, final_row)
-            ]
+            head.append(header)
+            data[header] = [sht.cell(i, header_col).value for i in range(start_row, final_row)]
             # read the data type
             # only read the data type if it is not a pressure, loading or branch
             if header_col > 2:
                 dtype = sht.cell(header_row - 1, header_col).value
                 if dtype != '':
-                    dtypes[header] = dtype
+                    data = [util.cast_string(s) for s in data]
             header_col += 1
-        data = pandas.DataFrame(experiment_data)
-        data = data.astype(dtypes)
 
         # process isotherm branches if they exist
-        if 'branch' in data.columns:
-            data['branch'] = data['branch'].apply(lambda x: 0 if x == 'ads' else 1)
-        else:
-            raw_dict['branch'] = 'guess'
+        for col in data:
+            if col == 'branch':
+                data['branch'] = [0 if s == 'ads' else 1 for s in data['branch']]
+            else:
+                data[col] = [float(s) for s in data[col]]
+
+    # read the secondary isotherm metadata
     meta = {}
-    # read the secondary isotherm parameters
     if 'metadata' in wb.sheet_names():
         sht = wb.sheet_by_name('metadata')
         row_index = 0
@@ -129,6 +123,4 @@ def parse(path):
             meta[namec.value] = val
             row_index += 1
 
-
-    data_dict = {'pressure' : data['pressure'].to_list(), 'loading' : data['loading'].to_list(), 'pressure_saturation' : data['pressure_saturation'].to_list(), 'branch' : data['branch'].to_list()}
-    return meta, data_dict
+    return meta, data
