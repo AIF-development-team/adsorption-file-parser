@@ -93,6 +93,8 @@ disable = [
     "too-many-arguments", # we don't need these
     "too-many-statements", # we don't need these
     "invalid-name", # we don't need these
+    "duplicate-code", # sometimes it just has to happen
+    "unused-argument", # sometimes it just has to happen
 ]
 
 # linting: darglint

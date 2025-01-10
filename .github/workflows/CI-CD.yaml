@@ -23,8 +23,12 @@ jobs:
         pip install .[dev]
     - name: Run lint checks
       run: |
+        echo "Running isort"
         isort --verbose --check-only --diff src tests
+        echo "Running flake8"
         flake8 src tests
+        echo "Running pylint"
+        pylint src
 
   unit-tests:
     runs-on: ubuntu-latest

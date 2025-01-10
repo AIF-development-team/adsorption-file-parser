@@ -279,11 +279,11 @@ def _sort_data(data, head):
     ds['loading'] = (data['loading_ads'] + data['loading_des'][::-1])
 
     if 'pressure_actual_ads' in head:
-        ds['pressure_target'] = (data['pressure_target'] + data['pressure_target'][::-1])
-        ds['pressure'] = (data['pressure_actual_ads'] + data['pressure_actual_des'][::-1])
+        ds['pressure_target'] = data['pressure_target'] + data['pressure_target'][::-1]
+        ds['pressure'] = data['pressure_actual_ads'] + data['pressure_actual_des'][::-1]
         indices = [i for i, v in enumerate(ds['pressure']) if v is None]
     else:
-        ds['pressure'] = (data['pressure_target'] + data['pressure_target'][::-1])
+        ds['pressure'] = data['pressure_target'] + data['pressure_target'][::-1]
         indices = [i for i, v in enumerate(ds['loading']) if v is None]
 
     # remove empty data
