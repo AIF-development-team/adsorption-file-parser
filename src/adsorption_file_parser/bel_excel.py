@@ -5,6 +5,7 @@ from itertools import product
 
 import xlrd
 
+from adsorption_file_parser import ParsingError
 from adsorption_file_parser.bel_common import _META_DICT
 from adsorption_file_parser.bel_common import _check
 from adsorption_file_parser.bel_common import _parse_header
@@ -115,19 +116,21 @@ def _parse_data(sheet, row, col):
     rowc = 1
 
     # Check for adsorption branch
-    if sheet.cell(row + rowc, col).value == 'ADS':
-        ads_start_row = row + rowc + 1
-        ads_final_row = ads_start_row
-
+    if sheet.cell(row + rowc, col).value != 'ADS':
+        raise ParsingError
+    ads_start_row = row + rowc + 1
+    ads_final_row = ads_start_row
     point = sheet.cell(ads_final_row, col).value
 
     while point != 'DES':
         ads_final_row += 1
         point = sheet.cell(ads_final_row, col).value
 
-    if sheet.cell(ads_final_row, col).value == 'DES':
-        des_start_row = ads_final_row + 1
-        des_final_row = des_start_row
+    # Check for desorption branch
+    if sheet.cell(ads_final_row, col).value != 'DES':
+        raise ParsingError
+    des_start_row = ads_final_row + 1
+    des_final_row = des_start_row
 
     if des_final_row < sheet.nrows:
 

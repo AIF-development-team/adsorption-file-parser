@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+"""Common python utilities."""
 import ast
 import re
 
@@ -110,8 +111,7 @@ def handle_string_numeric(text):
     if isinstance(text, str):
         if _is_int(text):
             return int(text)
-        else:
-            return float(text)
+        return float(text)
     return text
 
 

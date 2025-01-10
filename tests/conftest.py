@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
+"""Common test fixtures."""
 from pathlib import Path
 
 # set to true to remake all jsons
-RECREATE = True
+RECREATE = False
 
 BEL_PATH = Path('./tests/data/bel')
 MIC_PATH = Path('./tests/data/mic')
@@ -20,3 +21,4 @@ DATA_3P_XML = tuple(TP_PATH.glob('*.jwgbt'))
 DATA_QNT = tuple(QNT_PATH.glob('*.txt'))
 DATA_SMS_DVS_XL = tuple(SMS_DVS_PATH.glob('*.xlsx'))
 DATA_GENERIC_CSV = tuple(GENERIC_PATH.glob('*.csv'))
+DATA_GENERIC_EXCEL = tuple(GENERIC_PATH.glob('*.xls'))

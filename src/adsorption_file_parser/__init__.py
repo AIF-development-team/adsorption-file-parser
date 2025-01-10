@@ -38,7 +38,7 @@ _SUPPORTED_FORMATS = {
     'mic': ('xl', ),
     '3p': ('xl'),  # 'jwgbt'),
     'qnt': ('txt-raw', ),
-    'generic': ('csv'),
+    'generic': ('csv', 'xls'),
 }
 
 
@@ -92,6 +92,8 @@ def read(path, manufacturer, fmt, **options):
     elif manufacturer == 'generic':
         if fmt == 'csv':
             from .generic_csv import parse
+        elif fmt == 'xls':
+            from .generic_excel import parse
     else:
         raise ParsingError('Something went wrong.')
 
