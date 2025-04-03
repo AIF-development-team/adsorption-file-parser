@@ -35,18 +35,18 @@ _META_DICT = {
         'xl_ref': (0, 2),
     },
     'date': {
-        'text': ('date of measurement', '測定日'),
+        'text': ('analysis date', 'date of measurement', '測定日'),
         'type': 'datetime',
         'xl_ref': (0, 2),
     },
     'material_mass': {
-        'text': ('sample weight', 'サンプル質量'),
+        'text': ('sample mass','sample weight', 'サンプル質量'),
         'unit': 'material_mass_unit',
         'type': 'numeric',
         'xl_ref': (0, 2),
     },
     'measurement_duration': {
-        'text': ('time of measurement', '測定時間'),
+        'text': ('analysis time','time of measurement', '測定時間'),
         'type': 'timedelta',
         'xl_ref': (0, 2),
     },
