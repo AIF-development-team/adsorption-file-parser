@@ -1,0 +1,25 @@
+data_afp_aif
+_audit_aif_version v1.0.0
+_exptl_operator "unknown"
+_exptl_date "2017-06-13T07:56:30"
+_exptl_adsorptive "N2"
+_exptl_temperature "77.3"
+_exptl_instrument "TriStar II 3020 3.02"
+_adsnt_sample_id "Sample B"
+_adsnt_sample_mass "0.288"
+_units_temperature "K"
+_units_pressure "mmHg"
+_units_mass "g"
+_units_loading "cm³/g STP"
+_mic_date_finished "2017-06-13T11:32:24"
+_mic_date_report "2017-06-13T11:32:24"
+_mic_comment "Sample that was stopped during collection."
+_mic_errors
+"["BET Calculation: At least 2 Points must be supplied for the BET Calculation's Least Squares Fit", '1023-  Preparations failed in primary data.', "BET Calculation: At least 2 Points must be supplied for the BET Calculation's Least Squares Fit", '1023-  Preparations failed in primary data.', "BET Calculation: At least 2 Points must be supplied for the BET Calculation's Least Squares Fit", '1023-  Preparations failed in primary data.']"
+_mic_instrument_details "Serial # 1306  Unit 2  Port 2"
+
+loop_
+_adsorp_pressure
+_adsorp_p0
+_adsorp_amount
+0.26594552397727966 745.736328125 28.33484691613959

@@ -12,7 +12,7 @@
         "equilibration_time_unit": "sec",
         "measurement_mode": "2",
         "material_mass": 0.33383,
-        "material_mass_unit": "g",
+        "material_unit": "g",
         "material": "CEP 3XX-2B",
         "operator": null,
         "comment3": "30mn \u00e0 140\u00b0C sous vide",
@@ -30,9 +30,9 @@
         "loading_basis": "molar",
         "loading_unit": "mL(STP)",
         "material_basis": "mass",
-        "material_unit": "g",
         "original_loading_string": "ml(STP) g-1",
-        "apparatus": "BEL 00203"
+        "instrument": "BEL 00203",
+        "filetype": "bel"
     },
     "data": {
         "branch": [

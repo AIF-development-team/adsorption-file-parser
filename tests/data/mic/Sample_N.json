@@ -9,7 +9,6 @@
         "temperature_unit": "K",
         "date_report": "2023-02-02T10:41:41",
         "material_mass": 0.0908,
-        "material_mass_unit": "g",
         "comment": "Degas: 110 \u00b0C, 10h in-situ degas: 110 \u00b0C, 3h",
         "pressure_mode": "absolute",
         "pressure_unit": "torr",
@@ -19,8 +18,9 @@
         "material_basis": "mass",
         "material_unit": "g",
         "original_loading_string": "cm\u00b3/g STP",
-        "apparatus": "MicroActive 6.00",
-        "apparatus_details": "Serial # 902  Unit 1  Port 2"
+        "instrument": "MicroActive 6.00",
+        "instrument_details": "Serial # 902  Unit 1  Port 2",
+        "filetype": "mic"
     },
     "data": {
         "pressure_relative": [

@@ -12,7 +12,7 @@
         "equilibration_time_unit": "sec",
         "measurement_mode": "1",
         "material_mass": 0.0049,
-        "material_mass_unit": "g",
+        "material_unit": "g",
         "material": "DUT-49_nbutane_273K_vielePunkte",
         "operator": "Simon",
         "comment3": "3h 150\u00ef\u00bf\u00bdC",
@@ -30,9 +30,9 @@
         "loading_basis": "molar",
         "loading_unit": "mL(STP)",
         "material_basis": "mass",
-        "material_unit": "g",
         "original_loading_string": "ml(STP) g-1",
-        "apparatus": "BEL 00349"
+        "instrument": "BEL 00349",
+        "filetype": "bel"
     },
     "data": {
         "branch": [

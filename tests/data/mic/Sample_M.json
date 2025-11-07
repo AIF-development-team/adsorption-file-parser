@@ -9,7 +9,6 @@
         "temperature_unit": "K",
         "date_report": "2023-02-02T17:49:45",
         "material_mass": 0.0269,
-        "material_mass_unit": "g",
         "comment": "9 mm tube with filler rod, no isothermal jacket. Water bath at room temperature.",
         "pressure_mode": "absolute",
         "pressure_unit": "torr",
@@ -19,8 +18,9 @@
         "material_basis": "mass",
         "material_unit": "g",
         "original_loading_string": "cm\u00b3/g STP",
-        "apparatus": "Flex 6.01",
-        "apparatus_details": "Serial # 104  Unit 2  Port 1"
+        "instrument": "Flex 6.01",
+        "instrument_details": "Serial # 104  Unit 2  Port 1",
+        "filetype": "mic"
     },
     "data": {
         "pressure_relative": [

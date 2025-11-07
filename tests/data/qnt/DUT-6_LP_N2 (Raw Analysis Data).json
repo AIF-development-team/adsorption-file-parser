@@ -15,7 +15,7 @@
         "adsorbate_molecular_weight": "28.0134 g",
         "adsorbate_non_ideality": "6.58e-05 1/Torr",
         "measurement_duration": "2070.6 min",
-        "apparatus": "Autosorb Station 1",
+        "instrument": "Autosorb Station 1",
         "temperature": 77.3,
         "material_unit": "g",
         "material_basis": "mass",
@@ -29,7 +29,8 @@
         "pressure_mode": "absolute",
         "original_pressure_string": "Torr",
         "original_loading_string": "cc",
-        "loading_basis": "molar"
+        "loading_basis": "molar",
+        "filetype": "qnt"
     },
     "data": {
         "pressure": [

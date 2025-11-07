@@ -9,7 +9,7 @@
         "comment4": null,
         "serialnumber": "HP-102",
         "software_version": "1.4.7a-Bessy",
-        "material_mass_unit": "g",
+        "material_unit": "g",
         "material_mass": 0.0289,
         "cell_volume_unit": "cm^3",
         "cell_volume": 24.847,
@@ -37,9 +37,9 @@
         "loading_basis": "molar",
         "loading_unit": "cm3(STP)",
         "material_basis": "mass",
-        "material_unit": "g",
         "original_loading_string": "cm^3(STP) g^-1",
-        "apparatus": "BEL HP-102"
+        "instrument": "BEL HP-102",
+        "filetype": "bel"
     },
     "data": {
         "branch": [

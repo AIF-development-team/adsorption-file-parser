@@ -8,7 +8,7 @@
         "comment4": "degas at 150C for 720 minLeak amount : 4.636E-2Pa/Min, Vacuum degree before measurement:1.287E-8Pa",
         "serialnumber": "1.0",
         "material_mass": 0.0543,
-        "material_mass_unit": "g",
+        "material_unit": "g",
         "cell_volume": 24.475,
         "cell_volume_unit": "cm3",
         "dead_volume": 18.018,
@@ -23,9 +23,9 @@
         "loading_basis": "molar",
         "loading_unit": "mol",
         "material_basis": "mass",
-        "material_unit": "g",
         "original_loading_string": "mol g-1",
-        "apparatus": "BEL 1.0"
+        "instrument": "BEL 1.0",
+        "filetype": "bel"
     },
     "data": {
         "branch": [

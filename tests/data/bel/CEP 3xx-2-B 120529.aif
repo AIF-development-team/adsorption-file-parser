@@ -1,0 +1,95 @@
+data_afp_aif
+_audit_aif_version v1.0.0
+_exptl_operator "unknown"
+_exptl_date "2012-05-29T00:00:00"
+_exptl_adsorptive "N2"
+_exptl_temperature "77.0"
+_exptl_instrument "BEL 00203"
+_adsnt_sample_id "CEP 3XX-2B"
+_adsnt_sample_mass "0.33383"
+_units_temperature "K"
+_units_pressure "kPa"
+_units_mass "g"
+_units_loading "ml(STP) g-1"
+_bel_serialnumber "00203"
+_bel_cell_volume "27.661"
+_bel_cell_volume_unit "ml"
+_bel_molecular_cross-sectional_area "0"
+_bel_molecular_weight_of_adsorbate "0.00"
+_bel_equilibration_time "0"
+_bel_equilibration_time_unit "sec"
+_bel_measurement_mode "2"
+_bel_comment3 "30mn à 140°C sous vide"
+_bel_comment4 "120201"
+_bel_as "0.0000 m2_g-1"
+_bel_molecular_weight_of_adsorbent "0.00"
+_bel_measurement_duration "31:00:40"
+_bel_slope_of_dead_volume "-1.4341E-6"
+_bel_intercept_of_dead_volume "3.1577E+1"
+_bel_initial_dead_volume "31.343 ml"
+
+loop_
+_adsorp_pressure
+_adsorp_p0
+_adsorp_amount
+0.32537 101.85 8.6589
+5.4912 101.97 19.32
+8.9607 101.96 22.133
+12.15 101.99 24.178
+15.071 102.01 25.816
+19.735 101.98 28.085
+22.948 102.03 29.615
+27.673 101.97 31.673
+32.751 101.98 33.841
+37.903 101.97 36.034
+43.05 102.0 38.25
+48.169 102.02 40.545
+53.264 102.04 42.945
+58.305 102.03 45.482
+63.245 102.11 48.238
+68.169 102.13 51.298
+72.931 102.08 54.783
+77.566 102.08 58.821
+81.905 102.11 63.681
+85.809 102.08 69.778
+90.656 102.14 82.359
+95.86 102.11 122.4
+97.92 102.05 185.64
+98.306 102.01 214.87
+98.923 101.95 296.58
+99.35 101.89 377.72
+99.651 101.82 457.23
+99.833 101.8 534.8
+100.09 101.8 610.31
+100.34 101.76 690.77
+100.63 101.78 769.5
+102.3 101.86 845.18
+
+loop_
+_desorp_pressure
+_desorp_p0
+_desorp_amount
+99.748 101.82 839.63
+98.667 101.86 759.91
+98.371 101.85 677.48
+98.078 101.88 590.4
+97.692 101.88 505.73
+97.241 101.97 424.66
+96.559 101.91 344.8
+95.864 101.89 265.57
+94.548 101.85 188.62
+92.346 101.89 126.13
+86.061 101.88 76.125
+81.336 101.95 66.095
+77.115 101.9 60.714
+71.623 101.97 55.675
+65.691 101.9 51.519
+59.869 101.96 48.098
+54.3 101.93 45.295
+48.973 101.94 42.749
+43.72 101.99 40.457
+38.581 101.93 38.31
+33.458 101.97 36.233
+28.437 101.91 34.161
+23.424 101.91 32.068
+20.295 101.93 30.7

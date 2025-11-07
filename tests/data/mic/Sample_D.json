@@ -9,7 +9,6 @@
         "temperature_unit": "\u00b0C",
         "date_report": "2021-10-02T08:25:31",
         "material_mass": 0.0625,
-        "material_mass_unit": "g",
         "pressure_mode": "absolute",
         "pressure_unit": "kPa",
         "original_pressure_string": "kPa",
@@ -23,8 +22,9 @@
             "Primary Data",
             "4052-  Fewer than two points are selected for this report."
         ],
-        "apparatus": "ASAP 2020 V3.01 H",
-        "apparatus_details": ""
+        "instrument": "ASAP 2020 V3.01 H",
+        "instrument_details": "",
+        "filetype": "mic"
     },
     "data": {
         "pressure_relative": [

@@ -11,10 +11,10 @@
         "material_mass": 0.0101,
         "measurement_duration": "1056.9 min",
         "end_of_run": "12/21/2018 11:11:37",
-        "apparatus": "QuadraSorb Station 1",
+        "instrument": "QuadraSorb Station 1",
         "void_volume": "He Mode.",
         "cell": "9mm small bulbRun modeStandard",
-        "apparatus_version": "5.04",
+        "instrument_version": "5.04",
         "outgas_time": "0.0 hrs",
         "outgas_temperature": "0.0 C",
         "adsorbate": "Nitrogen",
@@ -34,7 +34,8 @@
         "pressure_mode": "absolute",
         "original_pressure_string": "mmHg",
         "original_loading_string": "cc",
-        "loading_basis": "molar"
+        "loading_basis": "molar",
+        "filetype": "qnt"
     },
     "data": {
         "pressure": [

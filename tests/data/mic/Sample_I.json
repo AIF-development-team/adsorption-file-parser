@@ -9,7 +9,6 @@
         "temperature_unit": "K",
         "date_report": "2021-07-15T14:58:59",
         "material_mass": 0.1226,
-        "material_mass_unit": "g",
         "pressure_mode": "absolute",
         "pressure_unit": "mbar",
         "original_pressure_string": "mbar",
@@ -18,8 +17,9 @@
         "material_basis": "mass",
         "material_unit": "g",
         "original_loading_string": "cm\u00b3/g STP",
-        "apparatus": "MicroActive 4.03",
-        "apparatus_details": "Serial # 298  Unit 1  Port 3"
+        "instrument": "MicroActive 4.03",
+        "instrument_details": "Serial # 298  Unit 1  Port 3",
+        "filetype": "mic"
     },
     "data": {
         "pressure_relative": [

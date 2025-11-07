@@ -17,7 +17,8 @@
         "loading_unit": "mmol",
         "material_unit": "g",
         "temperature_unit": "K",
-        "outgas_temperature": 423.15
+        "outgas_temperature": 423.15,
+        "filetype": "generic"
     },
     "data": {
         "pressure": [

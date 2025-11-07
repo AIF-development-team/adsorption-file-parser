@@ -14,7 +14,8 @@
         "_adsnt_sample_id": "Test-adsorption-10",
         "_adsnt_material_id": "MOF-1",
         "_adsnt_sample_mass": 0.1,
-        "_adsnt_degas_temperature": 450.0
+        "_adsnt_degas_temperature": 450.0,
+        "filetype": "generic"
     },
     "data": {
         "pressure": [

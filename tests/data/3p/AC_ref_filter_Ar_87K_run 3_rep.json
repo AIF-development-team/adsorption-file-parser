@@ -18,9 +18,10 @@
         "material_basis": "mass",
         "material_unit": "g",
         "original_loading_string": "cm\u00b3/g STP",
-        "apparatus": "3P",
+        "instrument": "3P",
         "temperature": 77.3,
-        "temperature_unit": "K"
+        "temperature_unit": "K",
+        "filetype": "3p"
     },
     "data": {
         "branch": [

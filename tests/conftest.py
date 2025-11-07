@@ -2,7 +2,7 @@
 """Common test fixtures."""
 from pathlib import Path
 
-# set to true to remake all jsons
+# set to true to remake all jsons and aifs
 RECREATE = False
 
 BEL_PATH = Path('./tests/data/bel')

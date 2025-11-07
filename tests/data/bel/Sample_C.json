@@ -8,7 +8,7 @@
         "comment4": "Leak amount 1.177Pa/min",
         "serialnumber": "1.0",
         "material_mass": 0.074,
-        "material_mass_unit": "g",
+        "material_unit": "g",
         "cell_volume": 9.057,
         "cell_volume_unit": "cm3",
         "dead_volume": 11.242,
@@ -23,9 +23,9 @@
         "loading_basis": "molar",
         "loading_unit": "cm3(STP)",
         "material_basis": "mass",
-        "material_unit": "g",
         "original_loading_string": "cm3(STP) g-1",
-        "apparatus": "BEL 1.0"
+        "instrument": "BEL 1.0",
+        "filetype": "bel"
     },
     "data": {
         "branch": [

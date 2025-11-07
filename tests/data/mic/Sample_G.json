@@ -9,7 +9,6 @@
         "temperature_unit": "K",
         "date_report": "2020-01-09T13:47:56",
         "material_mass": 0.0455,
-        "material_mass_unit": "g",
         "pressure_mode": "absolute",
         "pressure_unit": "torr",
         "original_pressure_string": "mmHg",
@@ -18,8 +17,9 @@
         "material_basis": "mass",
         "material_unit": "g",
         "original_loading_string": "cm\u00b3/g STP",
-        "apparatus": "3Flex 5.02",
-        "apparatus_details": "Serial # 367  Unit 1  Port 1"
+        "instrument": "3Flex 5.02",
+        "instrument_details": "Serial # 367  Unit 1  Port 1",
+        "filetype": "mic"
     },
     "data": {
         "pressure_relative": [

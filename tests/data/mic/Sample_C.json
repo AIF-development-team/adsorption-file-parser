@@ -9,7 +9,6 @@
         "temperature_unit": "K",
         "date_report": "2021-04-15T15:06:14",
         "material_mass": 1.0,
-        "material_mass_unit": "g",
         "loading_basis": "molar",
         "loading_unit": "cm3(STP)",
         "material_basis": "mass",
@@ -17,8 +16,9 @@
         "original_loading_string": "cm\u00b3/g STP",
         "pressure_mode": "relative",
         "pressure_unit": null,
-        "apparatus": "3Flex 5.02",
-        "apparatus_details": "Port 1"
+        "instrument": "3Flex 5.02",
+        "instrument_details": "Port 1",
+        "filetype": "mic"
     },
     "data": {
         "pressure": [

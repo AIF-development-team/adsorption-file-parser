@@ -9,7 +9,7 @@
         "material_description": "",
         "comment": "ih_DUT-60_183b",
         "material_mass": 0.0081,
-        "apparatus": "Autosorb iQ Station 1",
+        "instrument": "Autosorb iQ Station 1",
         "outgas_time": "12.0 hrs       Final",
         "outgas_temperature": "30 \u00b0C",
         "extended_info": "Available",
@@ -30,7 +30,8 @@
         "pressure_mode": "absolute",
         "original_pressure_string": "Torr",
         "original_loading_string": "cc",
-        "loading_basis": "molar"
+        "loading_basis": "molar",
+        "filetype": "qnt"
     },
     "data": {
         "pressure": [

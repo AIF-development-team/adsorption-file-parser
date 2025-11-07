@@ -19,7 +19,7 @@
         "equilibration_timeout": "240/240 sec (ads/des)",
         "measurement_duration": "748.4 min",
         "end_of_run": "2020/07/01 4:16:54",
-        "apparatus": "Nova Station C",
+        "instrument": "Nova Station C",
         "cell_id": "0",
         "material_unit": "g",
         "material_basis": "mass",
@@ -30,7 +30,8 @@
         "pressure_mode": "relative",
         "original_pressure_string": null,
         "original_loading_string": "cc",
-        "loading_basis": "molar"
+        "loading_basis": "molar",
+        "filetype": "qnt"
     },
     "data": {
         "pressure_relative": [

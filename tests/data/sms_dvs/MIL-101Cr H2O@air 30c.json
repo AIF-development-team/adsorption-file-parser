@@ -24,9 +24,9 @@
         "pressure_unit": "torr",
         "loading_basis": "percent",
         "loading_unit": null,
-        "material_mass_unit": "mg",
+        "material_unit": "mg",
         "material_basis": "mass",
-        "material_unit": null
+        "filetype": "smsdvs"
     },
     "data": {
         "branch": [

@@ -30,7 +30,8 @@
         "material_basis": "mass",
         "material_unit": "g",
         "original_loading_string": "ml(STP) g-1",
-        "apparatus": "BEL 00356"
+        "instrument": "BEL 00356",
+        "filetype": "bel"
     },
     "data": {
         "branch": [

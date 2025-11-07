@@ -12,7 +12,7 @@
         "equilibration_time_unit": "sec",
         "measurement_mode": "1",
         "material_mass": 0.0352,
-        "material_mass_unit": "g",
+        "material_unit": "g",
         "material": "DUT-67Zr_acetone",
         "operator": "Volodymyr",
         "comment3": null,
@@ -30,9 +30,9 @@
         "loading_basis": "molar",
         "loading_unit": "mL(STP)",
         "material_basis": "mass",
-        "material_unit": "g",
         "original_loading_string": "ml(STP) g-1",
-        "apparatus": "BEL 00348"
+        "instrument": "BEL 00348",
+        "filetype": "bel"
     },
     "data": {
         "branch": [

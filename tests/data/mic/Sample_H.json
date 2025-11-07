@@ -9,7 +9,6 @@
         "temperature_unit": "K",
         "date_report": "2019-06-09T10:57:41",
         "material_mass": 0.9813,
-        "material_mass_unit": "g",
         "pressure_mode": "absolute",
         "pressure_unit": "torr",
         "original_pressure_string": "mmHg",
@@ -22,8 +21,9 @@
         "errors": [
             "At least two points must be selected for this calculation."
         ],
-        "apparatus": "3Flex 5.00",
-        "apparatus_details": "Serial # 394  Unit 2  Port 3"
+        "instrument": "3Flex 5.00",
+        "instrument_details": "Serial # 394  Unit 2  Port 3",
+        "filetype": "mic"
     },
     "data": {
         "pressure_relative": [

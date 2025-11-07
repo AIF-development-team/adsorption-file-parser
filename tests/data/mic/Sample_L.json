@@ -9,7 +9,6 @@
         "temperature_unit": "\u00b0C",
         "date_report": "2021-12-21T02:31:47",
         "material_mass": 0.0832,
-        "material_mass_unit": "g",
         "pressure_mode": "absolute",
         "pressure_unit": "torr",
         "original_pressure_string": "mmHg",
@@ -22,8 +21,9 @@
         "errors": [
             "Analysis temperature was adjusted by as much as -272.943 \u00b0C to find usable compressibility factors.\n"
         ],
-        "apparatus": "3Flex 5.02",
-        "apparatus_details": "Serial # 1212  Unit 1  Port 1"
+        "instrument": "3Flex 5.02",
+        "instrument_details": "Serial # 1212  Unit 1  Port 1",
+        "filetype": "mic"
     },
     "data": {
         "pressure_relative": [
