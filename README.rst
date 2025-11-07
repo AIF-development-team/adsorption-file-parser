@@ -2,7 +2,8 @@ Adsorption File Parser
 ======================
 
 A pure python parser to sorption files from various instrumentation manufacturers.
-It comes with minimal dependencies and maximum flexibility.
+It comes with minimal dependencies and maximum flexibility, and attempts to
+extract as much information as possible from the files, while being unopinionated.
 
 Currently supports files from:
 
