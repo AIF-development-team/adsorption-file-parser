@@ -97,7 +97,7 @@ def parse(path):
     _check(meta, data, path)
 
     # Set extra metadata
-    meta['apparatus'] = f'BEL {meta["serialnumber"]}'
+    meta['instrument'] = f'BEL {meta["serialnumber"]}'
 
     return meta, data
 

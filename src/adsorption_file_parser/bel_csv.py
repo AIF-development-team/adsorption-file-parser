@@ -99,7 +99,7 @@ def parse(path, separator=',', lang='ENG') -> "tuple[dict, dict]":
                     line = file.readline()
 
     # Format extra metadata
-    meta['apparatus'] = 'BEL ' + meta['serialnumber']
+    meta['instrument'] = 'BEL ' + meta['serialnumber']
     if not meta['material']:
         meta['material'] = meta['file_name']
 

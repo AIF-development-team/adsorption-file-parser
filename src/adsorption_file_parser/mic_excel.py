@@ -183,10 +183,12 @@ def parse(path):
         meta['comment'] = meta['comment'].replace('Comments: ', '')
     if not meta.get('operator'):
         meta['operator'] = None
+    if meta['material_mass_unit']:
+        meta['material_unit'] = meta.pop('material_mass_unit')
 
     # Get instrument from absolute position
-    meta['apparatus'] = str(sheet.cell(1, 0).value)
-    meta['apparatus_details'] = str(sheet.cell(2, 1).value)
+    meta['instrument'] = str(sheet.cell(1, 0).value)
+    meta['instrument_details'] = str(sheet.cell(2, 1).value)
 
     return meta, data
 

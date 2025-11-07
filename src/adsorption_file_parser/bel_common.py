@@ -41,7 +41,7 @@ _META_DICT = {
     },
     'material_mass': {
         'text': ('sample weight', 'サンプル質量'),
-        'unit': 'material_mass_unit',
+        'unit': 'material_unit',
         'type': 'numeric',
         'xl_ref': (0, 2),
     },

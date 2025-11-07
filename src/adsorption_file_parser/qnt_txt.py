@@ -30,11 +30,11 @@ _META_DICT = {
         'text': ('bath temp:', 'bath temp.:'),
         'type': 'numeric',
     },
-    'apparatus': {
+    'instrument': {
         'text': ('instrument:', ),
         'type': 'string',
     },
-    'apparatus_version': {
+    'instrument_version': {
         'text': ('instrument version:', ),
         'type': 'string',
     },

@@ -117,7 +117,7 @@ def parse(path, lang='ENG') -> "tuple[dict, dict]":
                 raise ParsingError(f'Unknown line format: {line}')
 
     # Format extra metadata
-    meta['apparatus'] = 'BEL ' + meta['serialnumber']
+    meta['instrument'] = 'BEL ' + meta['serialnumber']
 
     # Prepare data
     data = dict(zip(head, map(lambda *x: list(x), *data)))

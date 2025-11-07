@@ -205,9 +205,8 @@ def parse(path):
                 break
 
     # Set extra metadata
-    meta['material_mass_unit'] = 'mg'
+    meta['material_unit'] = 'mg'
     meta['material_basis'] = 'mass'
-    meta['material_unit'] = None
 
     return meta, data
 

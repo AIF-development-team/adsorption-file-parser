@@ -106,7 +106,7 @@ def parse(path):
     _check(meta, data, path)
 
     # Set extra metadata
-    meta['apparatus'] = '3P'
+    meta['instrument'] = '3P'
 
     return meta, data
 

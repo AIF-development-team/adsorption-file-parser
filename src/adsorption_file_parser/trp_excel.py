@@ -127,7 +127,7 @@ def parse(path):
     _check(meta, data, path)
 
     # Set extra metadata
-    meta['apparatus'] = '3P'
+    meta['instrument'] = '3P'
     meta['temperature'] = 77.3  # TODO where is this stored?
     meta['temperature_unit'] = 'K'  # TODO where is this stored?
 
