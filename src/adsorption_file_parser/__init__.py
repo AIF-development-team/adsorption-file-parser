@@ -38,7 +38,7 @@ _SUPPORTED_FORMATS = {
     'mic': ('xl', ),
     '3p': ('xl'),  # 'jwgbt'),
     'qnt': ('txt-raw', ),
-    'generic': ('csv', 'xls'),
+    'generic': ('csv', 'xls', 'sim'),
 }
 
 
@@ -86,12 +86,14 @@ def read_file(path, manufacturer, fmt, **options):
         if fmt == 'xl':
             from .trp_excel import parse_file
         elif fmt == 'jwgbt':
-            from .trp_xml import parse
+            from .trp_xml import parse_file
     elif manufacturer == 'qnt' and fmt == 'txt-raw':
         from .qnt_txt import parse_file
     elif manufacturer == 'generic':
         if fmt == 'xls':
             from .generic_excel import parse_file
+        elif fmt == 'sim':
+            from .generic_sim import parse_file
     else:
         raise ParsingError('Something went wrong.')
     

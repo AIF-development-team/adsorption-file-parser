@@ -1,0 +1,23 @@
+SimulationType                MonteCarlo
+NumberOfCycles                200000
+NumberOfInitializationCycles  0
+PrintEvery                    1000
+
+Forcefield                    --force field--
+RemoveAtomNumberCodeFromLabel no
+CutOffVDW                     12.0
+ChargeMethod                  ewald
+EwaldPrecision                1e-6
+OmitAdsorbateAdsorbateCoulombInteractions no
+
+Framework 0
+FrameworkName                 ZIF_08
+UnitCells   2 2 2
+
+ExternalTemperature 303.0
+
+Component 0 MoleculeName             --guest--
+            MoleculeDefinition       --guest force field--
+            WidomProbability         1.0
+            CreateNumberOfMolecules  0
+

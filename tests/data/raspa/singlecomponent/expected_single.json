@@ -1,0 +1,48 @@
+{
+    "meta": {
+        "operator": "theochem3",
+        "framework_name": "MFI_SI",
+        "adsorbate_name": "methane",
+        "adsorbate_definition": "ExampleDefinitions",
+        "ff_definition": "ExampleZeolitesForceField",
+        "temperature": "300.000000",
+        "code": "RASPA-2.0.47"
+    },
+    "data": {
+        "pressure": [
+            "1000",
+            "10000",
+            "100000"
+        ],
+        "loading": [
+            0.0062603006,
+            0.0604515153,
+            0.5040963602
+        ],
+        "loading_error": [
+            0.000113034,
+            0.0008584653,
+            0.0120059384
+        ],
+        "excess_loading": [
+            0.006195577,
+            0.0598041525,
+            0.4976100509
+        ],
+        "excess_loading_error": [
+            0.000113034,
+            0.0008584653,
+            0.0120059384
+        ],
+        "enthalpy": [
+            -19.00191,
+            -19.02605,
+            -19.23534
+        ],
+        "enthalpy_error": [
+            0.028158,
+            0.065605,
+            0.122033
+        ]
+    }
+}

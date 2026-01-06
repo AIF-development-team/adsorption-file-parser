@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Tests generic CSV excel parsing."""
+"""Tests generic CSV parsing."""
 
 import json
 

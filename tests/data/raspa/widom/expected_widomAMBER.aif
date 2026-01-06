@@ -1,0 +1,24 @@
+data_WI_raspa2aif
+_audit_aif_version 6acf6ef
+_exptl_operator PM.
+_exptl_method simulation
+_exptl_adsorptive ethane
+_exptl_temperature 303.000000
+_adsnt_material_id ZIF_08
+_simltn_date 2023-07-12T12:09:59
+_simltn_code RASPA-2.0.41
+_simltn_sampling WI
+_simltn_input_files simulation.input,ZIF_08.cif
+_simltn_forcefield_adsorbent AMBER
+_simltn_forcefield_adsorptive TraPPE
+_units_temperature K
+_units_pressure Pa
+_units_henry mol/kg/Pa
+_units_enthalpy kJ/mol
+
+loop_
+_adsorp_henry
+_adsorp_henry_uncertainty
+_adsorp_enthalpy
+_adsorp_enthalpy_uncertainty
+2.93193E-05 6.99351E-08 -1.86014E+01 2.78720E-02

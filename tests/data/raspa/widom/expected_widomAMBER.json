@@ -1,0 +1,25 @@
+{
+    "meta": {
+        "operator": "PM.",
+        "framework_name": "ZIF_08",
+        "adsorbate_name": "ethane",
+        "host_ff_definition": "AMBER",
+        "guest_ff_definition": "TraPPE",
+        "temperature": "303.000000",
+        "code": "RASPA-2.0.41"
+    },
+    "data": {
+        "henry": [
+            2.93193e-05
+        ],
+        "henry_error": [
+            6.99351e-08
+        ],
+        "enthalpy": [
+            -18.60140986700043
+        ],
+        "enthalpy_error": [
+            0.0278720252
+        ]
+    }
+}

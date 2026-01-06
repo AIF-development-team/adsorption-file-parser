@@ -1,0 +1,50 @@
+SimulationType                MonteCarlo
+NumberOfCycles                200000
+NumberOfInitializationCycles  0
+NumberOfEquilibrationCycles   200000
+PrintEvery                    100
+
+ContinueAfterCrash            yes
+WriteBinaryRestartFileEvery   1000
+
+Forcefield                    GenericMOFs
+RemoveAtomNumberCodeFromLabel no
+CutOffVDW                     12.0
+ChargeMethod                  ewald
+EwaldPrecision                1e-6
+OmitAdsorbateAdsorbateCoulombInteractions no
+
+Framework 0
+FrameworkName                 ZIF_08
+UnitCells   2 2 2
+HeliumVoidFraction 0.52
+
+ExternalTemperature 298
+ExternalPressure  1e2 2e2 3e2 4e2 5e2 6e2 7e2 8e2 9e2 1e3 2.5e3 5e3 7.5e3 1e4 2.5e4 5e4 7.5e4 1e5 1.25e5 1.5e5 1.75e5 2e5 2.5e5 5e5 7.5e5 1e6 2e6 3e6 4e6
+
+ComputeDensityProfile3DVTKGrid yes
+WriteDensityProfile3DVTKGridEvery 1000
+DensityProfile3DVTKGridPoints 150 150 150
+AverageDensityOverUnitCellsVTK yes
+DensityAveragingTypeVTK UnitCell
+
+Movies yes
+WriteMoviesEvery 500
+
+Component 0 MoleculeName             ethane
+            MoleculeDefinition       TraPPE
+            MolFraction              0.1
+            TranslationProbability   0.5
+            ReinsertionProbability   0.5
+            RotationProbability      0.5
+            SwapProbability          1.0
+            CreateNumberOfMolecules  0
+
+Component 1 MoleculeName             ethene
+            MoleculeDefinition       TraPPE
+            MolFraction              0.9
+            TranslationProbability   0.5
+            ReinsertionProbability   0.5
+            RotationProbability      0.5
+            SwapProbability          1.0
+            CreateNumberOfMolecules  0
