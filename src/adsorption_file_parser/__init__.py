@@ -39,7 +39,7 @@ _SUPPORTED_FORMATS = {
     'bel': ('csv', 'xl', 'dat'),
     'mic': ('xl', ),
     '3p': ('xl'),  # 'jwgbt'),
-    'qnt': ('txt-raw', ),
+    'qnt': ('txt-raw', 'raw', 'drf'),
     'generic': ('csv', 'xls'),
 }
 
@@ -61,6 +61,14 @@ def guess_manufacturer_fmt(path):
     fmt : {'xl', 'txt', ...}
         The format of the isotherm.
     """
+
+    # Extension-based detection for Quantachrome legacy binary-report formats
+    from pathlib import Path as _Path
+    suffix = _Path(path).suffix.lower()
+    if suffix == '.raw':
+        return 'qnt', 'raw'
+    if suffix == '.drf':
+        return 'qnt', 'drf'
 
     # Text formats
     try:
@@ -185,8 +193,13 @@ def read(path, manufacturer='guess', fmt='guess', **options):
             from .trp_excel import parse
         elif fmt == 'jwgbt':
             from .trp_xml import parse
-    elif manufacturer == 'qnt' and fmt == 'txt-raw':
-        from .qnt_txt import parse
+    elif manufacturer == 'qnt':
+        if fmt == 'txt-raw':
+            from .qnt_txt import parse
+        elif fmt == 'raw':
+            from .qnt_raw import parse
+        elif fmt == 'drf':
+            from .qnt_drf import parse
     elif manufacturer == 'generic':
         if fmt == 'csv':
             from .generic_csv import parse
